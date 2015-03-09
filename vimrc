@@ -61,6 +61,8 @@ set autoindent
 " The default for 'backspace' is very confusing to new users, so change it to a
 " more sensible value.  Add 'set backspace&' to your ~/.vimrc to reset it.
 set backspace=indent,eol,start
+" Disable text wrap
+set nowrap
 
 " JSON
 au BufRead,BufNewFile *.json set ft=json syntax=javascript
