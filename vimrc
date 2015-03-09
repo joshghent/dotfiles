@@ -15,6 +15,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mileszs/ack.vim'
 Plugin 'mattn/emmet-vim'
+Plugin 'ervandew/supertab'
 " ----- Making Vim look good ------------------------------------------
 Plugin 'bling/vim-airline'
 "
