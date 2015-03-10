@@ -61,3 +61,6 @@ alias busy="cat /dev/urandom | hexdump -C | grep "ca""
 alias marid="cd ~/Dropbox/Programming/marid-frontend && git up"
 
 alias vimsync="rsync -a .vimrc ~/Dropbox/Programming/dotfiles/vimrc"
+
+alias bashsync="rsync -a .bash_profile ~/Dropbox/Programming/dotfiles/bash_profile"
+
