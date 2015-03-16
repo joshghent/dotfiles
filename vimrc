@@ -83,6 +83,15 @@ au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 " ZSH
 au BufRead,BufNewFile .zsh_rc,.functions,.commonrc set ft=zsh
 
+"Title Bar
+syn on se title
+
+"Tab Spacing
+set tabstop=8
+set softtabstop=8
+set shiftwidth=8
+set noexpandtab
+
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 set undodir=~/.vim/undo

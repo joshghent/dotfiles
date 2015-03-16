@@ -67,5 +67,3 @@ alias bashsync="rsync -a .bash_profile ~/Dropbox/Programming/dotfiles/bash_profi
 alias tmuxsync="rsync -a .tmux.conf ~/Dropbox/Programming/dotfiles/tmux.conf"
 
 alias gpo="git push origin master"
-
-alias gc="git commit -m"
