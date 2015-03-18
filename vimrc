@@ -1,5 +1,3 @@
-colorscheme railscasts
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -95,3 +93,5 @@ set noexpandtab
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 set undodir=~/.vim/undo
+
+colorscheme heroku
