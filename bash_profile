@@ -74,6 +74,8 @@ alias myip="curl http://ipecho.net/plain; echo"
 
 alias ls='ls -G'
 
+alias reload="source ~/.bash_profile"
+
 alias grep="grep --color=auto"
 
 md5check() { md5sum "$1" | grep "$2";}
