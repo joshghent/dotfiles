@@ -32,8 +32,10 @@ alias -- -="cd -"
 alias gh="open -a google\ chrome 'http://github.com/joshghent'"
 
 # be nice
-alias please=sudo
+alias fuck='sudo $(history -p !!)'
 
+# git
+alias gc="!git add -A && git commit -m"
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
@@ -58,7 +60,7 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-
+	
 # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 7'"
@@ -95,3 +97,5 @@ alias bashsync="rsync -a .bash_profile ~/Dropbox/Programming/dotfiles/bash_profi
 alias tmuxsync="rsync -a .tmux.conf ~/Dropbox/Programming/dotfiles/tmux.conf"
 
 alias gpo="git push origin master"
+
+alias serverme="python -m SimpleHTTPServer"
