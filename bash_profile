@@ -99,3 +99,7 @@ alias tmuxsync="rsync -a .tmux.conf ~/Dropbox/Programming/dotfiles/tmux.conf"
 alias gpo="git push origin master"
 
 alias serverme="python -m SimpleHTTPServer"
+
+alias wifiinfo="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I"
+alias wifidisconnect="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z"
+alias wifiscan="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s"
