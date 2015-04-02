@@ -18,6 +18,8 @@ unset file;
 
 archey -c
 
+alias matrix="cmatrix -abs -C green"
+
 alias ss="/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
 
 alias cd..="cd .."
@@ -103,3 +105,5 @@ alias serverme="python -m SimpleHTTPServer"
 alias wifiinfo="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I"
 alias wifidisconnect="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z"
 alias wifiscan="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s"
+export WORKON_HOME=~/Envs
+source /usr/local/bin/virtualenvwrapper.sh
