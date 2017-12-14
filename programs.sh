@@ -82,6 +82,8 @@ brew cask install vagrant-manager
 brew cask install docker
 brew cask install kitematic
 brew cask install postman
+brew cask install spotmenu
+brew cask install beardedspice
 
 # Install the Sonos Controller app
 rm ~/Downloads/sonos.dmg
