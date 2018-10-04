@@ -3,7 +3,6 @@ language: bash
 services:
   - docker
 script:
-	- chmod 777 test.sh
   - make test
 
 notifications:
