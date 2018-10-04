@@ -11,9 +11,6 @@ before_install:
 script:
   - docker run -v $(pwd):/scripts koalaman/shellcheck /scripts/test.sh
 
-matrix:
-	fast_finish: true
-
 notifications:
     webhooks: https://www.travisbuddy.com/
     on_success: never
