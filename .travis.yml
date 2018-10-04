@@ -1,15 +1,14 @@
 sudo: required
-
 language: bash
-
 services:
   - docker
-
 before_install:
   - docker pull koalaman/shellcheck
-
 script:
-  - docker run --rm --name shellcheck -v $(CURDIR):/usr/src:ro --workdir /usr/src koalaman/shellcheck ./test.sh
+  - docker run -v $(pwd):/scripts koalaman/shellcheck /scripts/test.sh
+
+matrix:
+  fast_finish: true
 
 notifications:
     webhooks: https://www.travisbuddy.com/
