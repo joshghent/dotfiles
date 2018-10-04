@@ -5,9 +5,6 @@ services:
 script:
 	- make test
 
-matrix:
-  fast_finish: true
-
 notifications:
     webhooks: https://www.travisbuddy.com/
     on_success: never
