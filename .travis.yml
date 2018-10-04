@@ -9,7 +9,7 @@ before_install:
   - docker pull koalaman/shellcheck
 
 script:
-  - docker run -v $(pwd):/scripts koalaman/shellcheck /scripts/test.sh
+  - docker run --rm --name shellcheck -v $(CURDIR):/usr/src:ro --workdir /usr/src koalaman/shellcheck ./test.sh
 
 notifications:
     webhooks: https://www.travisbuddy.com/
