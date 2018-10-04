@@ -3,7 +3,7 @@ language: bash
 services:
   - docker
 script:
-	- make test
+  - make test
 
 notifications:
     webhooks: https://www.travisbuddy.com/
