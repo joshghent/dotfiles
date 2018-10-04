@@ -1,0 +1,5 @@
+language: bash
+script: bash ./test.sh
+notifications:
+    webhooks: https://www.travisbuddy.com/
+    on_success: never
