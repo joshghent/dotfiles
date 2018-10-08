@@ -55,9 +55,14 @@ function doIt() {
   cp .profile ~/
   cp .editorconfig ~/
 	cp .vimrc ~/
-	cp colors/railscasts.vim ~/.vim/colors/
+	cp .gitconfig ~/
 
-	vim +PluginInstall +qall
+	echo ""
+  echo "------------------------------"
+  echo "Installing Pathogen (VIM)"
+  echo "------------------------------"
+  echo ""
+	mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
   echo ""
   echo "------------------------------"
