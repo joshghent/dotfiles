@@ -14,6 +14,17 @@ function doIt() {
   echo ""
   ./prep.sh
 
+	echo ""
+  echo "------------------------------"
+  echo "Overwriting bash_profile"
+  echo "------------------------------"
+  echo ""
+  cp .bash_profile ~/
+  cp .profile ~/
+  cp .editorconfig ~/
+	cp .vimrc ~/
+	cp .gitconfig ~/
+
   # Run the programs.sh Script
   echo ""
   echo "------------------------------"
@@ -46,17 +57,6 @@ function doIt() {
   echo ""
   ./gitalias.sh
 
-  echo ""
-  echo "------------------------------"
-  echo "Overwriting bash_profile"
-  echo "------------------------------"
-  echo ""
-  cp .bash_profile ~/
-  cp .profile ~/
-  cp .editorconfig ~/
-	cp .vimrc ~/
-	cp .gitconfig ~/
-
 	echo ""
   echo "------------------------------"
   echo "Installing Pathogen (VIM)"
@@ -72,10 +72,10 @@ function doIt() {
   echo ""
 }
 
-read -p "This script may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+read -p "This script may overwrite existing files in your home directory. Are you sure? (y/n) " -r -n 1;
 echo "";
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    doIt $@
+    doIt "$@"
 fi;
 
 unset runDots;

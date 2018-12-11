@@ -5,7 +5,7 @@ set -o pipefail
 ERRORS=()
 
 # Get all dotfiles and pipe into shellcheck
-for f in $(find . -type f -not -iwholename '*.git*' -not -iwholename './.vim/**' -not -iwholename '*.DS_Store' | sort -u); do
+for f in $(find . -type f -not -iwholename '*.git*' -not -iwholename './.vim/**' -not -iwholename '*.DS_Store' -not -iwholename './.bash_prompt' | sort -u); do
 	if file "$f" | grep --quiet shell; then
 		{
 			shellcheck "$f" && echo "[OK]: sucessfully linted $f"
