@@ -52,7 +52,7 @@ brew install git
 brew install yarn
 brew install mysql
 brew install redis
-brew install php71
+brew install php
 brew install postgresql
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/guarinogabriel/mac-cli/master/mac-cli/tools/install)"
