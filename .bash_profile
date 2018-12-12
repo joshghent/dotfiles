@@ -1,13 +1,10 @@
 source ~/.profile
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
-export PATH="$PATH:`yarn global bin`"
 alias ga="git add -A"
 alias gc="git commit"
 alias gpo="git push origin"
 alias gp="git push"
-export PATH=~/.composer/vendor/bin:$PATH
-export PATH=~/.rvm/gems/ruby-2.3.0/bin:$PATH
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -56,11 +53,3 @@ complete -W "NSGlobalDomain" defaults;
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export PATH=$PATH:/Users/josh/Library/Android/sdk/platform-tools:/Users/josh/Library/Android/sdk/tools
-export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
