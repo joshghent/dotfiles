@@ -6,5 +6,5 @@ script:
   - make test
 
 notifications:
-    webhooks: https://www.travisbuddy.com/
-    on_success: never
+  webhooks: https://www.travisbuddy.com/
+  slack: ghentspace:ZLT8kfb3r2v5M0iY2gCN62dd
