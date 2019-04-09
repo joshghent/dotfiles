@@ -1,10 +1,12 @@
 source ~/.profile
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
+export PATH="$PATH:`yarn global bin`"
 alias ga="git add -A"
 alias gc="git commit"
 alias gpo="git push origin"
 alias gp="git push"
+export PATH=~/.composer/vendor/bin:$PATH
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -51,5 +53,16 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/opt/nvm/nvm.sh"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH="/usr/local/opt/mongodb@3.6/bin:$PATH"
+
+
+alias cat="bat"
+alias ping='prettyping --nolegend'
+alias c="code ."

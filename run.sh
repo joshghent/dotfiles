@@ -21,9 +21,10 @@ function doIt() {
   echo ""
   cp .bash_profile ~/
   cp .profile ~/
-  cp .editorconfig ~/
 	cp .vimrc ~/
 	cp .gitconfig ~/
+	cp .bash_prompt ~/
+	cp .aliases ~/
 
   # Run the programs.sh Script
   echo ""
@@ -48,14 +49,6 @@ function doIt() {
   echo "------------------------------"
   echo ""
   ./macos.sh
-
-  # Run the gitalias.sh Script
-  echo ""
-  echo "------------------------------"
-  echo "Configuring Git Alias'"
-  echo "------------------------------"
-  echo ""
-  ./gitalias.sh
 
 	echo ""
   echo "------------------------------"
