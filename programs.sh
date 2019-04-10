@@ -44,6 +44,10 @@ declare -a brews=(
 	"findutils"
 	"awscli"
 	"docker"
+	"go"
+	"tree"
+	"bat"
+	"php-cs-fixer"
 )
 
 # Install brews in a loop
@@ -79,6 +83,12 @@ declare -a casks=(
 	"visual-studio-code"
 	"teamviewer"
 	"visual-studio"
+	"tunnelblick"
+	"rescuetime"
+	"pocketcasts"
+	"font-fira-code"
+	"font-hack-nerd-font"
+	"slack"
 )
 
 # Install casks in a loop
