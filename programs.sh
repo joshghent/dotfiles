@@ -75,7 +75,7 @@ declare -a casks=(
 	"now"
 	"backblaze"
 	"discord"
-	"vscode"
+	"visual-studio-code"
 	"teamviewer"
 )
 
