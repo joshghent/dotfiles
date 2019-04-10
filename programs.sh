@@ -43,6 +43,7 @@ declare -a brews=(
 	"moreutils"
 	"findutils"
 	"awscli"
+	"docker"
 )
 
 # Install brews in a loop
