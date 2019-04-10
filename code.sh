@@ -15,6 +15,8 @@ nvm install node
 nvm use node
 nvm alias default node
 
+npm i -g typescript tslint eslint create-react-app
+
 brew cleanup
 
 # Install latest ruby
