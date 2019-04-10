@@ -203,3 +203,6 @@ defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 
 # Update extensions automatically
 defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
+
+# Show the path bar on Finder
+defaults write com.apple.finder ShowPathbar -bool true
