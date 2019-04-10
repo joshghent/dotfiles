@@ -78,6 +78,7 @@ declare -a casks=(
 	"discord"
 	"visual-studio-code"
 	"teamviewer"
+	"visual-studio"
 )
 
 # Install casks in a loop
