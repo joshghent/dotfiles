@@ -89,6 +89,7 @@ declare -a casks=(
 	"font-fira-code"
 	"font-hack-nerd-font"
 	"slack"
+	"keka"
 )
 
 # Install casks in a loop
