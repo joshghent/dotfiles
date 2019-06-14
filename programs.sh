@@ -81,6 +81,7 @@ declare -a casks=(
 	"backblaze"
 	"discord"
 	"visual-studio-code"
+	"visual-studio"
 	"teamviewer"
 	"visual-studio"
 	"tunnelblick"
@@ -90,6 +91,7 @@ declare -a casks=(
 	"font-hack-nerd-font"
 	"slack"
 	"keka"
+	"dotnet-sdk"
 )
 
 # Install casks in a loop
