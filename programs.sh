@@ -23,6 +23,8 @@ brew upgrade --all
 
 sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
+brew tap jesseduffield/lazydocker
+
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/guarinogabriel/mac-cli/master/mac-cli/tools/install)"
 
 declare -a brews=(
@@ -47,7 +49,8 @@ declare -a brews=(
 	"go"
 	"tree"
 	"bat"
-	"php-cs-fixer"
+	"php-cs-fixer",
+	"lazydocker",
 )
 
 # Install brews in a loop
@@ -92,6 +95,7 @@ declare -a casks=(
 	"slack"
 	"keka"
 	"dotnet-sdk"
+	"aerial"
 )
 
 # Install casks in a loop
