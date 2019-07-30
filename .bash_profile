@@ -66,3 +66,4 @@ export PATH="/usr/local/opt/mongodb@3.6/bin:$PATH"
 alias cat="bat"
 alias ping='prettyping --nolegend'
 alias c="code ."
+export GPG_TTY=$(tty)

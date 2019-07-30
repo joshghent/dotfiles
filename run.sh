@@ -19,6 +19,7 @@ function doIt() {
   echo "Overwriting bash_profile"
   echo "------------------------------"
   echo ""
+  cp .ssh ~/
   cp .bash_profile ~/
   cp .profile ~/
 	cp .vimrc ~/

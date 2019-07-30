@@ -15,9 +15,4 @@ sudo softwareupdate -iva
 # Install only recommended available updates
 #sudo softwareupdate -irv
 
-echo "------------------------------"
-echo "Installing Xcode Command Line Tools."
-# Install Xcode command line tools
-xcode-select --install
-
 mkdir ~/Projects

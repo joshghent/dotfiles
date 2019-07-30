@@ -24,8 +24,7 @@ brew upgrade --all
 sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
 brew tap jesseduffield/lazydocker
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/guarinogabriel/mac-cli/master/mac-cli/tools/install)"
+brew tap homebrew/cask-fonts
 
 declare -a brews=(
 	"git"
@@ -51,7 +50,6 @@ declare -a brews=(
 	"bat"
 	"php-cs-fixer"
 	"lazydocker"
-	"zsh"
 )
 
 # Install brews in a loop
@@ -98,6 +96,10 @@ declare -a casks=(
 	"dotnet-sdk"
 	"aerial"
 	"zoomus"
+	"gpg-suite-pinentry"
+	"gpg-suite"
+	"rocket"
+	"keybase"
 )
 
 # Install casks in a loop
@@ -110,6 +112,8 @@ mas install 803453959 # slack
 mas install 585829637 # todoist
 mas install 1147396723 # whatsapp
 mas install 409183694 # keynote
+
+code --install-extension Shan.code-settings-sync
 
 # Install laravel and valet
 composer global require laravel/installer

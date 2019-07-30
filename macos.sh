@@ -212,3 +212,6 @@ defaults write com.apple.finder ShowPathbar -bool true
 
 # Show hidden files
 defaults write com.apple.finder AppleShowAllFiles YES
+
+defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain InitialKeyRepeat -int 4

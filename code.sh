@@ -23,3 +23,12 @@ brew cleanup
 rvm install ruby
 rvm --default use ruby
 gem install bundler --no-rdoc --no-ri
+
+echo "Please enter your email: "
+read email
+
+ssh-keygen -t rsa -b 4096 -C "$email"
+eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub | pbcopy
+echo "SSH Key Copied to Clipboard. Please add to GitHub / GitLab"
