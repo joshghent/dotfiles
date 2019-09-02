@@ -74,6 +74,15 @@ set ffs=unix,dos,mac
 """"""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+  if &paste
+      return 'PASTE MODE  '
+  en
+  return ''
+endfunction
+
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 let g:goyo_height='100%'
@@ -81,3 +90,6 @@ let g:goyo_width=100
 let g:goyo_margin_top=2
 let g:goyo_margin_bottom=2
 set clipboard=unnamedplus
+
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
