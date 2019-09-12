@@ -27,6 +27,7 @@ brew tap jesseduffield/lazydocker
 brew tap homebrew/cask-fonts
 
 declare -a brews=(
+	"ansible"
 	"git"
 	"yarn"
 	"mysql"
@@ -107,11 +108,6 @@ for i in "${casks[@]}"
 do
 	brew cask install "$i"
 done
-
-mas install 803453959 # slack
-mas install 585829637 # todoist
-mas install 1147396723 # whatsapp
-mas install 409183694 # keynote
 
 code --install-extension Shan.code-settings-sync
 
