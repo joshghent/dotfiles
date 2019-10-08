@@ -21,6 +21,7 @@ function doIt() {
   echo ""
   cp .ssh ~/
   cp .bash_profile ~/
+  cp .zshrc ~/
   cp .profile ~/
 	cp .vimrc ~/
 	cp .gitconfig ~/

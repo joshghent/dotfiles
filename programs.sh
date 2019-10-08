@@ -51,6 +51,8 @@ declare -a brews=(
 	"bat"
 	"php-cs-fixer"
 	"lazydocker"
+	"zsh"
+	"oh-my-zsh"
 )
 
 # Install brews in a loop
