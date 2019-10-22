@@ -52,7 +52,6 @@ declare -a brews=(
 	"php-cs-fixer"
 	"lazydocker"
 	"zsh"
-	"oh-my-zsh"
 )
 
 # Install brews in a loop
@@ -123,4 +122,4 @@ cd ~/Projects && valet park && cd ~
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 brew cleanup
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
