@@ -27,6 +27,7 @@ function doIt() {
 	cp .gitconfig ~/
 	cp .bash_prompt ~/
 	cp .aliases ~/
+  cp .functions ~/
 
   # Run the programs.sh Script
   echo ""
