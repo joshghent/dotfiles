@@ -18,9 +18,6 @@ Please also run
 # Setup Git
 $ git config --global user.name "Josh Ghent"
 $ git config --global user.email "youremail@example.com"
-
-# Install ZSH Plugins (requires git setup)
-$ bash zsh-plugins.sh
 ```
 
 Install TablePlus and Notion as the casks do not work
