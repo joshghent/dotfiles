@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# usage generate_favicon /logo/image.png
+generate_favicon() {
+  magick convert -resize x16 -gravity center -crop 16x16+0+0 "$1" -flatten -colors 256 -background transparent "$PWD/favicon.ico"
+}

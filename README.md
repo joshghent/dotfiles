@@ -13,13 +13,14 @@ Run the following - **THIS WILL OVERWRITE YOUR BASH PROFILE, BE CAREFUL. YOU HAV
 After the initial install make sure to configure VSCode with Settings sync from [this gist](https://gist.github.com/joshghent/f1d8dd0f1750a7f66e405c5a513a94da)
 Then generate ssh keys and gpg keys and add them to git and you're done!
 
-Also install the plugins listed in the zshrc - this should be automated
-
 Please also run
 ```bash
+# Setup Git
 $ git config --global user.name "Josh Ghent"
 $ git config --global user.email "youremail@example.com"
 ```
+
+Install TablePlus and Notion as the casks do not work
 
 ## What it does
 ### MacOS

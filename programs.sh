@@ -52,6 +52,9 @@ declare -a brews=(
 	"php-cs-fixer"
 	"lazydocker"
 	"zsh"
+	"rbenv"
+	"hub"
+	"imagemagick"
 )
 
 # Install brews in a loop
