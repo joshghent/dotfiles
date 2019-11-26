@@ -103,6 +103,7 @@ declare -a casks=(
 	"gpg-suite"
 	"rocket"
 	"keybase"
+	"telegram"
 )
 
 # Install casks in a loop
