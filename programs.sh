@@ -106,6 +106,7 @@ declare -a casks=(
 	"rocket"
 	"keybase"
 	"telegram"
+	"skype"
 )
 
 # Install casks in a loop
