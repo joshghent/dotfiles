@@ -217,5 +217,9 @@ defaults write com.apple.Finder AppleShowAllFiles true
 # Reboot finder
 killall Finder
 
+# Key repeat to super fast for l33t hax
 defaults write NSGlobalDomain KeyRepeat -int 0
-defaults write NSGlobalDomain InitialKeyRepeat -int 4
+defaults write NSGlobalDomain InitialKeyRepeat -int 0
+
+# Turn off screenshot previews
+defaults write com.apple.screencapture show-thumbnail -bool FALSE
