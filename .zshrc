@@ -116,6 +116,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle tysonwolker/iterm-tab-colors
 antigen bundle qoomon/zsh-lazyload
 antigen bundle jgogstad/passwordless-history
+antigen bundle tysonwolker/iterm-tab-colors
 
 antigen apply
 
