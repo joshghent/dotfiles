@@ -112,6 +112,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle djui/alias-tips
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle tysonwolker/iterm-tab-colors
 
 antigen apply
 
