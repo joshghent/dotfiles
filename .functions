@@ -4,3 +4,17 @@
 generate_favicon() {
   magick convert -resize x16 -gravity center -crop 16x16+0+0 "$1" -flatten -colors 256 -background transparent "$PWD/favicon.ico"
 }
+
+uuid(){
+  uuidvar=$(npx uuid)
+  echo $uuidvar
+  echo $uuidvar | tr -d '\n' | pbcopy
+}
+
+gh_actions(){
+    mkdir .github
+    mkdir .github/workflows
+    touch .github/workflows/deploy.yml
+    touch .github/workflows/test.yml
+    echo "Done"
+}
