@@ -55,6 +55,7 @@ declare -a brews=(
 	"rbenv"
 	"hub"
 	"imagemagick"
+	"git-delta"
 )
 
 # Install brews in a loop
