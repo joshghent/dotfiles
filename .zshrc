@@ -2,6 +2,9 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 source ~/antigen.zsh
 
+# To prevent insecure dirs error
+ZSH_DISABLE_COMPFIX=true
+
 # Path to your oh-my-zsh installation.
 export ZSH="~/.oh-my-zsh"
 
@@ -100,6 +103,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 antigen use oh-my-zsh
+
+antigen theme denysdovhan/spaceship-prompt
 
 antigen bundle git
 antigen bundle heroku

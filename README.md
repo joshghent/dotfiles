@@ -22,6 +22,12 @@ $ git config --global user.email "youremail@example.com"
 
 Install TablePlus and Notion as the casks do not work
 
+## Updating
+```
+$ gfo && git rebase origin/master master
+$ make
+```
+
 ## What it does
 ### MacOS
 * Updated and installs Homebrew for managing packages
