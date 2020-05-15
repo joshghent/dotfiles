@@ -8,12 +8,6 @@ ZSH_DISABLE_COMPFIX=true
 # Path to your oh-my-zsh installation.
 export ZSH="~/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="spaceship"
-
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -104,7 +98,9 @@ source $ZSH/oh-my-zsh.sh
 
 antigen use oh-my-zsh
 
-antigen theme denysdovhan/spaceship-prompt
+# workaround for https://github.com/zsh-users/antigen/issues/675
+THEME=denysdovhan/spaceship-prompt 
+antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
 
 antigen bundle git
 antigen bundle heroku
@@ -122,6 +118,7 @@ antigen bundle tysonwolker/iterm-tab-colors
 antigen bundle qoomon/zsh-lazyload
 antigen bundle jgogstad/passwordless-history
 antigen bundle tysonwolker/iterm-tab-colors
+antigen bundle agkozak/zsh-z
 
 antigen apply
 
@@ -141,5 +138,6 @@ export NVM_DIR="$HOME/.nvm"
 	
 HISTSIZE=10000000
 SAVEHIST=10000000
+HISTFILE=~/.zsh_history
 setopt HIST_IGNORE_ALL_DUPS
 setopt SHARE_HISTORY # share command history data
