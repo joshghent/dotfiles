@@ -1,13 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-source ~/antigen.zsh
 
-# To prevent insecure dirs error
-ZSH_DISABLE_COMPFIX=true
-
-# Path to your oh-my-zsh installation.
 export ZSH="~/.oh-my-zsh"
-
+source ~/antigen.zsh
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -22,7 +17,7 @@ export ZSH="~/.oh-my-zsh"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
 # DISABLE_UPDATE_PROMPT="true"
@@ -66,10 +61,6 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -98,10 +89,6 @@ source $ZSH/oh-my-zsh.sh
 
 antigen use oh-my-zsh
 
-# workaround for https://github.com/zsh-users/antigen/issues/675
-THEME=denysdovhan/spaceship-prompt 
-antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
-
 antigen bundle git
 antigen bundle heroku
 antigen bundle docker
@@ -114,28 +101,28 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle djui/alias-tips
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle tysonwolker/iterm-tab-colors
 antigen bundle qoomon/zsh-lazyload
 antigen bundle jgogstad/passwordless-history
-antigen bundle tysonwolker/iterm-tab-colors
 antigen bundle agkozak/zsh-z
+antigen bundle bundle caarlos0/open-pr
 
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
 antigen apply
+
+zstyle :prompt:pure:path color 14
+zstyle :prompt:pure:git:branch color 13
+# Make it so it shows command execution time if it took over a second 
+PURE_CMD_MAX_EXEC_TIME=1
 
 source ~/.aliases
 source ~/.functions
-source ~/.profile
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
 export PATH=~/.local/bin:$PATH
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-	
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.zsh_history
