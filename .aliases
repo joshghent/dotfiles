@@ -79,6 +79,8 @@ alias reload="exec $SHELL -l"
 
 # Get the git status
 alias gs="git status"
+alias grod="git fetch origin && git rebase origin/develop develop"
+alias grom="git fetch origin && git rebase origin/master master"
 
 #quick commit
 alias qc="git add -A && git commit"
