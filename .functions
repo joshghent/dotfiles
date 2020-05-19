@@ -18,3 +18,9 @@ gh_actions(){
     touch .github/workflows/test.yml
     echo "Done"
 }
+
+notify(){
+    title="$1"
+    message="$2"
+    /usr/bin/osascript -e "display notification \"$message\" with title \"$title\" sound name \"Hero\""
+}
