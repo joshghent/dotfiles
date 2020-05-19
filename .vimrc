@@ -2,10 +2,31 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 colorscheme monokai
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'junegunn/fzf.vim'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+set cursorline
+hi cursorline cterm=none term=none
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+highlight CursorLine guibg=#303000 ctermbg=234
+
 " Set to auto read when a file is changed from the outside
 set autoread
 " Sets how many lines of history VIM has to remember
-set history=1000
+set history=10000
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
