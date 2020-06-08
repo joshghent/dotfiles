@@ -56,6 +56,7 @@ declare -a brews=(
 	"hub"
 	"imagemagick"
 	"git-delta"
+    "deno"
 )
 
 # Install brews in a loop
@@ -85,13 +86,11 @@ declare -a casks=(
 	"postman"
 	"beardedspice"
 	"bartender"
-	"now"
-	"backblaze"
+	"vercel"
 	"discord"
 	"visual-studio-code"
 	"visual-studio"
 	"teamviewer"
-	"visual-studio"
 	"tunnelblick"
 	"rescuetime"
 	"pocketcasts"
