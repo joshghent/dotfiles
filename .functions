@@ -24,3 +24,8 @@ notify(){
     message="$2"
     /usr/bin/osascript -e "display notification \"$message\" with title \"$title\" sound name \"Hero\""
 }
+
+plan(){
+    filename="$(date '+%Y-%m-%d')"
+    vim ~/projects/notes/plans/$filename.md
+}

@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-
+ZSH_DISABLE_COMPFIX="true"
 export ZSH="~/.oh-my-zsh"
 source ~/antigen.zsh
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -104,7 +104,6 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle qoomon/zsh-lazyload
 antigen bundle jgogstad/passwordless-history
 antigen bundle agkozak/zsh-z
-antigen bundle bundle caarlos0/open-pr
 
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
@@ -117,9 +116,6 @@ PURE_CMD_MAX_EXEC_TIME=1
 
 source ~/.aliases
 source ~/.functions
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
 
 export PATH=~/.local/bin:$PATH
 
