@@ -5,6 +5,19 @@ generate_favicon() {
   magick convert -resize x16 -gravity center -crop 16x16+0+0 "$1" -flatten -colors 256 -background transparent "$PWD/favicon.ico"
 }
 
+npminit() {
+  mkdir -p $1
+  cd $1
+  git init
+  npm init -y
+  npm i -s typescript
+  open -a "Google Chrome" https://github.com/new/
+  npx gitignore node
+  git add -A
+  git commit -m "Initial Commit"
+  echo "Please update the remote and then push the code"
+}
+
 uuid(){
   uuidvar=$(npx uuid)
   echo $uuidvar
