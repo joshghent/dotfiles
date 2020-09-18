@@ -57,6 +57,7 @@ declare -a brews=(
 	"imagemagick"
 	"git-delta"
     "deno"
+    "gh"
 )
 
 # Install brews in a loop
