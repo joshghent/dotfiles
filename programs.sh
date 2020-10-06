@@ -58,6 +58,7 @@ declare -a brews=(
 	"git-delta"
     "deno"
     "gh"
+    "pyenv"
 )
 
 # Install brews in a loop
@@ -78,14 +79,11 @@ declare -a casks=(
 	"iterm2"
 	"filezilla"
 	"google-backup-and-sync"
-	"sequel-pro"
 	"robo-3t"
 	"spectacle"
 	"spotify"
 	"docker"
-	"kitematic"
 	"postman"
-	"beardedspice"
 	"bartender"
 	"vercel"
 	"discord"
@@ -100,7 +98,6 @@ declare -a casks=(
 	"slack"
 	"keka"
 	"dotnet-sdk"
-	"aerial"
 	"zoomus"
 	"gpg-suite-pinentry"
 	"gpg-suite"
@@ -109,6 +106,8 @@ declare -a casks=(
 	"telegram"
 	"skype"
 	"toggl-track"
+	"whatsapp"
+	"tableplus"
 )
 
 # Install casks in a loop
