@@ -108,6 +108,7 @@ declare -a casks=(
 	"keybase"
 	"telegram"
 	"skype"
+	"toggl-track"
 )
 
 # Install casks in a loop
