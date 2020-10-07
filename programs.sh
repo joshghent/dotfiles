@@ -109,6 +109,8 @@ declare -a casks=(
 	"toggl-track"
 	"whatsapp"
 	"tableplus"
+  "microsoft-teams"
+  "notion"
 )
 
 # Install casks in a loop
