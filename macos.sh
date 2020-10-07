@@ -30,10 +30,6 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Increase sound quality for Bluetooth headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
-defaults write NSGlobalDomain InitialKeyRepeat -int 0
-
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
@@ -223,3 +219,5 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 0
 
 # Turn off screenshot previews
 defaults write com.apple.screencapture show-thumbnail -bool FALSE
+
+defaults write com.apple.dock autohide-time-modifier -int 0;killall Dock
