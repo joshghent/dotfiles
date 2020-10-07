@@ -28,6 +28,7 @@ function doIt() {
 	cp .bash_prompt ~/
 	cp .aliases ~/
   cp .functions ~/
+  cp -R .vim ~/
 
   # Run the programs.sh Script
   echo ""
