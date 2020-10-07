@@ -129,6 +129,8 @@ cd ~/Projects && valet park && cd ~
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 brew cleanup
+mkdir -p ~/.vim/colors
+curl -G https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -o ~/.vim/colors/monokai.vim
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 curl -L git.io/antigen > ~/antigen.zsh
 cp ~/.zshrc ~/
