@@ -59,6 +59,7 @@ declare -a brews=(
     "deno"
     "gh"
     "pyenv"
+    "diff-so-fancy"
 )
 
 # Install brews in a loop
