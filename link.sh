@@ -8,6 +8,7 @@ dotfiles=(
     ".profile"
     ".aliases"
     ".gitconfig"
+    ".gitignore"
 )
 
 for file in "${dotfiles[@]}"
