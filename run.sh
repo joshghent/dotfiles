@@ -64,6 +64,10 @@ function doIt() {
   zsh
   source ~/.zshrc
 
+  echo "Fixing Comp Init errors - please review this file if you still experience issues"
+  compaudit | xargs -I % chmod g-w "%"
+  rm ~/.zcompdump*
+
   echo ""
   echo "------------------------------"
   echo "ALL DONE!"
