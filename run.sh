@@ -20,15 +20,8 @@ function doIt() {
   echo "------------------------------"
   echo ""
   cp .ssh ~/
-  cp .bash_profile ~/
-  cp .zshrc ~/
-  cp .profile ~/
-	cp .vimrc ~/
-	cp .gitconfig ~/
-	cp .bash_prompt ~/
-	cp .aliases ~/
-  cp .functions ~/
   cp -R .vim ~/
+  ./link.sh
 
   # Run the programs.sh Script
   echo ""
