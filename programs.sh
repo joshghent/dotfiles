@@ -60,6 +60,7 @@ declare -a brews=(
     "gh"
     "pyenv"
     "diff-so-fancy"
+    "terraform"
 )
 
 # Install brews in a loop
