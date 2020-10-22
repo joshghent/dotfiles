@@ -61,6 +61,7 @@ declare -a brews=(
     "pyenv"
     "diff-so-fancy"
     "terraform"
+    "telnet"
 )
 
 # Install brews in a loop
@@ -81,7 +82,6 @@ declare -a casks=(
 	"iterm2"
 	"filezilla"
 	"google-backup-and-sync"
-	"robo-3t"
 	"spectacle"
 	"spotify"
 	"docker"
