@@ -62,6 +62,7 @@ declare -a brews=(
     "diff-so-fancy"
     "terraform"
     "telnet"
+    "tmate"
 )
 
 # Install brews in a loop
