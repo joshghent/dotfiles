@@ -43,6 +43,41 @@ plan(){
     vim ~/projects/notes/plans/$filename.md
 }
 
+1to1(){
+    name="$1"
+    date="$(date '+%Y-%m-%d')"
+    touch ~/projects/notes/1to1/$name-$date.md
+    tee -a ~/projects/notes/1to1/$name-$date.md <<EOF
+# One to One with $name on $date
+    
+## Personal prompts to start
+* What have you been up to at the weekends?
+* How is your family? Kids etc.
+
+## Work Review general
+1. How has work been? Have you found it satisfying? Anything frustrating you?
+
+## Career Development
+1. Do you feel like you're making progress on your career goals here? Why or why not?
+2. Do you have the tools you need to accomplish your goals?
+3. How do you feel your progressing on your goals?
+4. What are your career goals? (if not known)
+
+## Satisfaction
+1. What are you most excited about?
+2. What are you most dreading?
+3. What motivated you to come to work?
+4. What's frustrating you at the moment?
+5. What could I do to make your work more enjoyable?
+
+## Team
+1. Are there any aspects of the team/culture you'd like to change?
+2. How would you rate the communication in the team?
+3. How well do you relate to everyone on the team? Always a challenge to do that when not in person
+EOF
+    vim ~/projects/notes/1to1/$name-$date.md
+}
+
 # Source: https://h.daily-dev-tips.com/bash-never-forget-to-git-commit-again
 # https://github.com/rebelchris/afterwork
 afterwork(){
