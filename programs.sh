@@ -63,6 +63,7 @@ declare -a brews=(
     "terraform"
     "telnet"
     "tmate"
+    "ffmpeg"
 )
 
 # Install brews in a loop
