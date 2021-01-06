@@ -9,7 +9,8 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Enable FileVault
-sudo fdesetup enable
+# Disabled as it's enabled by default
+# sudo fdesetup enable
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
