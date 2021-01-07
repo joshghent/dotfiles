@@ -82,38 +82,27 @@ chsh -s /usr/local/bin/bash
 declare -a casks=(
 	"google-chrome"
 	"iterm2"
-	"filezilla"
 	"google-backup-and-sync"
 	"spectacle"
 	"spotify"
 	"docker"
 	"postman"
 	"bartender"
-	"vercel"
 	"discord"
 	"visual-studio-code"
-	"visual-studio"
-	"teamviewer"
-	"tunnelblick"
 	"rescuetime"
-	"pocketcasts"
 	"font-fira-code"
 	"font-hack-nerd-font"
 	"slack"
-	"keka"
-	"dotnet-sdk"
 	"zoomus"
 	"gpg-suite-pinentry"
 	"gpg-suite"
 	"rocket"
-	"keybase"
-	"telegram"
-	"skype"
 	"toggl-track"
-	"whatsapp"
 	"tableplus"
-  "microsoft-teams"
-  "notion"
+	"notion"
+	"signal"
+	"hazel"
 )
 
 # Install casks in a loop
@@ -121,15 +110,6 @@ for i in "${casks[@]}"
 do
 	brew cask install "$i"
 done
-
-code --install-extension Shan.code-settings-sync
-
-# Install laravel and valet
-composer global require laravel/installer
-composer global require laravel/valet
-valet domain app
-# shellcheck disable=SC2164
-cd ~/Projects && valet park && cd ~
 
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 
