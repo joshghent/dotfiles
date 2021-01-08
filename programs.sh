@@ -108,7 +108,7 @@ declare -a casks=(
 # Install casks in a loop
 for i in "${casks[@]}"
 do
-	brew cask install "$i"
+	brew install "$i" --cask
 done
 
 curl -sSL https://get.rvm.io | bash -s stable --ruby
