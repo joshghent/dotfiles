@@ -77,9 +77,7 @@ sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
 chsh -s /usr/local/bin/bash
 
 declare -a casks=(
-	"google-chrome"
 	"iterm2"
-	"google-backup-and-sync"
 	"spectacle"
 	"spotify"
 	"docker"
