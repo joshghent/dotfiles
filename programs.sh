@@ -18,9 +18,6 @@ fi
 # Make sure we’re using the latest Homebrew.
 brew update
 
-# Upgrade any already-installed formulae.
-brew upgrade --all
-
 sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
 brew tap jesseduffield/lazydocker
