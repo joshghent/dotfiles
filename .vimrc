@@ -13,6 +13,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/goyo.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
