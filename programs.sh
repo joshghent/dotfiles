@@ -58,6 +58,7 @@ declare -a brews=(
     "telnet"
     "tmate"
     "ffmpeg"
+    "tmux"
 )
 
 # Install brews in a loop
