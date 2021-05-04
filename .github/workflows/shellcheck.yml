@@ -1,16 +1,11 @@
-name: reviewdog
-on: [pull_request]
+on: push
+name: make test
 jobs:
-  shellcheck:
-    name: runner / shellcheck
+  test:
+    name: make test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: shellcheck
-        uses: reviewdog/action-shellcheck@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review # Change reporter.
-          path: "." # Optional.
-          pattern: "*.sh" # Optional.
-          exclude: "./.git/*" # Optional.
+      - uses: actions/checkout@master
+      - name: make test
+        run: make test
+        shell: bash
