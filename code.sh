@@ -16,7 +16,7 @@ nvm install node
 nvm use node
 nvm alias default node
 
-npm i -g typescript eslint create-react-app npm-check-updates serverless jest mocha
+npm i -g typescript eslint npm-check-updates serverless jest mocha git-split-diffs
 
 brew cleanup
 
