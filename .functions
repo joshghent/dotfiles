@@ -6,8 +6,8 @@ generate_favicon() {
 }
 
 npminit() {
-  mkdir -p $1
-  cd $1
+  mkdir -p "$1"
+  cd "$1" || exit
   git init
   npm init -y
   npm i -s typescript
@@ -20,8 +20,8 @@ npminit() {
 
 uuid(){
   uuidvar=$(npx uuid)
-  echo $uuidvar
-  echo $uuidvar | tr -d '\n' | pbcopy
+  echo "$uuidvar"
+  echo "$uuidvar" | tr -d '\n' | pbcopy
 }
 
 gh_actions(){
@@ -40,16 +40,16 @@ notify(){
 
 plan(){
     filename="$(date '+%Y-%m-%d')"
-    vim ~/projects/notes/plans/$filename.md
+    vim ~/projects/notes/plans/"$filename".md
 }
 
 1to1(){
     name="$1"
     date="$(date '+%Y-%m-%d')"
-    touch ~/projects/notes/1to1/$name-$date.md
-    tee -a ~/projects/notes/1to1/$name-$date.md <<EOF
+    touch ~/projects/notes/1to1/"$name"-"$date".md
+    tee -a ~/projects/notes/1to1/"$name"-"$date".md <<EOF
 # One to One with $name on $date
-    
+
 ## Personal prompts to start
 * What have you been up to at the weekends?
 * How is your family? Kids etc.
@@ -86,18 +86,18 @@ afterwork(){
 DIR=~/Projects/
 GITBASED=.git
 # Step 1 loop through all folders in a dir
-for dir in $DIR*
+for dir in "$DIR"*
 do
     # Check if we have a directory
     if [[ -d $dir ]]; then
         # Change into working directory
-        cd $dir
+        cd "$dir" || exit
         # Define empty message variable
         MSG="";
         # Check if directory contains .git folder
         if [ -d "$GITBASED" ]; then
             # Define our test for Git Status
-            TEST=$(git status $dir);
+            TEST=$(git status "$dir");
             # Check if git status is perfect
             if [[ $TEST == *"nothing to commit"* ]]; then
                 MSG=": No changes ✅"
@@ -107,12 +107,12 @@ do
             # Check if git status has uncommitted changes
             elif [[ $TEST == *"Untracked files"* ]]; then
                 MSG=": You forgot to commit some files 😡"
-            fi 
-        else 
+            fi
+        else
             # Not a valid git project
             MSG=": Not a valid git project 👀"
         fi
-        echo ${dir##*/}$MSG
+        echo "${dir##*/}""$MSG"
         cd ..
     fi
 done
