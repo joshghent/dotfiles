@@ -50,15 +50,16 @@ declare -a brews=(
 	"rbenv"
 	"imagemagick"
 	"git-delta"
-    "deno"
-    "gh"
-    "pyenv"
-    "diff-so-fancy"
-    "terraform"
-    "telnet"
-    "tmate"
-    "ffmpeg"
-    "tmux"
+  "deno"
+  "gh"
+  "pyenv"
+  "diff-so-fancy"
+  "terraform"
+  "telnet"
+  "tmate"
+  "ffmpeg"
+  "tmux"
+  "mas"
 )
 
 # Install brews in a loop
@@ -92,10 +93,9 @@ declare -a casks=(
 	"gpg-suite"
 	"rocket"
 	"toggl-track"
-	"tableplus"
-	"notion"
 	"signal"
 	"hazel"
+  "firefox"
 )
 
 # Install casks in a loop
@@ -107,8 +107,21 @@ done
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 brew cleanup
-mkdir -p ~/.vim/colors
-curl -G https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -o ~/.vim/colors/monokai.vim
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
-curl -L git.io/antigen > ~/antigen.zsh
-cp ~/.zshrc ~/
+
+
+declare -a appstore=(
+  "1176895641" # Spark Email
+  "585829637" # Todoist
+  "568494494" # Pocket
+  "1451685025" # Wireguard
+  "926036361" # Lastpass
+  "1440147259" # AdGuard
+)
+
+# TablePlus Install
+wget https://tableplus.com/release/osx/tableplus_latest -o ~/Downloads/tableplus.dmg
+hdiutil attach ~/Downloads/tableplus.dmg
+
+# Notion Install
+wget https://www.notion.so/desktop/apple-silicon/download -o ~/Downloads/notion.dmg
+hdiutil attach ~/Downloads/notion.dmg
