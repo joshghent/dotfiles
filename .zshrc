@@ -1,5 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 ZSH_DISABLE_COMPFIX="true"
+ZSH_DOTENV_ALLOWED_LIST="~/.oh-my-zsh/cache/dotenv/allow.list"
+ZSH_DOTENV_DISALLOWED_LIST="~/.oh-my-zsh/cache/dotenv/disallow.list"
 export ZSH="~/.oh-my-zsh"
 source ~/antigen.zsh
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -95,7 +97,6 @@ antigen bundle docker
 antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
-antigen bundle dotenv
 
 antigen bundle zsh-users/zsh-completions
 antigen bundle djui/alias-tips
@@ -124,3 +125,4 @@ SAVEHIST=10000000
 HISTFILE=~/.zsh_history
 setopt HIST_IGNORE_ALL_DUPS
 setopt SHARE_HISTORY # share command history data
+export PATH="/usr/local/sbin:$PATH"
