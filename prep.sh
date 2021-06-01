@@ -11,8 +11,6 @@ echo "------------------------------"
 echo "Updating OSX.  If this requires a restart, run the script again."
 sudo systemsetup -setcomputersleep Never
 # Install all available updates
-sudo softwareupdate -iva
-# Install only recommended available updates
-#sudo softwareupdate -irv
+sudo softwareupdate -i -a --install-rosetta
 
-mkdir ~/Projects
+mkdir -p ~/Projects
