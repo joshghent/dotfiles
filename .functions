@@ -118,3 +118,8 @@ do
 done
 echo "All done for today! 🔥"
 }
+
+gro(){
+    git fetch origin
+    git rebase origin/$1 $1
+}
