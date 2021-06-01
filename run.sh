@@ -68,6 +68,17 @@ function doIt() {
   compaudit | xargs -I % chmod g-w "%"
   rm ~/.zcompdump*
 
+
+  echo ""
+  echo "------------------------------"
+  echo "Generate SSH Keys and Configure Git"
+  echo "------------------------------"
+  echo ""
+  git config --global user.name $name;
+  git config --global user.email $email;
+  ssh-keygen -t ed25519 -C "$email"
+
+
   echo ""
   echo "------------------------------"
   echo "ALL DONE!"
@@ -76,9 +87,13 @@ function doIt() {
   echo ""
 }
 
-read -p "This script may overwrite existing files in your home directory. Are you sure? (y/n) " -r -n 1;
+read -p "This script may overwrite existing files in your home directory. Are you sure? (y/n) " -r -n 1 confirm;
 echo "";
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+
+read -p "Please enter your Email" -r -n 1 email;
+read -p "Please enter your Name" -r -n 1 name;
+
+if [[ $confirm =~ ^[Yy]$ ]]; then
     doIt "$@"
 fi;
 
