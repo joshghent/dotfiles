@@ -59,6 +59,7 @@ declare -a brews=(
   "ffmpeg"
   "tmux"
   "mas"
+  "the_silver_searcher"
 )
 
 # Install brews in a loop
@@ -95,6 +96,7 @@ declare -a casks=(
 	"signal"
 	"hazel"
   "firefox"
+  "crossover"
 )
 
 # Install casks in a loop
