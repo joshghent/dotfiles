@@ -1,7 +1,7 @@
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
-colorscheme monokai
+colorscheme monokai-refined
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -125,3 +125,4 @@ augroup ft_markdown
   au!
   au FileType markdown let b:auto_save = 1
 augroup END
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown

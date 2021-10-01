@@ -123,3 +123,11 @@ gro(){
     git fetch origin
     git rebase origin/$1 $1
 }
+
+portscan() {
+    echo Grabbing ports...
+    ports=$(nmap -p- --min-rate 1000 -T4 $1 | grep '^[0-9]' | cut -d '/' -f 1 | tr '\n' ',' | sed s/,$//)  
+    echo Ports grabbed!
+    echo Scanning...
+    nmap -sC -sV -Pn -p $ports $1 $2 $3
+}

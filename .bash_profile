@@ -67,3 +67,4 @@ alias cat="bat"
 alias ping='prettyping --nolegend'
 alias c="code ."
 export GPG_TTY=$(tty)
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
