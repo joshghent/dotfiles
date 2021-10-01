@@ -14,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
+Plugin '907th/vim-auto-save'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -117,3 +118,10 @@ let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 
 set wrap linebreak
+
+" Enable autosave for markdown files
+let g:auto_save = 0
+augroup ft_markdown
+  au!
+  au FileType markdown let b:auto_save = 1
+augroup END
