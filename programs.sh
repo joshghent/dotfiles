@@ -60,6 +60,7 @@ declare -a brews=(
   "tmux"
   "mas"
   "the_silver_searcher"
+  "cmake"
 )
 
 # Install brews in a loop
@@ -106,6 +107,8 @@ do
 done
 
 curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+curl https://bun.sh/install | bash
 
 brew cleanup
 
