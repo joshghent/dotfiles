@@ -61,6 +61,7 @@ declare -a brews=(
   "mas"
   "the_silver_searcher"
   "cmake"
+  "ipfs"
 )
 
 # Install brews in a loop
@@ -98,6 +99,7 @@ declare -a casks=(
 	"hazel"
   "firefox"
   "crossover"
+  "ipfs"
 )
 
 # Install casks in a loop
