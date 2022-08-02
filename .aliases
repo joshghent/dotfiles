@@ -91,3 +91,9 @@ alias findpi="nmap -sP 192.168.0.0/24 | awk '/^Nmap/{print}/B8:27:EB/{print}'"
 alias c="code ."
 alias cat="bat"
 alias gensecret="ruby -rsecurerandom -e 'puts SecureRandom.hex(20)'"
+setToken() {
+    ~/mfa.sh $1 $2
+    source ~/.token_file
+    echo "Your creds have been set in your env."
+}
+alias mfa=setToken
