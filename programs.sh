@@ -41,7 +41,6 @@ declare -a brews=(
 	"moreutils"
 	"findutils"
 	"awscli"
-	"docker"
 	"go"
 	"tree"
 	"bat"
@@ -100,6 +99,7 @@ declare -a casks=(
   "firefox"
   "crossover"
   "ipfs"
+  "font-inter"
 )
 
 # Install casks in a loop
