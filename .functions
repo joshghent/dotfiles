@@ -10,9 +10,10 @@ npminit() {
   cd "$1" || exit
   git init
   npm init -y
-  npm i -s typescript
   open -a "Google Chrome" https://github.com/new/
   npx gitignore node
+  npx eslint --init
+  npx tsc --init
   git add -A
   git commit -m "Initial Commit"
   echo "Please update the remote and then push the code"
