@@ -36,3 +36,6 @@ ssh-add -K ~/.ssh/id_rsa
 echo ~/.ssh/id_rsa.pub
 pbcopy < ~/.ssh/id_rsa.pub
 echo "SSH Key Copied to Clipboard. Please add to GitHub / GitLab"
+
+# Install Monokai Refined theme for Vim
+curl -o ~/.vim/colors/monokai-refined.vim https://raw.githubusercontent.com/jaromero/vim-monokai-refined/master/colors/Monokai-Refined.vim
