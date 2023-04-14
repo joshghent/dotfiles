@@ -18,6 +18,7 @@ alias gc="git commit"
 alias gpo="git push origin"
 alias gp="git push"
 alias ll="ls -la"
+alias gpx="git add -A && git commit -m \"x\" && git push origin"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -97,3 +98,4 @@ setToken() {
     echo "Your creds have been set in your env."
 }
 alias mfa=setToken
+alias python=python3

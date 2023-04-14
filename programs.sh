@@ -61,6 +61,7 @@ declare -a brews=(
   "the_silver_searcher"
   "cmake"
   "ipfs"
+  "neofetch"
 )
 
 # Install brews in a loop
@@ -81,7 +82,7 @@ declare -a casks=(
 	"spectacle"
 	"spotify"
 	"docker"
-	"postman"
+	"insomnia"
 	"bartender"
 	"discord"
 	"visual-studio-code"
@@ -131,3 +132,13 @@ hdiutil attach ~/Downloads/tableplus.dmg
 # Notion Install
 wget https://www.notion.so/desktop/apple-silicon/download -o ~/Downloads/notion.dmg
 hdiutil attach ~/Downloads/notion.dmg
+
+# Oh my ZSH
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+# Antigen install
+curl -L git.io/antigen > antigen.zsh
+
+# Install Playwright
+npx playwright install --with-deps

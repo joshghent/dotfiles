@@ -68,3 +68,11 @@ alias ping='prettyping --nolegend'
 alias c="code ."
 export GPG_TTY=$(tty)
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+SCRIPT_PATH="$( cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null 2>&1 ; pwd -P  )"
+setToken() {
+    $SCRIPT_PATH/mfa.sh $1 $2
+    source ~/.token_file
+    echo "Your creds have been set in your env."
+}
+alias mfa=setToken
