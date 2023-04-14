@@ -117,8 +117,8 @@ antigen bundle qoomon/zsh-lazyload
 antigen bundle jgogstad/passwordless-history
 antigen bundle agkozak/zsh-z
 
-antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
+antigen bundle mafredri/zsh-async@main
+antigen bundle sindresorhus/pure@main
 antigen apply
 
 zstyle :prompt:pure:path color 14
