@@ -137,3 +137,16 @@ HISTFILE=~/.zsh_history
 setopt HIST_IGNORE_ALL_DUPS
 setopt SHARE_HISTORY # share command history data
 export PATH="/usr/local/sbin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# bun completions
+[ -s "/Users/joshghent/.bun/_bun" ] && source "/Users/joshghent/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

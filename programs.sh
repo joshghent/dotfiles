@@ -63,6 +63,7 @@ declare -a brews=(
   "ipfs"
   "neofetch"
   "tfenv"
+  "act"
 )
 
 # Install brews in a loop
