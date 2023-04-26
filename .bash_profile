@@ -76,3 +76,4 @@ setToken() {
     echo "Your creds have been set in your env."
 }
 alias mfa=setToken
+. "$HOME/.cargo/env"

@@ -62,6 +62,7 @@ declare -a brews=(
   "cmake"
   "ipfs"
   "neofetch"
+  "tfenv"
 )
 
 # Install brews in a loop
@@ -142,3 +143,10 @@ curl -L git.io/antigen > antigen.zsh
 
 # Install Playwright
 npx playwright install --with-deps
+
+# Install latest Terraform
+tfenv install latest && tfenv use latest
+
+# Set Iterm2 settings to pull from dotfiles
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/dotfiles"
+defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
