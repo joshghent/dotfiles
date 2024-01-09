@@ -92,7 +92,7 @@ alias scan="nmap -sP 192.168.1.1/24"
 # Finds a local raspberry pi
 alias findpi="nmap -sP 192.168.0.0/24 | awk '/^Nmap/{print}/B8:27:EB/{print}'"
 
-alias c="code ."
+alias c="codium ."
 alias cat="bat"
 alias gensecret="ruby -rsecurerandom -e 'puts SecureRandom.hex(20)'"
 setToken() {
