@@ -15,6 +15,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin '907th/vim-auto-save'
+Plugin 'iamcco/markdown-preview.nvim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
