@@ -81,28 +81,23 @@ chsh -s /usr/local/bin/bash
 
 declare -a casks=(
 	"iterm2"
-	"spectacle"
 	"spotify"
 	"docker"
-	"insomnia"
 	"bartender"
 	"discord"
-	"visual-studio-code"
-	"rescuetime"
 	"font-fira-code"
 	"font-hack-nerd-font"
 	"slack"
 	"zoom"
 	"gpg-suite-pinentry"
 	"gpg-suite"
-	"rocket"
-	"toggl-track"
-	"signal"
 	"hazel"
   "firefox"
-  "crossover"
-  "ipfs"
   "font-inter"
+  "wireguard"
+  "rectangle"
+  "bruno"
+  "vscodium"
 )
 
 # Install casks in a loop
@@ -111,29 +106,11 @@ do
 	brew install "$i" --cask
 done
 
-curl -sSL https://get.rvm.io | bash -s stable --ruby
-
-curl https://bun.sh/install | bash
-
 brew cleanup
-
-
-declare -a appstore=(
-  "1176895641" # Spark Email
-  "585829637" # Todoist
-  "568494494" # Pocket
-  "1451685025" # Wireguard
-  "926036361" # Lastpass
-  "1440147259" # AdGuard
-)
 
 # TablePlus Install
 wget https://tableplus.com/release/osx/tableplus_latest -o ~/Downloads/tableplus.dmg
 hdiutil attach ~/Downloads/tableplus.dmg
-
-# Notion Install
-wget https://www.notion.so/desktop/apple-silicon/download -o ~/Downloads/notion.dmg
-hdiutil attach ~/Downloads/notion.dmg
 
 # Oh my ZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -149,5 +126,6 @@ npx playwright install --with-deps
 tfenv install latest && tfenv use latest
 
 # Set Iterm2 settings to pull from dotfiles
+# Please note: you probably need to update the projects path
 defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/dotfiles"
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
