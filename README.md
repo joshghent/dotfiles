@@ -11,6 +11,8 @@ $ git clone https://github.com/joshghent/dotfiles.git && cd dotfiles
 $ make
 ```
 
+After install, run `:call mkdp#util#install()` inside vim to install markdown preview
+
 ## ✅ TODO
 
 - [] Automatically generate SSH key
@@ -18,7 +20,7 @@ $ make
 - [x] Change to github actions
 - [] Automate import of Iterm schema
 - [] Add install via Curl - [like this](https://github.com/wookayin/dotfiles/blob/master/etc/install)
-- [] Add app installs
+- [x] Add app installs
 - [] Add all accounts (without passwords)
 - [] Add colored output
 - [] Silence the output of various commands
