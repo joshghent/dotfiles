@@ -1,7 +1,6 @@
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
-colorscheme monokai-refined
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -15,10 +14,13 @@ Plugin 'mileszs/ack.vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin '907th/vim-auto-save'
+Plugin 'nordtheme/vim'
 Plugin 'iamcco/markdown-preview.nvim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+colorscheme nord
 
 set cursorline
 hi cursorline cterm=none term=none
