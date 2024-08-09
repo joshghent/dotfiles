@@ -103,3 +103,4 @@ setToken() {
 alias mfa=setToken
 alias python=python3
 alias dc="docker compose"
+
