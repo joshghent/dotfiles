@@ -64,6 +64,10 @@ declare -a brews=(
   "neofetch"
   "tfenv"
   "act"
+  "trufflehog"
+  "pre-commit"
+  "detect-secrets"
+  "terraform-docs"
 )
 
 # Install brews in a loop
@@ -98,6 +102,7 @@ declare -a casks=(
   "rectangle"
   "bruno"
   "vscodium"
+  "zed"
 )
 
 # Install casks in a loop
