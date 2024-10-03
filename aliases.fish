@@ -10,6 +10,7 @@ alias gpx="git add -A && git commit -m \"x\" && git push origin"
 alias gco="git checkout"
 alias gfo="git fetch origin"
 alias grbc="git rebase --continue"
+alias gcmsg="git commit --message"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '

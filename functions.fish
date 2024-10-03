@@ -1,12 +1,12 @@
-#!/bin/fish
+#!/usr/bin/env fish
 
-uuid(){
-  uuidvar=$(npx uuid)
+function uuid
+  set uuidvar (npx uuid)
   echo "$uuidvar"
-  echo "$uuidvar" | tr -d '\n' | pbcopy
-}
+  echo -n "$uuidvar" | pbcopy
+end
 
-gro(){
+function gro
     git fetch origin
-    git rebase origin/$1 $1
-}
+    git rebase origin/$argv[1] $argv[1]
+end
