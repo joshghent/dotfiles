@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-# ~/macos.sh — Originally from https://mths.be/osx
+# Ensure that this script is running on macOS
+if [ "$(uname)" != "Darwin" ]; then
+  echo "Run on macOS !"; exit 1
+fi
 
 # Ask for the administrator password upfront
 sudo -v
@@ -8,16 +11,11 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `osx.sh` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Enable FileVault
-# Disabled as it's enabled by default
-# sudo fdesetup enable
-
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-
 
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
@@ -72,7 +70,7 @@ defaults write com.apple.dock autohide -bool true
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
 # Remove the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0
+defaults write com.apple.dock autohide-time-modifier -int 0
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
@@ -87,16 +85,8 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
-# Disable the all too sensitive backswipe on Magic Mouse
-defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
-# Disable the all too sensitive backswipe on trackpads
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
-
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 defaults write com.apple.dock minimize-to-application -bool true
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
@@ -110,14 +100,6 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
-
-# Disable the all too sensitive backswipe on trackpads
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
-
-# Disable the all too sensitive backswipe on Magic Mouse
-defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
 
 ###############################################################################
 # Safari & WebKit                                                             #
@@ -218,7 +200,8 @@ killall Finder
 defaults write NSGlobalDomain KeyRepeat -int 0
 defaults write NSGlobalDomain InitialKeyRepeat -int 0
 
+# Use key repeat instead of the accents menu when holding a key
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
 # Turn off screenshot previews
 defaults write com.apple.screencapture show-thumbnail -bool FALSE
-
-defaults write com.apple.dock autohide-time-modifier -int 0;killall Dock
