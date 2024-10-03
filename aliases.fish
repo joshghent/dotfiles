@@ -11,6 +11,7 @@ alias gco="git checkout"
 alias gfo="git fetch origin"
 alias grbc="git rebase --continue"
 alias gcmsg="git commit --message"
+alias gcb="git checkout -b"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
