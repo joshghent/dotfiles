@@ -1,4 +1,4 @@
-#!/usr/bin/env fish
+#/bin/fish
 
 function uuid
   set uuidvar (npx uuid)
