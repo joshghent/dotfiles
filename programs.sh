@@ -20,54 +20,48 @@ brew update
 
 sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
-brew tap jesseduffield/lazydocker
 brew tap homebrew/cask-fonts
 
 declare -a brews=(
-	"ansible"
-	"git"
-	"yarn"
-	"mysql"
-	"redis"
-	"php"
-	"composer"
-	"postgresql"
-	"nmap"
-	"wget"
-	"gpg"
-	"bash"
-	"bash-completion2"
-	"coreutils"
-	"moreutils"
-	"findutils"
-	"awscli"
-	"go"
-	"tree"
-	"bat"
-	"zsh"
-	"rbenv"
-	"imagemagick"
-	"git-delta"
-  "deno"
-  "gh"
-  "pyenv"
-  "diff-so-fancy"
-  "terraform"
-  "telnet"
-  "tmate"
-  "ffmpeg"
-  "tmux"
-  "mas"
-  "the_silver_searcher"
-  "cmake"
-  "ipfs"
-  "neofetch"
-  "tfenv"
-  "act"
-  "trufflehog"
-  "pre-commit"
-  "detect-secrets"
-  "terraform-docs"
+    "ansible"
+    "git"
+    "yarn"
+    "php"
+    "composer"
+    "nmap"
+    "wget"
+    "gpg"
+    "coreutils"
+    "moreutils"
+    "findutils"
+    "awscli"
+    "go"
+    "tree"
+    "bat"
+    "zsh"
+    "rbenv"
+    "imagemagick"
+    "git-delta"
+    "deno"
+    "gh"
+    "pyenv"
+    "diff-so-fancy"
+    "terraform"
+    "telnet"
+    "tmate"
+    "ffmpeg"
+    "tmux"
+    "the_silver_searcher"
+    "cmake"
+    "neofetch"
+    "tfenv"
+    "trufflehog"
+    "pre-commit"
+    "detect-secrets"
+    "terraform-docs"
+    "rust"
+    "nvm"
+    "rvm"
 )
 
 # Install brews in a loop
@@ -77,32 +71,32 @@ do
 done
 
 # We installed the new shell, now we have to activate it
-echo "Adding the newly installed shell to the list of allowed shells"
+echo "🐟 Installing Fish shell. This will prompt for your password."
 # Prompts for password
-sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
 # Change to the new shell, prompts for password
-chsh -s /usr/local/bin/bash
+chsh -s /opt/homebrew/bin/fish
 
 declare -a casks=(
-	"iterm2"
-	"spotify"
-	"docker"
-	"bartender"
-	"discord"
-	"font-fira-code"
-	"font-hack-nerd-font"
-	"slack"
-	"zoom"
-	"gpg-suite-pinentry"
-	"gpg-suite"
-	"hazel"
-  "firefox"
-  "font-inter"
-  "wireguard"
-  "rectangle"
-  "bruno"
-  "vscodium"
-  "zed"
+    "iterm2"
+    "spotify"
+    "docker"
+    "discord"
+    "font-fira-code"
+    "font-hack-nerd-font"
+    "slack"
+    "zoom"
+    "gpg-suite-pinentry"
+    "gpg-suite"
+    "firefox"
+    "font-inter"
+    "wireguard"
+    "rectangle"
+    "bruno"
+    "vscodium"
+    "zed"
+    "cursor"
+    "hiddenbar"
 )
 
 # Install casks in a loop
@@ -113,16 +107,18 @@ done
 
 brew cleanup
 
+# Install latest LTS Node
+mkdir ~/.nvm
+export NVM_DIR="$HOME/.nvm"
+# shellcheck source=/dev/null
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm install --lts
+nvm use --lts
+nvm alias default node
+
 # TablePlus Install
 wget https://tableplus.com/release/osx/tableplus_latest -o ~/Downloads/tableplus.dmg
 hdiutil attach ~/Downloads/tableplus.dmg
-
-# Oh my ZSH
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-
-# Antigen install
-curl -L git.io/antigen > antigen.zsh
 
 # Install Playwright
 npx playwright install --with-deps
@@ -130,7 +126,12 @@ npx playwright install --with-deps
 # Install latest Terraform
 tfenv install latest && tfenv use latest
 
-# Set Iterm2 settings to pull from dotfiles
-# Please note: you probably need to update the projects path
-defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/dotfiles"
-defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+# Install latest ruby
+rvm install ruby
+rvm --default use ruby
+
+# Install Monokai Refined theme for Vim
+curl -o ~/.vim/colors/monokai-refined.vim https://raw.githubusercontent.com/jaromero/vim-monokai-refined/master/colors/Monokai-Refined.vim
+
+# Change the theme and prompt for fish
+fish && fish_config theme choose nord && fish_config prompt choose arrow && fish_config prompt save && fish_config theme save

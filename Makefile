@@ -1,14 +1,3 @@
-.PHONY: all
-all: install
-
-.PHONY: install
-install:
-	for file in $(shell find $(CURDIR) -name ".*" -not -name ".gitignore" -not -name ".travis.yml" -not -name ".git" -not -name ".github" -not -name ".*.swp" -not -name ".gnupg" -not -name ".gitconfig"); do \
-		f=$$(basename $$file); \
-		ln -sfn $$file ~/$$f; \
-	done; \
-
-
 .PHONY: test
 test: shellcheck ## Runs all the tests on the files in the repository.
 
