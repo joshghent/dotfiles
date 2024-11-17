@@ -97,6 +97,7 @@ declare -a casks=(
     "zed"
     "cursor"
     "hiddenbar"
+    "google-drive"
 )
 
 # Install casks in a loop
