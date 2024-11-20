@@ -2,7 +2,6 @@
 
 dotfiles=(
     ".vimrc"
-    ".profile"
     ".gitconfig"
     ".gitignore"
 )
@@ -19,5 +18,8 @@ fish_config_dir="$HOME/.config/fish/conf.d"
 mkdir -p "$fish_config_dir"
 ln -sf "$PWD/aliases.fish" "$fish_config_dir/aliases.fish"
 ln -sf "$PWD/functions.fish" "$fish_config_dir/functions.fish"
+
+# Link config.fish
+ln -sf "$PWD/config.fish" "$HOME/.config/fish/config.fish"
 
 echo "Finishing Linking all dotfiles and fish config files"
