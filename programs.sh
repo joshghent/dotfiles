@@ -38,15 +38,12 @@ declare -a brews=(
     "go"
     "tree"
     "bat"
-    "zsh"
-    "rbenv"
     "imagemagick"
     "git-delta"
     "deno"
     "gh"
     "pyenv"
     "diff-so-fancy"
-    "terraform"
     "telnet"
     "tmate"
     "ffmpeg"
@@ -62,6 +59,10 @@ declare -a brews=(
     "rust"
     "nvm"
     "rvm"
+    "colima"
+    "docker"
+    "docker-credential-helper"
+    "lazydocker"
 )
 
 # Install brews in a loop
@@ -70,18 +71,9 @@ do
 	brew install "$i"
 done
 
-# We installed the new shell, now we have to activate it
-echo "🐟 Installing Fish shell. This will prompt for your password."
-# Prompts for password
-echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
-# Change to the new shell, prompts for password
-chsh -s /opt/homebrew/bin/fish
-
 declare -a casks=(
     "iterm2"
     "spotify"
-    "docker"
-    "discord"
     "font-fira-code"
     "font-hack-nerd-font"
     "slack"
@@ -97,7 +89,16 @@ declare -a casks=(
     "zed"
     "cursor"
     "hiddenbar"
+    "protonmail-bridge"
     "google-drive"
+    "dropbox"
+    "steam"
+    "protonvpn"
+    "calibre"
+    "tailscale"
+    "vlc"
+    "deluge"
+    "leapp"
 )
 
 # Install casks in a loop
@@ -107,6 +108,24 @@ do
 done
 
 brew cleanup
+
+# We installed the new shell, now we have to activate it
+echo "🐟 Installing Fish shell. This will prompt for your password."
+# Prompts for password
+echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
+# Change to the new shell, prompts for password
+chsh -s /opt/homebrew/bin/fish
+
+# Change the theme and prompt for fish
+fish && fish_config theme choose nord && fish_config prompt choose arrow && fish_config prompt save && fish_config theme save
+
+# Install Fisher and setup common functions
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+
+fisher install jorgebucaran/nvm.fish
+
+# Setup RVM for fish
+curl -L --create-dirs -o ~/.config/fish/functions/rvm.fish https://raw.github.com/lunks/fish-nuggets/master/functions/rvm.fish
 
 # Install latest LTS Node
 mkdir ~/.nvm
@@ -134,5 +153,5 @@ rvm --default use ruby
 # Install Monokai Refined theme for Vim
 curl -o ~/.vim/colors/monokai-refined.vim https://raw.githubusercontent.com/jaromero/vim-monokai-refined/master/colors/Monokai-Refined.vim
 
-# Change the theme and prompt for fish
-fish && fish_config theme choose nord && fish_config prompt choose arrow && fish_config prompt save && fish_config theme save
+# Autostart docker
+brew services start colima
