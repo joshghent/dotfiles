@@ -63,6 +63,7 @@ declare -a brews=(
     "docker"
     "docker-credential-helper"
     "lazydocker"
+    "pnpm"
 )
 
 # Install brews in a loop
