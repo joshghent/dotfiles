@@ -56,7 +56,6 @@ declare -a brews=(
     "pre-commit"
     "detect-secrets"
     "terraform-docs"
-    "rust"
     "nvm"
     "rvm"
     "colima"
@@ -64,6 +63,7 @@ declare -a brews=(
     "docker-credential-helper"
     "lazydocker"
     "pnpm"
+    "rustup"
 )
 
 # Install brews in a loop
@@ -156,3 +156,6 @@ curl -o ~/.vim/colors/monokai-refined.vim https://raw.githubusercontent.com/jaro
 
 # Autostart docker
 brew services start colima
+
+# Install Rust
+rustup default stable
