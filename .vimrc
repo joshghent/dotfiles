@@ -11,8 +11,6 @@ Plugin 'nordtheme/vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-colorscheme nord
-
 set cursorline
 hi cursorline cterm=none term=none
 autocmd WinEnter * setlocal cursorline
@@ -54,3 +52,5 @@ set laststatus=2
 set clipboard=unnamedplus
 
 set wrap linebreak
+
+set smartindent

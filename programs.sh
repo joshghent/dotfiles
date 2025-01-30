@@ -20,8 +20,6 @@ brew update
 
 sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
-brew tap homebrew/cask-fonts
-
 declare -a brews=(
     "ansible"
     "git"
@@ -56,14 +54,12 @@ declare -a brews=(
     "pre-commit"
     "detect-secrets"
     "terraform-docs"
-    "rust"
-    "nvm"
-    "rvm"
     "colima"
     "docker"
     "docker-credential-helper"
     "lazydocker"
     "pnpm"
+    "fish"
 )
 
 # Install brews in a loop

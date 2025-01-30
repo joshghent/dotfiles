@@ -33,7 +33,9 @@ function doIt() {
 			echo "Overwriting dotfiles"
 			echo "------------------------------"
 			echo ""
-			cp .ssh ~/
+			if [ ! -f ~/.ssh/config ]; then
+				cp .ssh ~/
+			fi
 			./link.sh
 
 			echo "2" > ~/.setup_progress
@@ -81,17 +83,23 @@ function doIt() {
 	if [ "$progress" -lt 6 ]; then
 			echo ""
 			echo "------------------------------"
-			echo "Generate SSH Keys and Configure Git"
+			echo "Configure Git and Check SSH Keys"
 			echo "------------------------------"
 			echo ""
-			git config --global user.name "$name";
-			git config --global user.email "$email";
-			ssh-keygen -t ed25519 -C "$email"
-			eval "$(ssh-agent -s)"
-			ssh-add -K ~/.ssh/id_ed25519
-			echo ~/.ssh/id_ed25519.pub
-			pbcopy < ~/.ssh/id_ed25519.pub
-			echo "SSH Key Copied to Clipboard. Please add to GitHub / GitLab"
+			git config --global user.name "$name"
+			git config --global user.email "$email"
+
+			if [ ! -f ~/.ssh/id_ed25519 ]; then
+					echo "Generating new SSH key..."
+					ssh-keygen -t ed25519 -C "$email"
+					eval "$(ssh-agent -s)"
+					ssh-add -K ~/.ssh/id_ed25519
+					echo "~/.ssh/id_ed25519.pub"
+					pbcopy < ~/.ssh/id_ed25519.pub
+					echo "New SSH Key generated and copied to clipboard. Please add to GitHub / GitLab"
+			else
+					echo "SSH key already exists. Skipping key generation."
+			fi
 
 			echo "6" > ~/.setup_progress
 	fi
