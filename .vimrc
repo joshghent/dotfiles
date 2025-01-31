@@ -54,3 +54,6 @@ set laststatus=2
 set clipboard=unnamedplus
 
 set wrap linebreak
+
+" Preserve indent for new lines
+set smartindent
