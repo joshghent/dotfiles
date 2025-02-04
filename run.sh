@@ -36,7 +36,6 @@ function doIt() {
 			if [ ! -f ~/.ssh/config ]; then
 				cp .ssh ~/
 			fi
-			./link.sh
 
 			echo "2" > ~/.setup_progress
 	fi
