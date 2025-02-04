@@ -92,9 +92,9 @@ function doIt() {
 					echo "Generating new SSH key..."
 					ssh-keygen -t ed25519 -C "$email"
 					eval "$(ssh-agent -s)"
-					ssh-add -K ~/.ssh/id_ed25519
+					ssh-add -K $HOME/.ssh/id_ed25519
 					echo "~/.ssh/id_ed25519.pub"
-					pbcopy < ~/.ssh/id_ed25519.pub
+					pbcopy < $HOME/.ssh/id_ed25519.pub
 					echo "New SSH Key generated and copied to clipboard. Please add to GitHub / GitLab"
 			else
 					echo "SSH key already exists. Skipping key generation."
