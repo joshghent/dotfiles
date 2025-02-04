@@ -205,3 +205,4 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Turn off screenshot previews
 defaults write com.apple.screencapture show-thumbnail -bool FALSE
+defaults write -g NSWindowShouldDragOnGesture -bool true

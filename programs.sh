@@ -20,6 +20,9 @@ brew update
 
 sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
+# needed for sketchybar
+brew tap FelixKratz/formulae
+
 declare -a brews=(
     "ansible"
     "git"
@@ -60,6 +63,7 @@ declare -a brews=(
     "lazydocker"
     "pnpm"
     "fish"
+    "sketchybar"
 )
 
 # Install brews in a loop
@@ -152,3 +156,7 @@ curl -o ~/.vim/colors/monokai-refined.vim https://raw.githubusercontent.com/jaro
 
 # Autostart docker
 brew services start colima
+
+# Start sketchy, remove the menu bar and reboot finder.
+brew services start sketchybar && defaults write NSGlobalDomain _HIHideMenuBar -bool true && killall Finder
+

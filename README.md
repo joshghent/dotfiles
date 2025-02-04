@@ -7,6 +7,10 @@
 Run the following - **THIS WILL OVERWRITE YOUR BASH PROFILE, BE CAREFUL. YOU HAVE BEEN WARNED.**
 
 ```bash
-$ git clone https://github.com/joshghent/dotfiles.git && cd dotfiles
-$ make
+$ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:joshghent/dotfiles.git
+```
+
+To update...
+```
+$ chezmoi git pull
 ```
