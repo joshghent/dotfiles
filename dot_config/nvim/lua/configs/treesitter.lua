@@ -30,10 +30,11 @@ local options = {
 
   highlight = {
     enable = true,
-    use_languagetree = true,
   },
 
   indent = { enable = true },
+  sync_install = false,
+  auto_install = false,
 }
 
 require("nvim-treesitter.configs").setup(options)

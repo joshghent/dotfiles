@@ -1,7 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
-    event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -13,9 +13,23 @@ return {
     end,
   },
 
- {
+  {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufWritePre"},
-    opts = require 'configs.treesitter',
+    event = { "BufReadPre", "BufWritePre" },
+    opts = require "configs.treesitter",
+  },
+
+  {
+
+    "goolord/alpha-nvim",
+    config = function()
+      require("alpha").setup(require("alpha.themes.dashboard").config)
+    end,
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = { "nvim-lua/plenary.nvim" },
   },
 }
