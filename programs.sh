@@ -27,7 +27,6 @@ declare -a brews=(
     "ansible"
     "git"
     "yarn"
-    "php"
     "composer"
     "nmap"
     "wget"
@@ -36,14 +35,12 @@ declare -a brews=(
     "moreutils"
     "findutils"
     "awscli"
-    "go"
     "tree"
     "bat"
     "imagemagick"
     "git-delta"
     "deno"
     "gh"
-    "pyenv"
     "diff-so-fancy"
     "telnet"
     "tmate"
@@ -64,6 +61,8 @@ declare -a brews=(
     "pnpm"
     "fish"
     "sketchybar"
+    "mise"
+    "aws-vault"
 )
 
 # Install brews in a loop
@@ -120,23 +119,6 @@ chsh -s /opt/homebrew/bin/fish
 # Change the theme and prompt for fish
 fish && fish_config theme choose nord && fish_config prompt choose arrow && fish_config prompt save && fish_config theme save
 
-# Install Fisher and setup common functions
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-
-fisher install jorgebucaran/nvm.fish
-
-# Setup RVM for fish
-curl -L --create-dirs -o ~/.config/fish/functions/rvm.fish https://raw.github.com/lunks/fish-nuggets/master/functions/rvm.fish
-
-# Install latest LTS Node
-mkdir ~/.nvm
-export NVM_DIR="$HOME/.nvm"
-# shellcheck source=/dev/null
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-nvm install --lts
-nvm use --lts
-nvm alias default node
-
 # TablePlus Install
 wget https://tableplus.com/release/osx/tableplus_latest -o ~/Downloads/tableplus.dmg
 hdiutil attach ~/Downloads/tableplus.dmg
@@ -147,10 +129,6 @@ npx playwright install --with-deps
 # Install latest Terraform
 tfenv install latest && tfenv use latest
 
-# Install latest ruby
-rvm install ruby
-rvm --default use ruby
-
 # Install Monokai Refined theme for Vim
 curl -o ~/.vim/colors/monokai-refined.vim https://raw.githubusercontent.com/jaromero/vim-monokai-refined/master/colors/Monokai-Refined.vim
 
@@ -160,3 +138,5 @@ brew services start colima
 # Start sketchy, remove the menu bar and reboot finder.
 brew services start sketchybar && defaults write NSGlobalDomain _HIHideMenuBar -bool true && killall Finder
 
+# Install Language versions
+mise use -g node ruby python go rust
