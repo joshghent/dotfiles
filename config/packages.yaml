@@ -1,0 +1,142 @@
+homebrew:
+  taps:
+    - "FelixKratz/formulae"
+    - "homebrew/cask-fonts"
+    - "homebrew/cask"
+
+  packages:
+    base:
+      - "git"
+      - "fish"
+      - "nvim"
+      - "gpg"
+      - "coreutils"
+      - "moreutils"
+      - "findutils"
+      - "tree"
+      - "bat"
+      - "wget"
+      - "git-delta"
+      - "gh"
+      - "diff-so-fancy"
+      - "neofetch"
+      - "jq"
+
+    development:
+      - "ansible"
+      - "docker"
+      - "colima"
+      - "docker-credential-helper"
+      - "lazydocker"
+      - "mise"
+      - "aws-vault"
+      - "awscli"
+      - "tfenv"
+      - "terraform-docs"
+      - "yarn"
+      - "pnpm"
+      - "deno"
+      - "composer"
+
+    security:
+      - "trufflehog"
+      - "pre-commit"
+      - "detect-secrets"
+
+    tools:
+      - "nmap"
+      - "imagemagick"
+      - "telnet"
+      - "tmate"
+      - "ffmpeg"
+      - "tmux"
+      - "the_silver_searcher"
+      - "cmake"
+      - "sketchybar"
+
+    personal:
+      enabled: false # Will be set to true via configure.sh for personal machines
+      packages:
+        - "sketchybar"
+
+  casks:
+    base:
+      - "iterm2"
+      - "firefox"
+      - "gpg-suite"
+      - "gpg-suite-pinentry"
+      - "rectangle"
+      - "hiddenbar"
+
+    development:
+      - "vscodium"
+      - "bruno"
+      - "zed"
+
+    fonts:
+      - "font-fira-code"
+      - "font-hack-nerd-font"
+      - "font-inter"
+
+    communication:
+      - "slack"
+      - "zoom"
+
+    personal:
+      enabled: false # Will be set to true via configure.sh for personal machines
+      packages:
+        - "spotify"
+        - "protonmail-bridge"
+        - "google-drive"
+        - "dropbox"
+        - "steam"
+        - "protonvpn"
+        - "calibre"
+        - "tailscale"
+        - "vlc"
+        - "deluge"
+        - "wireguard"
+        - "cursor"
+        - "leapp"
+
+  post_install:
+    tasks:
+      - name: "Configure Fish Shell"
+        commands:
+          - "echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells"
+          - "chsh -s /opt/homebrew/bin/fish"
+          - "mkdir -p ~/.config/fish/conf.d"
+          - "mkdir -p ~/.config/fish/functions"
+          - "fish -c 'fish_config theme choose nord'"
+          - "fish -c 'fish_config prompt choose arrow'"
+          - "fish -c 'fish_config prompt save'"
+          - "fish -c 'fish_config theme save'"
+
+      - name: "Configure Development Tools"
+        commands:
+          - "npx playwright install --with-deps"
+          - "tfenv install latest"
+          - "tfenv use latest"
+          - "mise use -g node ruby python go rust"
+
+      - name: "Configure Services"
+        commands:
+          - "brew services start colima"
+
+      - name: "Configure Vim"
+        commands:
+          - "curl -o ~/.vim/colors/monokai-refined.vim https://raw.githubusercontent.com/jaromero/vim-monokai-refined/master/colors/Monokai-Refined.vim"
+
+    personal:
+      enabled: false
+      tasks:
+        - name: "Install TablePlus"
+          commands:
+            - "wget https://tableplus.com/release/osx/tableplus_latest -o ~/Downloads/tableplus.dmg"
+            - "hdiutil attach ~/Downloads/tableplus.dmg"
+
+        - name: "Configure Personal Services"
+          commands:
+            - "brew services start sketchybar"
+            - "defaults write NSGlobalDomain _HIHideMenuBar -bool true"
+            - "killall Finder"

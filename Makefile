@@ -1,3 +1,43 @@
+.PHONY: all install update check diff config first-time
+
+all: first-time
+
+# First time setup
+first-time:
+	@echo "🔧 First time setup..."
+	@echo "This will configure your machine from scratch."
+	@read -p "Are you sure? (y/n) " answer; \
+	if [ "$$answer" = "y" ]; then \
+		./scripts/install.sh; \
+	fi
+
+# Safe update for existing machines
+update:
+	@echo "🔄 Updating existing configuration..."
+	./scripts/configure.sh
+	chezmoi init --source="$(PWD)/home"
+	chezmoi apply
+	./scripts/packages.sh --update-only
+
+# Full installation
+install:
+	@echo "📦 Running full installation..."
+	./scripts/install.sh
+
+check:
+	@echo "🔍 Checking for differences..."
+	chezmoi diff
+
+diff: check
+
+config:
+	@echo "⚙️ Updating configuration..."
+	./scripts/configure.sh
+
+apply:
+	@echo "✨ Applying changes..."
+	chezmoi apply
+
 .PHONY: test
 test: shellcheck ## Runs all the tests on the files in the repository.
 
