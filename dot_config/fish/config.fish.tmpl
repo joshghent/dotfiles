@@ -8,3 +8,5 @@ set -Ux PATH /opt/homebrew/bin $PATH
 {{- if eq .chezmoi.os "darwin" }}
 set -x DOCKER_HOST unix://$HOME/.colima/docker.sock
 {{- end }}
+
+set -x GPG_TTY $(tty)

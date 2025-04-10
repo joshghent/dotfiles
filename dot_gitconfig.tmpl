@@ -92,5 +92,18 @@
 	all = true
 
 [pager]
-       diff = diff-so-fancy | less --tabs=1,5 -RFX
-       show = diff-so-fancy | less --tabs=1,5 -RFX
+    diff = diff-so-fancy | less --tabs=1,5 -RFX
+    show = diff-so-fancy | less --tabs=1,5 -RFX
+
+[user]
+    name = Josh Ghent
+    email = {{ .email | quote }}
+    signingkey = {{ (include "private_gpg_key_id" | trim) }}
+
+[commit]
+    gpgsign = true
+[gpg]
+    program = /opt/homebrew/bin/gpg
+    format = openpgp
+[tag]
+    gpgSign = true

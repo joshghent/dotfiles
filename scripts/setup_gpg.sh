@@ -15,22 +15,13 @@ main() {
     key_id=$(gpg --list-secret-keys --keyid-format=long | grep sec | awk '{print $2}' | awk -F'/' '{print $2}')
 
     if [[ -n "$key_id" ]]; then
-    echo "Found GPG key ID: $key_id"
-
-    # Export the public key in ASCII armor format
-    gpg --armor --export "$key_id"
+        echo "Found GPG key ID: $key_id"
+        gpg --armor --export "$key_id"
+        echo "$key_id" > ~/.local/share/chezmoi/private_gpg_key_id
     else
-    echo "Failed to find GPG key ID"
-    exit 1
+        echo "Failed to find GPG key ID"
+        exit 1
     fi
-
-    # Setup GPG signed commits
-    git config --global --unset gpg.format
-    git config --global user.signingkey "$key_id"
-    git config --global commit.gpgsign true
-    git config --global gpg.program $(which gpg)
-    git config --global gpg.format openpgp
-    git config --global tag.gpgSign true
 }
 
 main "$@"

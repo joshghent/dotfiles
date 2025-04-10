@@ -21,6 +21,7 @@ homebrew:
       - "diff-so-fancy"
       - "neofetch"
       - "jq"
+      - "pinentry-mac"
 
     development:
       - "ansible"
