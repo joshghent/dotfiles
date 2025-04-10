@@ -26,7 +26,7 @@ main() {
     bash "$SCRIPT_DIR/packages.sh"
 
     # Setup GPG
-    bash "$SCRIPT_DIR/setup-gpg.sh"
+    bash "$SCRIPT_DIR/setup_gpg.sh"
 
     # Apply dotfiles
     chezmoi apply

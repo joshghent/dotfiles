@@ -21,7 +21,7 @@
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/joshghent/dotfiles.git && cd dotfiles
+chezmoi init git@github.com:joshghent/dotfiles.git
 ```
 
 2. Run the installation:

@@ -15,7 +15,6 @@ first-time:
 update:
 	@echo "🔄 Updating existing configuration..."
 	./scripts/configure.sh
-	chezmoi init --source="$(PWD)/home"
 	chezmoi apply
 	./scripts/packages.sh --update-only
 
