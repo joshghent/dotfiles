@@ -22,6 +22,7 @@ homebrew:
       - "neofetch"
       - "jq"
       - "pinentry-mac"
+      - "ripgrep"
 
     development:
       - "ansible"

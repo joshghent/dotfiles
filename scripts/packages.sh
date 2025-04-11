@@ -60,27 +60,39 @@ cask_install() {
 }
 
 process_packages() {
-    local packages
     local is_personal
     local failed_packages=()
 
     # Get personal setting
     is_personal=$(yq e '.homebrew.packages.personal.enabled' "$REPO_DIR/config/packages.yaml")
 
-    # Get base packages
-    packages=$(yq e '.homebrew.packages.base[] + .homebrew.packages.development[] + .homebrew.packages.security[] + .homebrew.packages.tools[]' "$REPO_DIR/config/packages.yaml")
+    log_info "Installing Homebrew packages..."
+
+    # Process each category separately
+    for category in "base" "development" "security" "tools"; do
+        # Get packages from this category
+        local category_packages
+        category_packages=$(yq e ".homebrew.packages.${category}[]" "$REPO_DIR/config/packages.yaml")
+
+        # Install each package in this category
+        for package in $category_packages; do
+            if ! brew_install "$package"; then
+                failed_packages+=("$package")
+            fi
+        done
+    done
 
     # Add personal packages if enabled
     if [ "$is_personal" = "true" ]; then
-        packages="$packages $(yq e '.homebrew.packages.personal.packages[]' "$REPO_DIR/config/packages.yaml")"
-    fi
+        local personal_packages
+        personal_packages=$(yq e '.homebrew.packages.personal.packages[]' "$REPO_DIR/config/packages.yaml")
 
-    log_info "Installing Homebrew packages..."
-    for package in $packages; do
-        if ! brew_install "$package"; then
-            failed_packages+=("$package")
-        fi
-    done
+        for package in $personal_packages; do
+            if ! brew_install "$package"; then
+                failed_packages+=("$package")
+            fi
+        done
+    fi
 
     # Report failed packages
     if [ ${#failed_packages[@]} -ne 0 ]; then
@@ -91,7 +103,6 @@ process_packages() {
 }
 
 process_casks() {
-    local casks
     local is_personal
     local is_work
     local failed_casks=()
@@ -103,20 +114,33 @@ process_casks() {
     # Clear previous manual installations list
     echo "# The following applications need to be installed manually:" > "$REPO_DIR/manual_installs.txt"
 
-    # Get base casks
-    casks=$(yq e '.homebrew.casks.base[] + .homebrew.casks.development[] + .homebrew.casks.fonts[] + .homebrew.casks.communication[]' "$REPO_DIR/config/packages.yaml")
+    log_info "Installing casks..."
+
+    # Process each category separately
+    for category in "base" "development" "fonts" "communication"; do
+        # Get casks from this category
+        local category_casks
+        category_casks=$(yq e ".homebrew.casks.${category}[]" "$REPO_DIR/config/packages.yaml")
+
+        # Install each cask in this category
+        for cask in $category_casks; do
+            if ! cask_install "$cask" "$is_work"; then
+                failed_casks+=("$cask")
+            fi
+        done
+    done
 
     # Add personal casks if enabled
     if [ "$is_personal" = "true" ]; then
-        casks="$casks $(yq e '.homebrew.casks.personal.packages[]' "$REPO_DIR/config/packages.yaml")"
-    fi
+        local personal_casks
+        personal_casks=$(yq e '.homebrew.casks.personal.packages[]' "$REPO_DIR/config/packages.yaml")
 
-    log_info "Installing casks..."
-    for cask in $casks; do
-        if ! cask_install "$cask" "$is_work"; then
-            failed_casks+=("$cask")
-        fi
-    done
+        for cask in $personal_casks; do
+            if ! cask_install "$cask" "$is_work"; then
+                failed_casks+=("$cask")
+            fi
+        done
+    fi
 
     # Report failed casks
     if [ ${#failed_casks[@]} -ne 0 ]; then
