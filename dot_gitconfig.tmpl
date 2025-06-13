@@ -97,7 +97,7 @@
 
 [user]
     name = Josh Ghent
-    email = {{ .email | quote }}
+    email = {{ .git_email | quote }}
     signingkey = {{ (include "private_gpg_key_id" | trim) }}
 
 [commit]
