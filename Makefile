@@ -1,4 +1,4 @@
-.PHONY: all install update check diff config first-time
+.PHONY: all install update check diff config first-time prerequisites
 
 all: first-time
 
@@ -11,32 +11,63 @@ first-time:
 		./scripts/install.sh; \
 	fi
 
+# Install prerequisites only
+prerequisites:
+	@echo "📦 Installing prerequisites..."
+	@./scripts/install.sh prerequisites
+
 # Safe update for existing machines
 update:
 	@echo "🔄 Updating existing configuration..."
-	./scripts/configure.sh
-	chezmoi apply
-	./scripts/packages.sh --update-only
+	@./scripts/configure.sh
+	@chezmoi apply
+	@./scripts/packages.sh --update-only
 
 # Full installation
 install:
 	@echo "📦 Running full installation..."
-	./scripts/install.sh
+	@./scripts/install.sh
 
+# Check for differences
 check:
 	@echo "🔍 Checking for differences..."
-	chezmoi diff
+	@chezmoi diff
 
 diff: check
 
+# Update configuration
 config:
 	@echo "⚙️ Updating configuration..."
-	./scripts/configure.sh
+	@./scripts/configure.sh
 
+# Apply changes
 apply:
 	@echo "✨ Applying changes..."
-	chezmoi apply
+	@chezmoi apply
 
+# Show current configuration
+status:
+	@echo "📊 Current configuration:"
+	@chezmoi data | yq e '.name' 2>/dev/null && echo "Name: $$(chezmoi data | yq e '.name')" || echo "Name: Not set"
+	@chezmoi data | yq e '.email' 2>/dev/null && echo "Email: $$(chezmoi data | yq e '.email')" || echo "Email: Not set"
+	@chezmoi data | yq e '.personal' 2>/dev/null && echo "Personal: $$(chezmoi data | yq e '.personal')" || echo "Personal: false"
+	@chezmoi data | yq e '.os' 2>/dev/null && echo "OS: $$(chezmoi data | yq e '.os')" || echo "OS: Not detected"
+
+# Show help
+help:
+	@echo "Available commands:"
+	@echo "  first-time    - Initial setup (interactive)"
+	@echo "  install       - Full installation"
+	@echo "  update        - Update existing configuration"
+	@echo "  config        - Update user configuration"
+	@echo "  apply         - Apply dotfiles changes"
+	@echo "  check         - Check for differences"
+	@echo "  status        - Show current configuration"
+	@echo "  prerequisites - Install prerequisites only"
+	@echo "  omarchy       - Install Omarchy (Arch Linux only)"
+	@echo "  help          - Show this help"
+
+# Testing
 .PHONY: test
 test: shellcheck ## Runs all the tests on the files in the repository.
 

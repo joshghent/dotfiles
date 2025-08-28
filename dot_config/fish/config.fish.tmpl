@@ -1,12 +1,28 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
+# Fish shell configuration
+# This file uses Chezmoi templating for cross-platform support
 
-# Add Homebrew to PATH
-set -Ux PATH /opt/homebrew/bin $PATH
-
-{{- if eq .chezmoi.os "darwin" }}
+# Platform-specific configurations
+{{ if eq .chezmoi.os "darwin" }}
+# macOS-specific fish configuration
+set -g fish_user_paths "/opt/homebrew/bin" $fish_user_paths
+set -g fish_user_paths "/opt/homebrew/sbin" $fish_user_paths
 set -x DOCKER_HOST unix://$HOME/.colima/docker.sock
-{{- end }}
+{{ end }}
 
-set -x GPG_TTY $(tty)
+{{ if eq .chezmoi.os "linux" }}
+# Linux-specific fish configuration
+set -g fish_user_paths "$HOME/.local/bin" $fish_user_paths
+set -g fish_user_paths "$HOME/go/bin" $fish_user_paths
+
+# Linux-specific aliases
+alias open="xdg-open"
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -selection clipboard -o"
+{{ end }}
+
+# Set editor
+set -g EDITOR "nvim"
+set -g VISUAL "nvim"
+
+# Load common functions and aliases
+source ~/.config/fish/conf.d/aliases.fish
