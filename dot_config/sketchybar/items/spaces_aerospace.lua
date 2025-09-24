@@ -65,11 +65,25 @@ sbar.exec("aerospace list-workspaces --all | xargs -I {} sh -c 'count=$(aerospac
 
     -- Subscribe to aerospace workspace changes
     space:subscribe("aerospace_workspace_change", function(env)
-      -- Get current focused workspace
-      sbar.exec("aerospace list-workspaces --focused", function(focused_output)
-        local focused_workspace = focused_output:gsub("%s+", "")
-        local selected = (workspace_id == focused_workspace)
+      -- Use the environment variables passed from aerospace
+      local focused_workspace = env.FOCUSED_WORKSPACE
+      if not focused_workspace then
+        -- Fallback: get current focused workspace
+        sbar.exec("aerospace list-workspaces --focused", function(focused_output)
+          focused_workspace = focused_output:gsub("%s+", "")
+          local selected = (workspace_id == focused_workspace)
 
+          space:set({
+            icon = { highlight = selected, },
+            label = { highlight = selected },
+            background = { border_color = selected and colors.black or colors.bg2 }
+          })
+          space_bracket:set({
+            background = { border_color = selected and colors.grey or colors.bg2 }
+          })
+        end)
+      else
+        local selected = (workspace_id == focused_workspace)
         space:set({
           icon = { highlight = selected, },
           label = { highlight = selected },
@@ -78,7 +92,7 @@ sbar.exec("aerospace list-workspaces --all | xargs -I {} sh -c 'count=$(aerospac
         space_bracket:set({
           background = { border_color = selected and colors.grey or colors.bg2 }
         })
-      end)
+      end
     end)
 
     -- Update the space with current apps
@@ -125,6 +139,15 @@ sbar.exec("aerospace list-workspaces --all | xargs -I {} sh -c 'count=$(aerospac
         label = { highlight = selected },
         background = { border_color = selected and colors.black or colors.bg2 }
       })
+      -- Also update the bracket
+      local bracket_name = "space." .. workspace_id
+      sbar.query(bracket_name .. ".bracket", function(bracket_result)
+        if bracket_result then
+          sbar.set(bracket_name .. ".bracket", {
+            background = { border_color = selected and colors.grey or colors.bg2 }
+          })
+        end
+      end)
     end
   end)
 end)
@@ -133,15 +156,26 @@ end)
 sbar.add("event", "aerospace_workspace_change")
 sbar.add("event", "space_windows_change")
 
--- Create a periodic update for spaces since aerospace might not trigger events
-local update_all_spaces = function()
-  sbar.exec("aerospace list-workspaces --all | xargs -I {} sh -c 'count=$(aerospace list-windows --workspace {} | wc -l); if [ $count -gt 0 ]; then echo {}; fi'", function(current_workspaces_output)
-    -- This will re-create spaces if needed
-    -- For now, let's just update existing ones
+-- Create a periodic update for workspace highlighting
+local update_workspace_highlight = function()
+  sbar.exec("aerospace list-workspaces --focused", function(focused_output)
+    local focused_workspace = focused_output:gsub("%s+", "")
+    sbar.trigger("aerospace_workspace_change", { FOCUSED_WORKSPACE = focused_workspace })
   end)
 end
 
--- Update every 10 seconds
+-- Trigger periodic updates every 5 seconds
+sbar.add("item", {
+  position = "right",
+  drawing = false,
+  update_freq = 5,
+  script = "echo 'periodic_update'"
+}):subscribe("periodic_update", function()
+  update_workspace_highlight()
+  sbar.trigger("space_windows_change")
+end)
+
+-- Also trigger on space_windows_change
 sbar.exec("(while true; do echo 'space_windows_change'; sleep 10; done) &")
 
 -- Spaces indicator
