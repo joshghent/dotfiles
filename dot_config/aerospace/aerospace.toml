@@ -24,6 +24,14 @@ exec-on-workspace-change = [
     'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE',
 ]
 
+# Commented out - on-focus-changed may not work in v0.19.2
+# [on-focus-changed]
+# exec = [
+#     '/bin/bash',
+#     '-c',
+#     'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+# ]
+
 # Start AeroSpace at login
 start-at-login = true
 
@@ -62,20 +70,16 @@ automatically-unhide-macos-hidden-apps = false
 preset = 'qwerty'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
-# Possible values:
-# - Constant:     gaps.outer.top = 8
-# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
-#                 In this example, 24 is a default value when there is no match.
-#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
-#                 See:
-#                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+# Different gap settings for different monitors
+# Built-in monitor has smaller top gap, external monitors have larger gap for sketchybar
 [gaps]
 inner.horizontal = 5
 inner.vertical = 5
 outer.left = 5
 outer.bottom = 5
-outer.top = 5
 outer.right = 5
+# Per monitor top gaps - U32H85x is external monitor, needs more space for sketchybar
+outer.top = [{ monitor."U32H85x" = 40 }, 5]
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -128,6 +132,9 @@ alt-shift-l = 'move right'
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
+
+# Manually trigger sketchybar update (useful after opening/closing windows)
+alt-shift-backslash = 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-1 = 'workspace 1'

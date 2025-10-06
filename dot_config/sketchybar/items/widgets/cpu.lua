@@ -4,7 +4,8 @@ local settings = require("settings")
 
 -- Execute the event provider binary which provides the event "cpu_update" for
 -- the cpu load data, which is fired every 2.0 seconds.
-sbar.exec("killall cpu_load >/dev/null; $CONFIG_DIR/helpers/event_providers/cpu_load/bin/cpu_load cpu_update 2.0")
+local home = os.getenv("HOME")
+sbar.exec("killall cpu_load >/dev/null 2>&1; " .. home .. "/.config/sketchybar/helpers/event_providers/cpu_load/bin/cpu_load cpu_update 2.0")
 
 local cpu = sbar.add("graph", "widgets.cpu" , 42, {
   position = "right",
@@ -32,8 +33,16 @@ local cpu = sbar.add("graph", "widgets.cpu" , 42, {
 })
 
 cpu:subscribe("cpu_update", function(env)
+  -- Debug: print all environment variables
+  sbar.exec("echo 'CPU UPDATE: total_load=" .. (env.total_load or "nil") .. "' >> /tmp/sketchybar_debug.log")
+
   -- Also available: env.user_load, env.sys_load
   local load = tonumber(env.total_load)
+  if not load then
+    load = 0
+    sbar.exec("echo 'CPU UPDATE FAILED: load is nil' >> /tmp/sketchybar_debug.log")
+  end
+
   cpu:push({ load / 100. })
 
   local color = colors.blue
@@ -49,7 +58,7 @@ cpu:subscribe("cpu_update", function(env)
 
   cpu:set({
     graph = { color = color },
-    label = "cpu " .. env.total_load .. "%",
+    label = "cpu " .. tostring(load) .. "%",
   })
 end)
 
