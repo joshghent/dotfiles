@@ -1,14 +1,12 @@
 repos:
-  - repo: local
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
     hooks:
-      - id: trufflehog
-        name: TruffleHog
-        description: Detect secrets in your data.
-        entry: bash -c 'docker run -v "$(pwd):/workdir" --rm us-docker.pkg.dev/thog-artifacts/public/scanner:latest git main HEAD /workdir'
-        language: system
-        stages: ["commit", "push"]
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.5.0
     hooks:
       - id: detect-secrets
-        exclude: package.lock.json
+        exclude: "package.lock.json|dot_config/nvim/lazy-lock.json"

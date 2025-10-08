@@ -1,32 +1,6 @@
 local options = {
-  ensure_installed = {
-    "bash",
-    "c",
-    "cmake",
-    "cpp",
-    "dockerfile",
-    "fish",
-    "go",
-    "gomod",
-    "gosum",
-    "gotmpl",
-    "gowork",
-    "json",
-    "javascript",
-    "lua",
-    "luadoc",
-    "make",
-    "markdown",
-    "printf",
-    "python",
-    "toml",
-    "typescript",
-    "tsx",
-    "rust",
-    "vim",
-    "vimdoc",
-    "yaml",
-  },
+  -- Only install these parsers manually via :TSInstall
+  ensure_installed = {},
 
   highlight = {
     enable = true,
@@ -37,4 +11,4 @@ local options = {
   auto_install = false,
 }
 
-require("nvim-treesitter.configs").setup(options)
+return options
