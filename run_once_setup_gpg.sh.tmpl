@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ if .gpg.create_key -}}
+# Setup GPG key if it doesn't exist
+
+current_keys=$(gpg --list-secret-keys --keyid-format=long 2>/dev/null || true)
+
+# Check if there are any current keys
+if [[ -z "$current_keys" ]]; then
+    echo "No existing GPG keys found. Generating new key..."
+
+    # Generate key non-interactively
+    gpg --batch --gen-key <<EOF
+%no-protection
+Key-Type: {{ .gpg.key_type }}
+{{ if eq .gpg.key_type "RSA" -}}
+Key-Length: {{ .gpg.key_length }}
+{{ end -}}
+Expire-Date: {{ .gpg.expire_days }}
+Name-Real: {{ .name }}
+Name-Email: {{ .email }}
+EOF
+
+    echo "GPG key generated successfully!"
+fi
+
+# Extract the key ID
+key_id=$(gpg --list-secret-keys --keyid-format=long | grep sec | awk '{print $2}' | awk -F'/' '{print $2}' | head -1)
+
+if [[ -n "$key_id" ]]; then
+    echo "GPG key ID: $key_id"
+    echo ""
+    echo "Add this public key to GitHub/GitLab:"
+    echo "========================================"
+    gpg --armor --export "$key_id"
+    echo "========================================"
+
+    # Update the private_gpg_key_id file
+    echo "$key_id" > {{ .chezmoi.sourceDir }}/private_gpg_key_id
+
+    # Configure git to trust the GPG key
+    git config --global user.signingkey "$key_id"
+    git config --global commit.gpgsign true
+    git config --global tag.gpgsign true
+else
+    echo "Warning: Failed to find GPG key ID"
+fi
+{{ else -}}
+echo "GPG key creation disabled in config"
+{{ end -}}

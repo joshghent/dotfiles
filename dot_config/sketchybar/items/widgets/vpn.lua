@@ -27,8 +27,9 @@ local vpn = sbar.add("item", "widgets.vpn", {
 })
 
 local function update_vpn_status()
-  sbar.exec("scutil --nc list | grep 'ch.protonvpn.mac'", function(result)
-    local is_connected = result:find("Connected") ~= nil
+  sbar.exec("scutil --nc list", function(result)
+    -- Check if ProtonVPN line contains "(Connected)"
+    local is_connected = result:match("%(Connected%).-ch%.protonvpn%.mac") ~= nil
 
     vpn:set({
       drawing = is_connected,

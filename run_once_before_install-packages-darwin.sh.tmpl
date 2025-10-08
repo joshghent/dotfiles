@@ -1,5 +1,5 @@
-{{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
+{{ if eq .chezmoi.os "darwin" -}}
 
 brew bundle --file=/dev/stdin <<EOF
 {{ range .packages.darwin.taps -}}
@@ -12,4 +12,6 @@ brew {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 EOF
+{{ else -}}
+echo "Skipping: not on Darwin (macOS)"
 {{ end -}}

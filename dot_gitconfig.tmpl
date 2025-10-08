@@ -96,8 +96,8 @@
     show = diff-so-fancy | less --tabs=1,5 -RFX
 
 [user]
-    name = Josh Ghent
-    email = {{ .git_email | quote }}
+    name = {{ .name | quote }}
+    email = {{ .email | quote }}
     signingkey = {{ (include "private_gpg_key_id" | trim) }}
 
 [commit]
