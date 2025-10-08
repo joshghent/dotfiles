@@ -8,7 +8,11 @@ set -eufo pipefail
 if [ -d "$HOME/.gnupg" ]; then
     echo "Fixing GPG directory permissions..."
     chmod 700 "$HOME/.gnupg"
-    chmod 600 "$HOME/.gnupg"/* 2>/dev/null || true
+
+    # Fix all files (600) and directories (700) recursively
+    find "$HOME/.gnupg" -type f -exec chmod 600 {} \;
+    find "$HOME/.gnupg" -type d -exec chmod 700 {} \;
+
     echo "GPG permissions fixed!"
 else
     echo "GPG directory doesn't exist yet, will be created with correct permissions"

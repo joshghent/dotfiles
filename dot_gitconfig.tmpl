@@ -98,12 +98,18 @@
 [user]
     name = {{ .name | quote }}
     email = {{ .email | quote }}
+{{- if stat (joinPath .chezmoi.sourceDir "private_gpg_key_id") }}
     signingkey = {{ (include "private_gpg_key_id" | trim) }}
+{{- end }}
 
+{{- if stat (joinPath .chezmoi.sourceDir "private_gpg_key_id") }}
 [commit]
     gpgsign = true
+
 [gpg]
     program = /opt/homebrew/bin/gpg
     format = openpgp
+
 [tag]
     gpgSign = true
+{{- end }}

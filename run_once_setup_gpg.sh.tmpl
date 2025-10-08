@@ -14,9 +14,14 @@ if [[ -z "$current_keys" ]]; then
     # Generate key non-interactively
     gpg --batch --gen-key <<EOF
 %no-protection
-Key-Type: {{ .gpg.key_type }}
-{{ if eq .gpg.key_type "RSA" -}}
+{{ if eq .gpg.key_type "ed25519" -}}
+Key-Type: EDDSA
+Key-Curve: ed25519
+{{ else if eq .gpg.key_type "RSA" -}}
+Key-Type: RSA
 Key-Length: {{ .gpg.key_length }}
+{{ else -}}
+Key-Type: {{ .gpg.key_type }}
 {{ end -}}
 Expire-Date: {{ .gpg.expire_days }}
 Name-Real: {{ .name }}
