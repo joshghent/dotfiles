@@ -21,3 +21,4 @@ log/
 .config/chezmoi/chezmoi.toml
 private_gpg_key_id
 manual_installs.txt
+.chezmoi.toml.tmpl

@@ -146,4 +146,10 @@ return {
 		"nvim-tree/nvim-tree.lua",
 		opts = require("configs.nvimtree"),
 	},
+	{
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		config = function()
+			require("lsp_lines").setup()
+		end,
+	},
 }

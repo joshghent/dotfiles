@@ -8,8 +8,10 @@ tap {{ . | quote }}
 {{ range .packages.darwin.brews -}}
 brew {{ . | quote }}
 {{ end -}}
+{{ if .casks_enabled -}}
 {{ range .packages.darwin.casks -}}
 cask {{ . | quote }}
+{{ end -}}
 {{ end -}}
 EOF
 {{ else -}}

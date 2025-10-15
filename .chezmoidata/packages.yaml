@@ -2,7 +2,6 @@ packages:
   darwin:
     taps:
       - FelixKratz/formulae
-      - homebrew/cask-fonts
     brews:
       - abseil
       - act
@@ -51,7 +50,6 @@ packages:
       - clamav
       - cmake
       - colima
-      - composer
       - coreutils
       - cryptography
       - curl
@@ -218,7 +216,6 @@ packages:
       - md4c
       - minikube
       - mise
-      - mongodb-database-tools
       - moreutils
       - mozjpeg
       - mpdecimal
@@ -260,7 +257,6 @@ packages:
       - pango
       - pcre
       - pcre2
-      - php
       - pinentry
       - pinentry-mac
       - pipx
@@ -272,7 +268,6 @@ packages:
       - poppler
       - postgresql
       - posting
-      - pre-commit
       - protobuf
       - protobuf-c
       - protobuf@29
@@ -306,21 +301,16 @@ packages:
       - sfml
       - shared-mime-info
       - sketchybar
-      - skhd
       - slides
       - smartmontools
       - snappy
       - socket_vmnet
       - soft-serve
       - sonar-scanner
-      - spacebar
       - speex
       - spicetify-cli
-      - spotify-tui
       - sqlite
       - srt
-      - stripe
-      - supabase
       - svt-av1
       - tbb
       - tcl-tk
@@ -328,11 +318,9 @@ packages:
       - terraform-docs
       - terragrunt
       - tesseract
-      - tfenv
       - the_silver_searcher
       - theora
       - thrift
-      - tidy-html5
       - tmate
       - tmux
       - todoist
@@ -357,11 +345,9 @@ packages:
       - xorgproto
       - xvid
       - xz
-      - yabai
       - yara
       - yarn
       - yazi
-      - youtube-dl
       - yq
       - yt-dlp
       - z3
@@ -370,10 +356,7 @@ packages:
       - zlib
       - zstd
     casks:
-      - adobe-digital-editions
       - aerospace
-      - alt-tab
-      - autodesk-fusion
       - backblaze
       - battle-net
       - bitwarden
@@ -389,7 +372,6 @@ packages:
       - docker
       - docker-desktop
       - dropbox
-      - fig
       - firefox
       - font-fira-code
       - font-fontawesome
@@ -398,8 +380,6 @@ packages:
       - font-iosevka
       - font-jetbrains-mono-nerd-font
       - font-sf-pro
-      - freecad
-      - game-porting-toolkit
       - gimp
       - google-backup-and-sync
       - google-chrome
@@ -407,26 +387,18 @@ packages:
       - gpg-suite
       - gpg-suite-pinentry
       - hazel
-      - inkscape
-      - ipfs
-      - ipfs-desktop
       - iterm2
       - jan
       - jdownloader
       - jellyfin
       - jordanbaird-ice
-      - karabiner-elements
       - keybase
       - leapp
       - libreoffice
-      - mamp
-      - microsoft-auto-update
       - minecraft
       - mono-mdk-for-visual-studio
       - mullvad-browser
-      - ngrok
       - obs
-      - plex-media-server
       - proton-drive
       - proton-mail-bridge
       - protonmail-bridge
@@ -435,9 +407,6 @@ packages:
       - qmk-toolbox
       - raspberry-pi-imager
       - raycast
-      - rectangle
-      - robo-3t
-      - rocket
       - rustdesk
       - signal
       - slack
@@ -448,16 +417,12 @@ packages:
       - stremio
       - tableplus
       - tailscale
-      - tailscale-app
       - thunderbird
       - todoist
-      - todoist-app
       - tor-browser
-      - unity-hub
       - vlc
       - vscodium
       - webtorrent
       - whatsapp
       - zed
       - zoom
-      - kitty
