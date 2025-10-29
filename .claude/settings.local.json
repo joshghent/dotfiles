@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(aerospace reload-config:*)",
+      "Bash(sketchybar:*)",
+      "WebFetch(domain:www.chezmoi.io)",
+      "Bash(nvim:*)",
+      "WebFetch(domain:github.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

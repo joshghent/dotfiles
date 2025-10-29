@@ -12,10 +12,12 @@ local workspace = sbar.add("item", "widgets.workspace", {
         },
         string = "?",
         color = colors.white,
-        padding_left = 4,
-        padding_right = 4
     },
-    background = { color = colors.bg1 },
+    background = {
+        height = 6,
+        corner_radius = 3,
+        color = colors.transparent,
+    },
 })
 
 local function update_workspace()
