@@ -6,7 +6,10 @@
 # macOS-specific fish configuration
 set -g fish_user_paths "/opt/homebrew/bin" $fish_user_paths
 set -g fish_user_paths "/opt/homebrew/sbin" $fish_user_paths
-set -x DOCKER_HOST unix://$HOME/.colima/docker.sock
+
+# Required to use colima + testcontainers
+set -x DOCKER_HOST unix://{$HOME}/.colima/docker.sock
+set -x TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE /var/run/docker.sock
 {{ end }}
 
 {{ if eq .chezmoi.os "linux" }}

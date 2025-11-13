@@ -59,11 +59,6 @@ packages:
       - deno
       - detect-secrets
       - diff-so-fancy
-      - docker
-      - docker-buildx
-      - docker-completion
-      - docker-compose
-      - docker-credential-helper
       - doctl
       - dotnet
       - double-conversion
@@ -282,7 +277,6 @@ packages:
       - python
       - qemu
       - qt
-      - qt@5
       - rav1e
       - rbenv
       - rclone
@@ -294,8 +288,6 @@ packages:
       - rtmpdump
       - rubberband
       - ruby-build
-      - rust
-      - rustup
       - screenresolution
       - sdl2
       - sfml
@@ -316,7 +308,6 @@ packages:
       - tcl-tk
       - telnet
       - terraform-docs
-      - terragrunt
       - tesseract
       - the_silver_searcher
       - theora
@@ -359,7 +350,6 @@ packages:
       - aerospace
       - backblaze
       - battle-net
-      - bitwarden
       - brave-browser
       - bruno
       - calibre
@@ -369,8 +359,6 @@ packages:
       - darktable
       - deluge
       - discord
-      - docker
-      - docker-desktop
       - dropbox
       - firefox
       - font-fira-code
@@ -407,14 +395,12 @@ packages:
       - qmk-toolbox
       - raspberry-pi-imager
       - raycast
-      - rustdesk
       - signal
       - slack
       - spectacle
       - spotify
       - standard-notes
       - steam
-      - stremio
       - tableplus
       - tailscale
       - thunderbird
@@ -422,7 +408,6 @@ packages:
       - tor-browser
       - vlc
       - vscodium
-      - webtorrent
       - whatsapp
       - zed
       - zoom

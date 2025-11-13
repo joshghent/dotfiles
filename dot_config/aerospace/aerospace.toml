@@ -60,9 +60,8 @@ inner.vertical = 5
 outer.left = 5
 outer.bottom = 0
 outer.right = 5
-outer.top = 10
 # Per monitor top gaps - U32H85x is external monitor, needs more space for sketchybar
-outer.top = [{ monitor."U32H85x" = 40 }, 5]
+outer.top = [{ monitor."U32H85x" = 40 }, 10]
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
