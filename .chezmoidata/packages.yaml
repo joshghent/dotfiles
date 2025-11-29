@@ -411,3 +411,112 @@ packages:
       - whatsapp
       - zed
       - zoom
+
+  linux:
+    dnf:
+      # Core utilities
+      - fish
+      - neovim
+      - tmux
+      - git
+      - git-delta
+      - ripgrep
+      - bat
+      - fzf
+      - fd-find
+      - tree
+      - wget
+      - curl
+      - htop
+      - btop
+      - jq
+      - yq
+      - nmap
+      - autojump
+      - chezmoi
+      - gh
+      - lazygit
+      - lazydocker
+
+      # Development tools
+      - gcc
+      - make
+      - cmake
+      - python3
+      - python3-pip
+      - nodejs
+      - npm
+      - golang
+      - rust
+      - cargo
+      - podman
+      - podman-compose
+      - buildah
+      - skopeo
+
+      # Window manager and desktop environment
+      - hyprland
+      - waybar
+      - rofi-wayland
+      - dunst
+      - kitty
+      - alacritty
+      - swaybg
+      - swaylock
+      - swayidle
+      - wl-clipboard
+      - grim
+      - slurp
+      - wlogout
+      - network-manager-applet
+      - pavucontrol
+      - blueman
+
+      # Fonts
+      - fira-code-fonts
+      - google-noto-emoji-fonts
+      - fontawesome-fonts
+      - jetbrains-mono-fonts
+
+      # Media
+      - mpv
+      - vlc
+      - gimp
+      - ffmpeg
+
+      # File management
+      - thunar
+      - ranger
+      - yazi
+
+      # System utilities
+      - neofetch
+      - fastfetch
+      - gnupg2
+      - pinentry
+      - pass
+      - keepassxc
+
+      # Networking
+      - wireguard-tools
+      - tailscale
+      - rclone
+
+      # Misc tools
+      - vale
+      - pandoc
+      - slides
+      - usage
+
+    flatpak:
+      - com.brave.Browser
+      - com.discordapp.Discord
+      - com.slack.Slack
+      - org.signal.Signal
+      - com.spotify.Client
+      - org.mozilla.firefox
+      - org.telegram.desktop
+      - org.keepassxc.KeePassXC
+      - com.obsproject.Studio
+      - org.libreoffice.LibreOffice
+      - com.calibre_ebook.calibre

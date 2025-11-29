@@ -107,7 +107,11 @@
     gpgsign = true
 
 [gpg]
+{{ if eq .chezmoi.os "darwin" -}}
     program = /opt/homebrew/bin/gpg
+{{ else -}}
+    program = /usr/bin/gpg
+{{ end -}}
     format = openpgp
 
 [tag]

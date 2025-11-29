@@ -1,0 +1,54 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "linux" -}}
+{{ if eq .chezmoi.osRelease.id "fedora" -}}
+
+# Enable RPM Fusion repositories for additional packages
+if ! dnf repolist | grep -q rpmfusion; then
+    echo "Enabling RPM Fusion repositories..."
+    sudo dnf install -y \
+        https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+        https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+fi
+
+# Enable Flathub
+if ! flatpak remotes | grep -q flathub; then
+    echo "Adding Flathub repository..."
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+fi
+
+# Enable COPR for additional packages
+echo "Enabling useful COPR repositories..."
+sudo dnf copr enable -y solopasha/hyprland 2>/dev/null || true
+sudo dnf copr enable -y atim/lazygit 2>/dev/null || true
+sudo dnf copr enable -y atim/lazydocker 2>/dev/null || true
+
+# Update system
+echo "Updating system packages..."
+sudo dnf update -y
+
+# Install DNF packages
+echo "Installing DNF packages..."
+{{ range .packages.linux.dnf -}}
+sudo dnf install -y {{ . | quote }} || echo "Failed to install {{ . }}, continuing..."
+{{ end -}}
+
+# Install Flatpak applications
+echo "Installing Flatpak applications..."
+{{ range .packages.linux.flatpak -}}
+flatpak install -y flathub {{ . | quote }} || echo "Failed to install {{ . }}, continuing..."
+{{ end -}}
+
+# Install mise (replacement for asdf)
+if ! command -v mise &> /dev/null; then
+    echo "Installing mise..."
+    curl https://mise.run | sh
+fi
+
+echo "Package installation complete!"
+
+{{ else -}}
+echo "Skipping: Linux distribution is not Fedora"
+{{ end -}}
+{{ else -}}
+echo "Skipping: not on Linux"
+{{ end -}}
