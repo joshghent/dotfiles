@@ -454,23 +454,17 @@ packages:
       - buildah
       - skopeo
 
-      # Window manager and desktop environment
-      - hyprland
-      - waybar
-      - rofi-wayland
-      - dunst
+      # GNOME desktop environment and utilities
+      - gnome-tweaks
+      - gnome-extensions-app
+      - gnome-shell-extension-appindicator
       - kitty
       - alacritty
-      - swaybg
-      - swaylock
-      - swayidle
       - wl-clipboard
-      - grim
-      - slurp
-      - wlogout
-      - network-manager-applet
+      - flameshot
+      - ulauncher
+      - dconf-editor
       - pavucontrol
-      - blueman
 
       # Fonts
       - fira-code-fonts

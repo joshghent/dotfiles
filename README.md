@@ -15,7 +15,7 @@
 - **Modern Tools**: Fish shell, Neovim, Git Delta, and more
 - **Window Management**:
   - macOS: Aerospace + Sketchybar
-  - Fedora: Hyprland + Waybar
+  - Fedora: GNOME with extensions + Ulauncher
 - **Consistent Experience**: Shared configurations where possible, platform-specific where necessary
 
 ## 📥 Installation
@@ -47,10 +47,10 @@ The installation script will automatically:
 The installation script will automatically:
 - Enable RPM Fusion and Flathub repositories
 - Install DNF packages and Flatpak applications
-- Setup Hyprland window manager
-- Configure Waybar status bar
+- Install GNOME extensions and tweaks
+- Setup Ulauncher application launcher
 
-**First login**: After installation, log out and select "Hyprland" from your display manager (GDM/SDDM)
+**Post-setup**: Enable GNOME extensions using Extensions app for tiling window management
 
 ## 🛠️ Platform-Specific Configurations
 
@@ -61,9 +61,9 @@ The installation script will automatically:
 - **Container Runtime**: Colima
 
 ### Fedora
-- **Window Manager**: Hyprland (Wayland compositor)
-- **Status Bar**: Waybar
-- **Launcher**: Rofi
+- **Desktop Environment**: GNOME (with extensions for tiling)
+- **Launcher**: Ulauncher
+- **Screenshot Tool**: Flameshot
 - **Package Managers**: DNF + Flatpak
 - **Container Runtime**: Podman
 
@@ -93,4 +93,4 @@ The dotfiles use Chezmoi templates for cross-platform compatibility. Key templat
 
 - First-time setup may take 10-30 minutes depending on your internet connection
 - On Fedora, you may need to enable additional COPR repositories for some packages
-- GPU drivers for Wayland/Hyprland should be installed separately if needed
+- Recommended GNOME extensions: Pop Shell (tiling), AppIndicator, Dash to Dock
