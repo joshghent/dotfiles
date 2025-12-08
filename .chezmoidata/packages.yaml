@@ -397,6 +397,9 @@ packages:
       - raycast
       - signal
       - slack
+      - 1password
+      - 1password-cli
+      - chromium
       - spectacle
       - spotify
       - standard-notes
@@ -406,6 +409,7 @@ packages:
       - thunderbird
       - todoist
       - tor-browser
+      - virtualbox
       - vlc
       - vscodium
       - whatsapp
@@ -489,12 +493,18 @@ packages:
       - gnupg2
       - pinentry
       - pass
-      - keepassxc
 
       # Networking
       - wireguard-tools
       - tailscale
       - rclone
+
+      # Virtualization (KVM/QEMU - modern alternative to VirtualBox)
+      - qemu-kvm
+      - libvirt
+      - virt-manager
+      - virt-viewer
+      - bridge-utils
 
       # Misc tools
       - vale
@@ -509,8 +519,8 @@ packages:
       - org.signal.Signal
       - com.spotify.Client
       - org.mozilla.firefox
-      - org.telegram.desktop
-      - org.keepassxc.KeePassXC
       - com.obsproject.Studio
       - org.libreoffice.LibreOffice
       - com.calibre_ebook.calibre
+      - org.chromium.Chromium
+      - com.onepassword.OnePassword
