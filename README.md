@@ -93,9 +93,16 @@ The installation script will automatically:
 - **CLI Tools**: ripgrep, bat, fzf, lazygit, lazydocker
 
 ### Development Tools
-- Version managers (mise)
-- Docker/Podman
-- Various language toolchains (Go, Rust, Python, Node.js)
+- **Version Manager**: mise (manages all language toolchains)
+- **Languages via mise**:
+  - Node.js 23
+  - Python 3.12
+  - Go 1.23
+  - Rust (latest)
+  - Terraform (latest)
+  - Deno (latest)
+  - Bun (latest)
+- **Containers**: Docker (macOS via Colima) / Podman (Fedora)
 
 ## 🔧 Customization
 
@@ -103,6 +110,28 @@ The dotfiles use Chezmoi templates for cross-platform compatibility. Key templat
 - `dot_config/fish/config.fish.tmpl` - Fish shell configuration
 - `dot_gitconfig.tmpl` - Git configuration
 - `run_once_before_install-packages-*.sh.tmpl` - Package installation scripts
+- `mise.toml` - Language toolchain versions (Node, Python, Go, Rust, etc.)
+
+### Managing Language Versions with mise
+
+All language toolchains are managed via [mise](https://mise.jdx.dev/). To update versions:
+
+1. Edit `mise.toml` in the dotfiles directory
+2. Run `chezmoi apply` to sync changes
+3. Run `mise install` to install new versions
+4. Run `mise use <tool>@<version>` to switch versions
+
+Example:
+```bash
+# List all installed tools
+mise list
+
+# Install a specific version
+mise install node@20
+
+# Use a specific version globally
+mise use -g node@20
+```
 
 ## 📝 Notes
 

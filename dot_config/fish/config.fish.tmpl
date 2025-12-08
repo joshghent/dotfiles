@@ -27,5 +27,10 @@ alias pbpaste="xclip -selection clipboard -o"
 set -g EDITOR "nvim"
 set -g VISUAL "nvim"
 
+# Activate mise (version manager for Node, Python, Go, Rust, etc.)
+if command -v mise &> /dev/null
+    mise activate fish | source
+end
+
 # Load common functions and aliases
 source ~/.config/fish/conf.d/aliases.fish

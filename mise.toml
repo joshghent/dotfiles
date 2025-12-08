@@ -1,2 +1,23 @@
 [tools]
+# Node.js
 node = "23"
+
+# Python
+python = "3.12"
+
+# Go
+go = "1.23"
+
+# Rust
+rust = "latest"
+
+# Terraform
+terraform = "latest"
+
+# Other tools
+deno = "latest"
+bun = "latest"
+
+[settings]
+experimental = true
+

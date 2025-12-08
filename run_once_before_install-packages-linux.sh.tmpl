@@ -42,6 +42,18 @@ flatpak install -y flathub {{ . | quote }} || echo "Failed to install {{ . }}, c
 if ! command -v mise &> /dev/null; then
     echo "Installing mise..."
     curl https://mise.run | sh
+
+    # Add mise to PATH for this session
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Install mise toolchains (Node, Python, Go, Rust, Terraform, etc.)
+if command -v mise &> /dev/null; then
+    echo "Installing development toolchains via mise..."
+    echo "This may take a while as it compiles Rust and other tools..."
+    mise install
+else
+    echo "Warning: mise not found in PATH. You may need to restart your shell and run 'mise install' manually."
 fi
 
 echo "Package installation complete!"

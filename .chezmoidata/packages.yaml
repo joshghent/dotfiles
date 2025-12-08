@@ -439,16 +439,12 @@ packages:
       - lazydocker
 
       # Development tools
+      # Note: Language toolchains (Node, Python, Go, Rust, etc.) are managed via mise
+      # See mise.toml for version specifications
       - gcc
+      - gcc-c++
       - make
       - cmake
-      - python3
-      - python3-pip
-      - nodejs
-      - npm
-      - golang
-      - rust
-      - cargo
       - podman
       - podman-compose
       - buildah
