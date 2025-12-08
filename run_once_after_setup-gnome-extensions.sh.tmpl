@@ -1,0 +1,108 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "linux" -}}
+{{ if eq .chezmoi.osRelease.id "fedora" -}}
+
+echo "Setting up GNOME extensions..."
+
+# Install Pop Shell (tiling window manager) from source
+if [ ! -d "$HOME/.local/share/gnome-shell/extensions/pop-shell@system76.com" ]; then
+    echo "Installing Pop Shell..."
+    git clone https://github.com/pop-os/shell.git /tmp/pop-shell
+    cd /tmp/pop-shell
+    make local-install
+    cd -
+    rm -rf /tmp/pop-shell
+fi
+
+# Wait a moment for GNOME Shell to be ready
+sleep 2
+
+# Enable installed extensions
+echo "Enabling GNOME extensions..."
+
+# List of extensions to enable
+extensions=(
+    "dash-to-dock@micxgx.gmail.com"
+    "appindicatorsupport@rgcjonas.gmail.com"
+    "blur-my-shell@aunetx"
+    "caffeine@patapon.info"
+    "user-theme@gnome-shell-extensions.gcampax.github.com"
+    "pop-shell@system76.com"
+)
+
+for extension in "${extensions[@]}"; do
+    echo "Enabling $extension..."
+    gnome-extensions enable "$extension" 2>/dev/null || echo "  Note: $extension may need manual enabling via Extensions app"
+done
+
+# Configure Dash to Dock to be more macOS-like
+echo "Configuring Dash to Dock..."
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 48
+gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
+gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true
+
+# Configure Pop Shell keybindings
+echo "Configuring Pop Shell..."
+gsettings set org.gnome.shell.extensions.pop-shell tile-by-default true
+gsettings set org.gnome.shell.extensions.pop-shell show-title false
+gsettings set org.gnome.shell.extensions.pop-shell active-hint true
+
+# Configure some nice GNOME defaults
+echo "Configuring GNOME settings..."
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface enable-hot-corners false
+gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+gsettings set org.gnome.desktop.interface clock-format '12h'
+
+# Configure workspaces
+gsettings set org.gnome.mutter dynamic-workspaces false
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 5
+
+# Configure keyboard shortcuts for workspaces (like macOS/Aerospace)
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
+
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Super><Shift>1']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Super><Shift>2']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Super><Shift>3']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Super><Shift>4']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Super><Shift>5']"
+
+# Configure terminal shortcut
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Kitty'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'kitty'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>Return'
+
+echo ""
+echo "✓ GNOME setup complete!"
+echo ""
+echo "IMPORTANT: You need to log out and log back in (or restart GNOME Shell with Alt+F2, then 'r') for all changes to take effect."
+echo ""
+echo "Your setup includes:"
+echo "  • Pop Shell - Automatic tiling window management (Super+Y to toggle)"
+echo "  • Dash to Dock - macOS-like dock at the bottom"
+echo "  • AppIndicator - System tray support"
+echo "  • Blur My Shell - Beautiful blur effects"
+echo "  • Caffeine - Keep screen awake when needed"
+echo "  • Ulauncher - Fast launcher (set to Alt+Space in Ulauncher preferences)"
+echo ""
+echo "Workspace shortcuts (like macOS/Aerospace):"
+echo "  • Super+1-5: Switch to workspace"
+echo "  • Super+Shift+1-5: Move window to workspace"
+echo "  • Super+Return: Open Kitty terminal"
+echo ""
+
+{{ else -}}
+echo "Skipping: Linux distribution is not Fedora"
+{{ end -}}
+{{ else -}}
+echo "Skipping: not on Linux"
+{{ end -}}

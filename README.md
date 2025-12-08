@@ -47,10 +47,16 @@ The installation script will automatically:
 The installation script will automatically:
 - Enable RPM Fusion and Flathub repositories
 - Install DNF packages and Flatpak applications
-- Install GNOME extensions and tweaks
+- Install and configure GNOME extensions:
+  - **Pop Shell**: Automatic tiling window management
+  - **Dash to Dock**: macOS-like dock at the bottom
+  - **AppIndicator**: System tray support
+  - **Blur My Shell**: Beautiful blur effects
+  - **Caffeine**: Disable screen timeout when needed
 - Setup Ulauncher application launcher
+- Configure macOS-like keyboard shortcuts
 
-**Post-setup**: Enable GNOME extensions using Extensions app for tiling window management
+**Post-setup**: Log out and back in for extensions to activate
 
 ## 🛠️ Platform-Specific Configurations
 
@@ -61,11 +67,20 @@ The installation script will automatically:
 - **Container Runtime**: Colima
 
 ### Fedora
-- **Desktop Environment**: GNOME (with extensions for tiling)
-- **Launcher**: Ulauncher
+- **Desktop Environment**: GNOME with Pop Shell tiling
+- **Launcher**: Ulauncher (Alt+Space)
 - **Screenshot Tool**: Flameshot
+- **Extensions**: Pop Shell, Dash to Dock, AppIndicator, Blur My Shell, Caffeine
 - **Package Managers**: DNF + Flatpak
 - **Container Runtime**: Podman
+
+### Keyboard Shortcuts (Fedora)
+- `Super + 1-5`: Switch to workspace 1-5
+- `Super + Shift + 1-5`: Move window to workspace 1-5
+- `Super + Return`: Open Kitty terminal
+- `Super + Y`: Toggle Pop Shell tiling mode
+- `Alt + Space`: Open Ulauncher
+- `Super + Direction Keys`: Navigate tiled windows
 
 ## 📦 Key Tools Included
 
@@ -92,5 +107,7 @@ The dotfiles use Chezmoi templates for cross-platform compatibility. Key templat
 ## 📝 Notes
 
 - First-time setup may take 10-30 minutes depending on your internet connection
-- On Fedora, you may need to enable additional COPR repositories for some packages
-- Recommended GNOME extensions: Pop Shell (tiling), AppIndicator, Dash to Dock
+- On Fedora, extensions are installed and configured automatically
+- After first login, you may want to configure Ulauncher (set hotkey to Alt+Space)
+- Pop Shell tiling can be toggled on/off with Super+Y
+- All GNOME extensions can be managed via the Extensions app

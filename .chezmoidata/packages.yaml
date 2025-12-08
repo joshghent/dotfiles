@@ -458,6 +458,10 @@ packages:
       - gnome-tweaks
       - gnome-extensions-app
       - gnome-shell-extension-appindicator
+      - gnome-shell-extension-dash-to-dock
+      - gnome-shell-extension-blur-my-shell
+      - gnome-shell-extension-caffeine
+      - gnome-shell-extension-user-theme
       - kitty
       - alacritty
       - wl-clipboard
