@@ -18,7 +18,6 @@ fi
 
 # Enable COPR for additional packages
 echo "Enabling useful COPR repositories..."
-sudo dnf copr enable -y solopasha/hyprland 2>/dev/null || true
 sudo dnf copr enable -y atim/lazygit 2>/dev/null || true
 sudo dnf copr enable -y atim/lazydocker 2>/dev/null || true
 
@@ -56,7 +55,25 @@ else
     echo "Warning: mise not found in PATH. You may need to restart your shell and run 'mise install' manually."
 fi
 
+# Enable and start Podman socket (makes Docker API available)
+echo "Enabling Podman socket..."
+systemctl --user enable --now podman.socket
+
+# Enable and start Tailscale
+echo "Enabling Tailscale..."
+sudo systemctl enable --now tailscaled
+
+# Enable and start libvirtd for KVM/QEMU virtualization
+if command -v virt-manager &> /dev/null; then
+    echo "Enabling libvirtd for virtualization..."
+    sudo systemctl enable --now libvirtd
+    # Add user to libvirt group
+    sudo usermod -a -G libvirt "$USER"
+fi
+
 echo "Package installation complete!"
+echo ""
+echo "Important: You may need to log out and back in for group changes to take effect."
 
 {{ else -}}
 echo "Skipping: Linux distribution is not Fedora"

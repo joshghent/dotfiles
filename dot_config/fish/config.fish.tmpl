@@ -17,10 +17,14 @@ set -x TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE /var/run/docker.sock
 set -g fish_user_paths "$HOME/.local/bin" $fish_user_paths
 set -g fish_user_paths "$HOME/go/bin" $fish_user_paths
 
+# Use Podman as Docker replacement
+set -x DOCKER_HOST unix://$XDG_RUNTIME_DIR/podman/podman.sock
+
 # Linux-specific aliases
 alias open="xdg-open"
 alias pbcopy="xclip -selection clipboard"
 alias pbpaste="xclip -selection clipboard -o"
+alias docker="podman"
 {{ end }}
 
 # Set editor
