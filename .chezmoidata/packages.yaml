@@ -397,6 +397,9 @@ packages:
       - raycast
       - signal
       - slack
+      - 1password
+      - 1password-cli
+      - chromium
       - spectacle
       - spotify
       - standard-notes
@@ -406,8 +409,118 @@ packages:
       - thunderbird
       - todoist
       - tor-browser
+      - virtualbox
       - vlc
       - vscodium
       - whatsapp
       - zed
       - zoom
+
+  linux:
+    dnf:
+      # Core utilities
+      - fish
+      - neovim
+      - tmux
+      - git
+      - git-delta
+      - ripgrep
+      - bat
+      - fzf
+      - fd-find
+      - tree
+      - wget
+      - curl
+      - htop
+      - btop
+      - jq
+      - yq
+      - nmap
+      - autojump
+      - chezmoi
+      - gh
+      - lazygit
+      - lazydocker
+
+      # Development tools
+      # Note: Language toolchains (Node, Python, Go, Rust, etc.) are managed via mise
+      # See mise.toml for version specifications
+      - gcc
+      - gcc-c++
+      - make
+      - cmake
+      - podman
+      - podman-compose
+      - buildah
+      - skopeo
+
+      # GNOME desktop environment and utilities
+      - gnome-tweaks
+      - gnome-extensions-app
+      - gnome-shell-extension-appindicator
+      - gnome-shell-extension-dash-to-dock
+      - gnome-shell-extension-blur-my-shell
+      - gnome-shell-extension-caffeine
+      - gnome-shell-extension-user-theme
+      - kitty
+      - alacritty
+      - wl-clipboard
+      - flameshot
+      - ulauncher
+      - dconf-editor
+      - pavucontrol
+
+      # Fonts
+      - fira-code-fonts
+      - google-noto-emoji-fonts
+      - fontawesome-fonts
+      - jetbrains-mono-fonts
+
+      # Media
+      - mpv
+      - vlc
+      - gimp
+      - ffmpeg
+
+      # File management
+      - thunar
+      - ranger
+      - yazi
+
+      # System utilities
+      - neofetch
+      - fastfetch
+      - gnupg2
+      - pinentry
+      - pass
+
+      # Networking
+      - wireguard-tools
+      - tailscale
+      - rclone
+
+      # Virtualization (KVM/QEMU - modern alternative to VirtualBox)
+      - qemu-kvm
+      - libvirt
+      - virt-manager
+      - virt-viewer
+      - bridge-utils
+
+      # Misc tools
+      - vale
+      - pandoc
+      - slides
+      - usage
+
+    flatpak:
+      - com.brave.Browser
+      - com.discordapp.Discord
+      - com.slack.Slack
+      - org.signal.Signal
+      - com.spotify.Client
+      - org.mozilla.firefox
+      - com.obsproject.Studio
+      - org.libreoffice.LibreOffice
+      - com.calibre_ebook.calibre
+      - org.chromium.Chromium
+      - com.onepassword.OnePassword

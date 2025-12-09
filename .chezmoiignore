@@ -1,1 +1,14 @@
 .config/nvim/lazy-lock.json
+
+# Ignore macOS-specific files on non-Darwin systems
+{{ if ne .chezmoi.os "darwin" }}
+.config/aerospace/
+.config/borders/
+.config/sketchybar/
+run_once_before_install-packages-darwin.sh.tmpl
+{{ end }}
+
+# Ignore Linux-specific files on non-Linux systems
+{{ if ne .chezmoi.os "linux" }}
+run_once_before_install-packages-linux.sh.tmpl
+{{ end }}
