@@ -511,6 +511,8 @@ packages:
       - pandoc
       - slides
       - usage
+      - xournalpp
+      - deluge
 
     flatpak:
       - com.brave.Browser
@@ -524,3 +526,8 @@ packages:
       - com.calibre_ebook.calibre
       - org.chromium.Chromium
       - com.onepassword.OnePassword
+      - com.dropbox.Client
+      - com.protonvpn.www
+      - ch.protonmail.protonmail-bridge
+      - dev.zed.Zed
+      - io.jan.Jan
