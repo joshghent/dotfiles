@@ -1,0 +1,31 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "linux" -}}
+
+# Set fish as the default shell
+FISH_PATH=$(which fish)
+
+if [ -z "$FISH_PATH" ]; then
+    echo "Fish shell not found. Please install it first."
+    exit 1
+fi
+
+echo "Setting fish as default shell..."
+
+# Add fish to /etc/shells if not already there
+if ! grep -q "$FISH_PATH" /etc/shells; then
+    echo "Adding $FISH_PATH to /etc/shells..."
+    echo "$FISH_PATH" | sudo tee -a /etc/shells
+fi
+
+# Change default shell to fish
+if [ "$SHELL" != "$FISH_PATH" ]; then
+    echo "Changing default shell to fish..."
+    sudo chsh -s "$FISH_PATH" "$USER"
+    echo "Default shell changed to fish. Please log out and back in for changes to take effect."
+else
+    echo "Fish is already your default shell."
+fi
+
+{{ else -}}
+echo "Skipping: not on Linux"
+{{ end -}}
