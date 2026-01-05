@@ -4,6 +4,11 @@
 
 echo "Setting up GNOME extensions..."
 
+# Theme + cursor names (adjust if your installed theme names differ)
+GNOME_THEME_NAME="Catppuccin-Macchiato"
+CURSOR_THEME_NAME="Catppuccin-Macchiato-Light-Cursors"
+MONOSPACE_FONT_NAME="JetBrainsMono Nerd Font 12"
+
 # Install Pop Shell (tiling window manager) from source
 if [ ! -d "$HOME/.local/share/gnome-shell/extensions/pop-shell@system76.com" ]; then
     echo "Installing Pop Shell..."
@@ -28,6 +33,8 @@ extensions=(
     "caffeine@patapon.info"
     "user-theme@gnome-shell-extensions.gcampax.github.com"
     "pop-shell@system76.com"
+    "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
+    "window-list@gnome-shell-extensions.gcampax.github.com"
 )
 
 for extension in "${extensions[@]}"; do
@@ -43,6 +50,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
 gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
 gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true
+gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
 
 # Configure Pop Shell keybindings
 echo "Configuring Pop Shell..."
@@ -52,11 +60,17 @@ gsettings set org.gnome.shell.extensions.pop-shell active-hint true
 
 # Configure some nice GNOME defaults
 echo "Configuring GNOME settings..."
-gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+gsettings set org.gnome.desktop.interface gtk-theme "$GNOME_THEME_NAME"
+gsettings set org.gnome.shell.extensions.user-theme name "$GNOME_THEME_NAME"
+gsettings set org.gnome.desktop.interface cursor-theme "$CURSOR_THEME_NAME"
+gsettings set org.gnome.desktop.interface monospace-font-name "$MONOSPACE_FONT_NAME"
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface enable-hot-corners false
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.desktop.interface clock-format '12h'
+gsettings set org.gnome.desktop.interface clock-show-date true
+gsettings set org.gnome.desktop.interface clock-show-weekday false
+gsettings set org.gnome.desktop.interface clock-show-seconds false
 
 # Configure workspaces
 gsettings set org.gnome.mutter dynamic-workspaces false
@@ -80,6 +94,14 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Kitty'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'kitty'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>Return'
+
+# Enable Proton Mail Bridge autostart if available
+if command -v protonmail-bridge &> /dev/null; then
+    systemctl --user daemon-reload
+    systemctl --user enable --now protonmail-bridge.service
+else
+    echo "Proton Mail Bridge not found, skipping autostart."
+fi
 
 echo ""
 echo "✓ GNOME setup complete!"

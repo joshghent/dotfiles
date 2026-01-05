@@ -1,0 +1,13 @@
+[Unit]
+Description=Proton Mail Bridge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=protonmail-bridge --no-window --noninteractive
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

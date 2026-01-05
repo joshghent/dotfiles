@@ -38,3 +38,16 @@ end
 
 # Load common functions and aliases
 source ~/.config/fish/conf.d/aliases.fish
+
+# Auto-start tmux for new Kitty windows in ~/projects
+if status is-interactive
+    if set -q KITTY_WINDOW_ID; and not set -q TMUX
+        if command -v tmux &> /dev/null
+            set -l project_dir "$HOME/Projects"
+            if test -d "$project_dir"
+                cd "$project_dir"
+            end
+            exec tmux new-session -A -s main -c "$project_dir"
+        end
+    end
+end

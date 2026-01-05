@@ -25,9 +25,20 @@
       "keyColor": "red",
     },
     {
+      "type": "de",
+      "key": "󰧨 DE  ",
+      "keyColor": "cyan",
+    },
+    {
       "type": "kernel",
       "key": " VER ",
       "keyColor": "green",
+    },
+    {
+      "type": "display",
+      "key": "󰍹 RES ",
+      "keyColor": "magenta",
+      "compactType": "scaled",
     },
     {
       "type": "uptime",

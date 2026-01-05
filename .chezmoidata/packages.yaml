@@ -462,6 +462,8 @@ packages:
       - gnome-shell-extension-blur-my-shell
       - gnome-shell-extension-caffeine
       - gnome-shell-extension-user-theme
+      - gnome-shell-extension-window-list
+      - gnome-shell-extension-workspace-indicator
       - kitty
       - alacritty
       - wl-clipboard
@@ -474,7 +476,8 @@ packages:
       - fira-code-fonts
       - google-noto-emoji-fonts
       - fontawesome-fonts
-      - jetbrains-mono-fonts
+      - jetbrains-mono-nerd-fonts
+      - jetbrains-mononl-nerd-fonts
 
       # Media
       - mpv
@@ -488,7 +491,6 @@ packages:
       - yazi
 
       # System utilities
-      - neofetch
       - fastfetch
       - gnupg2
       - pinentry
@@ -515,9 +517,9 @@ packages:
       - deluge
 
     flatpak:
-      - com.brave.Browser
       - com.discordapp.Discord
       - com.slack.Slack
+      - app.zen_browser.zen
       - org.signal.Signal
       - com.spotify.Client
       - org.mozilla.firefox
