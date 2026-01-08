@@ -9,6 +9,53 @@ GNOME_THEME_NAME="Catppuccin-Macchiato"
 CURSOR_THEME_NAME="Catppuccin-Macchiato-Light-Cursors"
 MONOSPACE_FONT_NAME="JetBrainsMono Nerd Font 12"
 
+# Add custom keybindings without clobbering existing ones
+append_custom_keybinding_path() {
+    local path_id="$1"
+    local base="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    local full_path="${base}/${path_id}/"
+    local current
+    local newlist
+
+    current=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings)
+    newlist=$(
+        CURRENT="$current" FULL_PATH="$full_path" python3 - <<'PY'
+import ast
+import os
+
+s = os.environ.get("CURRENT", "").replace("@as ", "")
+try:
+    lst = ast.literal_eval(s)
+    if not isinstance(lst, list):
+        lst = []
+except Exception:
+    lst = []
+
+path = os.environ.get("FULL_PATH", "")
+if path and path not in lst:
+    lst.append(path)
+
+print(lst)
+PY
+    )
+
+    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "$newlist"
+    echo "$full_path"
+}
+
+add_custom_keybinding() {
+    local name="$1"
+    local command="$2"
+    local binding="$3"
+    local path_id="$4"
+    local full_path
+
+    full_path=$(append_custom_keybinding_path "$path_id")
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:"$full_path" name "$name"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:"$full_path" command "$command"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:"$full_path" binding "$binding"
+}
+
 # Install Pop Shell (tiling window manager) from source
 if [ ! -d "$HOME/.local/share/gnome-shell/extensions/pop-shell@system76.com" ]; then
     echo "Installing Pop Shell..."
@@ -41,6 +88,10 @@ for extension in "${extensions[@]}"; do
     echo "Enabling $extension..."
     gnome-extensions enable "$extension" 2>/dev/null || echo "  Note: $extension may need manual enabling via Extensions app"
 done
+
+if ! gnome-extensions list | grep -q "pop-shell@system76.com"; then
+    echo "Warning: Pop Shell is not listed by gnome-extensions. It may be incompatible with your GNOME version."
+fi
 
 # Configure Dash to Dock to be more macOS-like
 echo "Configuring Dash to Dock..."
@@ -90,10 +141,20 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Super><Sh
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Super><Shift>5']"
 
 # Configure terminal shortcut
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Kitty'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'kitty'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>Return'
+echo "Configuring custom keyboard shortcuts..."
+add_custom_keybinding "Kitty" "kitty" "<Super>Return" "codex-kitty"
+
+if command -v ulauncher-toggle &> /dev/null; then
+    add_custom_keybinding "Ulauncher" "ulauncher-toggle" "<Alt>space" "codex-ulauncher"
+else
+    echo "Ulauncher not found, skipping hotkey setup."
+fi
+
+if command -v gnome-characters &> /dev/null; then
+    add_custom_keybinding "Emoji Picker" "gnome-characters" "<Super>period" "codex-emoji"
+else
+    echo "GNOME Characters not found, skipping emoji hotkey setup."
+fi
 
 # Enable Proton Mail Bridge autostart if available
 if command -v protonmail-bridge &> /dev/null; then

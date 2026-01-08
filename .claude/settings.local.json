@@ -5,7 +5,9 @@
       "Bash(sketchybar:*)",
       "WebFetch(domain:www.chezmoi.io)",
       "Bash(nvim:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(gsettings set:*)",
+      "Bash(echo:*)"
     ],
     "deny": [],
     "ask": []

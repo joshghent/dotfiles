@@ -69,6 +69,7 @@ The installation script will automatically:
 ### Fedora
 - **Desktop Environment**: GNOME with Pop Shell tiling
 - **Launcher**: Ulauncher (Alt+Space)
+- **Emoji Picker**: GNOME Characters (Super+.)
 - **Screenshot Tool**: Flameshot
 - **Extensions**: Pop Shell, Dash to Dock, AppIndicator, Blur My Shell, Caffeine
 - **Package Managers**: DNF + Flatpak
@@ -80,6 +81,7 @@ The installation script will automatically:
 - `Super + Return`: Open Kitty terminal
 - `Super + Y`: Toggle Pop Shell tiling mode
 - `Alt + Space`: Open Ulauncher
+- `Super + .`: Open Emoji Picker
 - `Super + Direction Keys`: Navigate tiled windows
 
 ## 📦 Key Tools Included

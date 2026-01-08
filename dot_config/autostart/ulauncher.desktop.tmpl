@@ -1,0 +1,9 @@
+{{ if eq .chezmoi.os "linux" -}}
+[Desktop Entry]
+Type=Application
+Name=Ulauncher
+Exec=env GDK_BACKEND=x11 ulauncher --hide-window
+Terminal=false
+X-GNOME-Autostart-enabled=true
+OnlyShowIn=GNOME;
+{{- end }}

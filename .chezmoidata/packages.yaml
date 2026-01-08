@@ -464,6 +464,7 @@ packages:
       - gnome-shell-extension-user-theme
       - gnome-shell-extension-window-list
       - gnome-shell-extension-workspace-indicator
+      - gnome-characters
       - kitty
       - alacritty
       - wl-clipboard

@@ -25,7 +25,6 @@ alias findpi 'nmap -sP 192.168.0.0/24 | awk \'/^Nmap/{print}/B8:27:EB/{print}\''
 
 # Applications
 alias c 'codium .'
-alias cat 'bat'
 alias gensecret 'python -c "import secrets; print(secrets.token_hex(20))"'
 alias python 'python3'
 alias dc 'docker compose'

@@ -11,4 +11,5 @@ run_once_before_install-packages-darwin.sh.tmpl
 # Ignore Linux-specific files on non-Linux systems
 {{ if ne .chezmoi.os "linux" }}
 run_once_before_install-packages-linux.sh.tmpl
+.config/autostart/ulauncher.desktop
 {{ end }}
