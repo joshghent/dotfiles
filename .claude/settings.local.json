@@ -7,7 +7,9 @@
       "Bash(nvim:*)",
       "WebFetch(domain:github.com)",
       "Bash(gsettings set:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Read(//Users/joshghent/.local/share/sketchybar_lua/**)",
+      "Read(//Users/joshghent/.local/share/chezmoi/**)"
     ],
     "deny": [],
     "ask": []

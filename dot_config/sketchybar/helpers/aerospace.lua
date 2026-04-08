@@ -7,8 +7,8 @@ function aerospace.list_workspaces()
     local workspaces = {}
     local handle = io.popen("aerospace list-workspaces --all")
     if handle then
-        for workspace in handle:lines() do
-            workspace = workspace:gsub("%s+", "")
+        for line in handle:lines() do
+            local workspace = line:gsub("%s+", "")
             if workspace ~= "" then
                 table.insert(workspaces, workspace)
             end
@@ -36,8 +36,8 @@ function aerospace.list_windows(workspace)
     local windows = {}
     local handle = io.popen("aerospace list-windows --workspace " .. workspace .. " --format '%{app-name}'")
     if handle then
-        for app in handle:lines() do
-            app = app:gsub("%s+", "")
+        for line in handle:lines() do
+            local app = line:gsub("%s+", "")
             if app ~= "" then
                 table.insert(windows, app)
             end

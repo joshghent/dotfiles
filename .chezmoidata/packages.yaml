@@ -348,6 +348,7 @@ packages:
       - zstd
     casks:
       - aerospace
+      - battery
       - backblaze
       - battle-net
       - brave-browser
