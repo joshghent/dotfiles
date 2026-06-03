@@ -1,359 +1,257 @@
 packages:
   darwin:
     taps:
-      - FelixKratz/formulae
+      - aquasecurity/trivy
+      - felixkratz/formulae
+      - homebrew/services
+      - nikitabobko/tap
+      - oven-sh/bun
     brews:
-      - abseil
       - act
       - ansible
+      - antigen
       - aom
-      - apache-arrow
-      - apr
-      - apr-util
-      - argon2
+      - aquasecurity/trivy/trivy
       - aribb24
       - assimp@5
-      - autoconf
       - autojump
       - automake
-      - aws-c-auth
-      - aws-c-cal
-      - aws-c-common
-      - aws-c-compression
-      - aws-c-event-stream
-      - aws-c-http
-      - aws-c-io
-      - aws-c-mqtt
-      - aws-c-s3
-      - aws-c-sdkutils
-      - aws-checksums
-      - aws-crt-cpp
-      - aws-sdk-cpp
       - aws-vault
       - awscli
       - azure-cli
       - bash
       - bash-completion@2
       - bat
-      - brotli
-      - borders
-      - c-ares
-      - ca-certificates
-      - cairo
-      - capstone
-      - certifi
-      - cffi
+      - cariddi
       - cfitsio
       - cgif
+      - checkov
       - chezmoi
       - cjson
       - clamav
       - cmake
       - colima
+      - composer
       - coreutils
       - cryptography
-      - curl
       - cyrus-sasl
       - dav1d
       - dbus
       - deno
       - detect-secrets
       - diff-so-fancy
+      - docker
+      - docker-buildx
+      - docker-compose
+      - docker-credential-helper
       - doctl
       - dotnet
       - double-conversion
-      - dtc
       - expat
+      - fastfetch
+      - felixkratz/formulae/borders
+      - felixkratz/formulae/sketchybar
       - ffmpeg
       - fftw
       - findutils
       - fish
       - flac
       - flyctl
-      - fontconfig
-      - freetds
-      - freetype
       - frei0r
-      - fribidi
-      - gcc
-      - gd
       - gdbm
       - gdk-pixbuf
-      - gettext
       - gh
-      - ghostscript
-      - giflib
       - git
       - git-delta
       - git-filter-repo
-      - glib
-      - gmp
+      - glow
       - gnupg
-      - gnutls
+      - go
       - gobject-introspection
       - golang-migrate
-      - gpg
       - gpgme
       - gpgmepp
-      - graphite2
       - graphviz
-      - grep
-      - grpc
       - gts
-      - harfbuzz
       - harlequin
       - hdf5
-      - highway
+      - hey
+      - htop
       - hunspell
       - hwloc
-      - icu4c@77
-      - imagemagick
-      - imath
+      - hyperfine
+      - icdiff
       - infracost
       - ios-deploy
-      - isl
       - istioctl
       - jansson
-      - jasper
-      - jbig2dec
       - jemalloc
-      - jpeg-turbo
       - jpeg-xl
       - jq
       - json-c
       - jwt-cli
       - k6
-      - krb5
       - kubernetes-cli
       - lame
       - lazydocker
       - lazygit
-      - leptonica
+      - lefthook
       - libaec
-      - libarchive
       - libass
-      - libassuan
       - libavif
-      - libb2
       - libbluray
-      - libde265
-      - libdeflate
       - libdicom
       - libev
-      - libevent
       - libexif
-      - libgcrypt
-      - libgit2
-      - libgpg-error
-      - libheif
-      - libidn
-      - libidn2
       - libimagequant
-      - libksba
       - liblinear
-      - liblqr
       - libmagic
       - libmatio
       - libmicrohttpd
       - libmng
-      - libmpc
-      - libnghttp2
       - libnghttp3
       - libngtcp2
       - libogg
-      - libomp
-      - libpng
-      - libpq
-      - libraw
       - librist
       - librsvg
       - libsamplerate
-      - libslirp
       - libsndfile
-      - libsodium
       - libsoxr
       - libspng
-      - libssh
-      - libssh2
-      - libtasn1
-      - libtiff
       - libtommath
-      - libtool
       - libudfread
       - libunibreak
-      - libunistring
-      - libusb
-      - libuv
       - libvidstab
-      - libvmaf
       - libvorbis
       - libvpx
-      - libx11
-      - libxau
-      - libxcb
-      - libxdmcp
-      - libxext
       - libxml2
-      - libxrender
-      - libyaml
-      - libzip
-      - lima
-      - little-cms2
-      - llvm
-      - lpeg
+      - localstack
       - lua
-      - luajit
-      - luv
-      - lz4
-      - lzo
-      - m4
+      - make
       - mbedtls
       - md4c
       - minikube
       - mise
       - moreutils
       - mozjpeg
-      - mpdecimal
-      - mpfr
       - mpg123
-      - msgpack
       - mysql
-      - ncurses
-      - neofetch
       - neovim
-      - net-snmp
+      - nethack
       - netpbm
-      - nettle
       - nghttp2
       - nmap
-      - npth
       - nspr
       - nss
-      - numpy
       - nvm
-      - nvim
       - oha
       - ollama
-      - oniguruma
       - onnx
       - open-mpi
-      - openblas
       - opencore-amr
-      - openexr
       - openjdk
-      - openjpeg
-      - openldap
       - openslide
-      - openssl@3
       - openvino
       - opus
-      - p11-kit
+      - oven-sh/bun/bun
       - pandoc
-      - pango
       - pcre
-      - pcre2
-      - pinentry
+      - pdfly
+      - php
       - pinentry-mac
       - pipx
-      - pixman
-      - pkgconf
       - pmix
       - pnpm
       - podman
+      - policy_sentry
       - poppler
-      - postgresql
+      - postgresql@14
       - posting
-      - protobuf
+      - pre-commit
       - protobuf-c
       - protobuf@29
       - protoc-gen-go
       - protoc-gen-go-grpc
       - pugixml
-      - pycparser
+      - pure
       - pyenv
-      - python-certifi
-      - python-cryptography
       - python-packaging
-      - python
+      - python@3.11
+      - python@3.14
       - qemu
+      - qrencode
       - qt
+      - qt@5
       - rav1e
       - rbenv
       - rclone
-      - re2
-      - readline
       - redis
       - regal
       - ripgrep
-      - rtmpdump
       - rubberband
       - ruby-build
+      - rust
+      - rustup
       - screenresolution
       - sdl2
       - sfml
-      - shared-mime-info
-      - sketchybar
+      - shellcheck
       - slides
       - smartmontools
-      - snappy
       - socket_vmnet
       - soft-serve
       - sonar-scanner
       - speex
       - spicetify-cli
-      - sqlite
       - srt
+      - stripe-cli
       - svt-av1
       - tbb
       - tcl-tk
       - telnet
       - terraform-docs
-      - tesseract
+      - terragrunt
+      - terrascan
+      - tfenv
+      - tflint
+      - tfsec
       - the_silver_searcher
       - theora
-      - thrift
       - tmate
       - tmux
-      - todoist
+      - todoist-cli
       - tree
-      - tree-sitter
       - trufflehog
-      - unbound
-      - unibilium
-      - unixodbc
-      - usage
-      - utf8proc
       - uthash
       - vale
-      - vde
       - vips
-      - webp
+      - weasyprint
       - wget
       - wireguard-go
       - wireguard-tools
       - x264
-      - x265
-      - xorgproto
       - xvid
-      - xz
       - yara
       - yarn
       - yazi
       - yq
       - yt-dlp
-      - z3
+      - zbar
       - zeromq
       - zimg
       - zlib
-      - zstd
     casks:
+      - 1password
+      - 1password-cli
       - aerospace
-      - battery
       - backblaze
+      - battery
       - battle-net
       - brave-browser
       - bruno
       - calibre
+      - chromium
+      - copilot-cli
       - crossover
       - cryptomator
       - cursor
@@ -369,6 +267,7 @@ packages:
       - font-iosevka
       - font-jetbrains-mono-nerd-font
       - font-sf-pro
+      - font-sketchybar-app-font
       - gimp
       - google-backup-and-sync
       - google-chrome
@@ -396,11 +295,9 @@ packages:
       - qmk-toolbox
       - raspberry-pi-imager
       - raycast
+      - rectangle
       - signal
       - slack
-      - 1password
-      - 1password-cli
-      - chromium
       - spectacle
       - spotify
       - standard-notes
