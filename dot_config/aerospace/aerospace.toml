@@ -222,11 +222,3 @@ shift-down = ['volume set 0', 'mode main']
     if.app-id = 'org.mozilla.firefox'
     if.window-title-regex-substring = 'Picture-in-Picture'
     run = 'layout floating'
-
-[[on-window-detected]]
-  if.app-id = 'com.spotify.client'
-  run = 'move-node-to-workspace 4'
-
-[[on-window-detected]]
-    if.app-id = 'dev.zed.Zed'
-    run = 'move-node-to-workspace E'

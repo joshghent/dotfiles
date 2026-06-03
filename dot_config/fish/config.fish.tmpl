@@ -8,9 +8,10 @@ set -g fish_user_paths "/opt/homebrew/bin" $fish_user_paths
 set -g fish_user_paths "/opt/homebrew/sbin" $fish_user_paths
 set -g fish_user_paths "$HOME/.local/bin" $fish_user_paths
 
-# Required to use colima + testcontainers
-set -x DOCKER_HOST unix://{$HOME}/.colima/docker.sock
+# Podman + testcontainers
+set -x DOCKER_HOST "unix://"$TMPDIR"podman/podman-machine-default-api.sock"
 set -x TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE /var/run/docker.sock
+set -x TESTCONTAINERS_RYUK_DISABLED true
 {{ end }}
 
 {{ if eq .chezmoi.os "linux" }}
