@@ -1,0 +1,23 @@
+{{- $name := promptStringOnce . "name" "Full name" "Josh Ghent" -}}
+{{- $email := promptStringOnce . "email" "Email address" "joshuaghent@bpp.com" -}}
+{{- $gitEmail := promptStringOnce . "git_email" "Git commit email" "2934976+joshghent@users.noreply.github.com" -}}
+{{- $machineType := promptStringOnce . "machine_type" "Machine type (work/personal)" "work" -}}
+{{- $casksEnabled := promptBoolOnce . "casks_enabled" "Install Homebrew casks (GUI apps)?" false -}}
+
+encryption = "gpg"
+
+[data]
+    name = {{ $name | quote }}
+    email = {{ $email | quote }}
+    git_email = {{ $gitEmail | quote }}
+    machine_type = {{ $machineType | quote }}
+    casks_enabled = {{ $casksEnabled }}
+
+[data.gpg]
+    create_key = true
+    key_type = "ed25519"
+    key_length = 4096
+    expire_days = 0
+
+[edit]
+    command = "nvim"
