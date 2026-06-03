@@ -13,3 +13,7 @@ run_once_before_install-packages-darwin.sh.tmpl
 run_once_before_install-packages-linux.sh.tmpl
 .config/autostart/ulauncher.desktop
 {{ end }}
+
+# ~/mise.toml holds machine-local tool pins (e.g. work terraform/dotnet versions)
+# and must never be managed — global defaults live in .config/mise/config.toml
+mise.toml

@@ -1,0 +1,34 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "darwin" -}}
+set -e
+
+echo "Configuring macOS defaults..."
+
+# Dock
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock tilesize -int 61
+defaults write com.apple.dock show-recents -bool false
+
+# Keyboard: fast key repeat
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+# Show all file extensions everywhere
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder FXPreferredViewStyle -string "icnv"
+
+# Screenshots to ~/Pictures/Screenshots instead of the Desktop
+mkdir -p "$HOME/Pictures/Screenshots"
+defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
+
+killall Dock Finder SystemUIServer 2>/dev/null || true
+
+echo "macOS defaults applied."
+{{ else -}}
+echo "Skipping: not on Darwin (macOS)"
+{{ end -}}

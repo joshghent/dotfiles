@@ -1,0 +1,41 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "darwin" -}}
+set -e
+
+# Enable Notification Center alerts on all iTerm2 profiles so that
+# bells / OSC 9 escapes (e.g. Claude Code waiting for input) raise an
+# OS notification when the session isn't focused.
+#
+# NOTE: quit iTerm2 before running, or it will overwrite these prefs
+# with its in-memory copy when it next quits.
+
+if ! defaults read com.googlecode.iterm2 "New Bookmarks" &>/dev/null; then
+  echo "iTerm2 has no profiles yet — launch it once, then run:"
+  echo "  bash ~/.local/share/chezmoi/run_once_after_configure-iterm-notifications.sh.tmpl (via chezmoi apply)"
+  exit 0
+fi
+
+tmpfile=$(mktemp /tmp/iterm2-prefs.XXXXXX.plist)
+defaults export com.googlecode.iterm2 "$tmpfile"
+
+python3 - "$tmpfile" <<'PY'
+import plistlib, sys
+path = sys.argv[1]
+with open(path, 'rb') as f:
+    prefs = plistlib.load(f)
+for profile in prefs.get('New Bookmarks', []):
+    profile['BM Growl'] = True          # Send Notification Center alerts
+    profile['Send Bell Alert'] = True   # ...when the session rings the bell
+    profile['Send Terminal Generated Alerts'] = True  # ...and for OSC 9 alerts
+with open(path, 'wb') as f:
+    plistlib.dump(prefs, f)
+print(f"Patched {len(prefs.get('New Bookmarks', []))} iTerm2 profile(s)")
+PY
+
+defaults import com.googlecode.iterm2 "$tmpfile"
+rm -f "$tmpfile"
+
+echo "iTerm2 notification alerts enabled (restart iTerm2 to pick up)."
+{{ else -}}
+echo "Skipping: not on Darwin (macOS)"
+{{ end -}}

@@ -30,7 +30,6 @@ packages:
       - cjson
       - clamav
       - cmake
-      - colima
       - composer
       - coreutils
       - cryptography
@@ -143,7 +142,6 @@ packages:
       - nmap
       - nspr
       - nss
-      - nvm
       - oha
       - ollama
       - onnx

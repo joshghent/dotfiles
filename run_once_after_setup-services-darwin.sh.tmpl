@@ -1,0 +1,46 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "darwin" -}}
+set -e
+
+# Make sure brew is on PATH (non-interactive shell)
+if ! command -v brew &>/dev/null; then
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+fi
+
+# --- Podman (replaces colima/Docker Desktop) ---
+if command -v podman &>/dev/null; then
+  # Create the VM if it doesn't exist yet
+  if ! podman machine inspect &>/dev/null; then
+    echo "Initialising podman machine..."
+    podman machine init
+  fi
+
+  # Start it if it isn't running
+  if ! podman machine inspect --format '{{ "{{.State}}" }}' 2>/dev/null | grep -q running; then
+    echo "Starting podman machine..."
+    podman machine start
+  fi
+
+  # Docker compatibility: installs a launch daemon that forwards
+  # /var/run/docker.sock to podman's user socket, so docker CLI,
+  # docker-compose, testcontainers etc. work unchanged.
+  # Requires sudo (prompts once).
+  if [ ! -S /var/run/docker.sock ]; then
+    echo "Installing podman docker-compat socket (needs sudo)..."
+    sudo podman-mac-helper install || echo "WARN: podman-mac-helper failed; docker CLI may need DOCKER_HOST set"
+    podman machine stop && podman machine start
+  fi
+fi
+
+# --- Background services ---
+brew services start sketchybar || true
+brew services start ollama || true
+
+echo "Services configured."
+{{ else -}}
+echo "Skipping: not on Darwin (macOS)"
+{{ end -}}
