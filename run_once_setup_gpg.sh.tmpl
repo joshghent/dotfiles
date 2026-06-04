@@ -2,6 +2,22 @@
 
 set -eufo pipefail
 
+# Ensure brew-installed tools (gpg, git) are on PATH in this
+# non-interactive shell — /opt/homebrew/bin isn't there by default.
+if ! command -v gpg &>/dev/null; then
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+fi
+
+if ! command -v gpg &>/dev/null; then
+  echo "gpg not found even after loading brew env — skipping GPG setup."
+  echo "Install gnupg and re-run 'chezmoi apply' to generate your key."
+  exit 0
+fi
+
 {{ if .gpg.create_key -}}
 # Setup GPG key if it doesn't exist
 

@@ -210,7 +210,6 @@ packages:
       - terragrunt
       - terrascan
       - tfenv
-      - tflint
       - tfsec
       - the_silver_searcher
       - theora
