@@ -20,6 +20,11 @@ if ! command -v brew &>/dev/null; then
   fi
 fi
 
+# Don't abort the whole chezmoi run if a single package fails to install
+# (transient download errors, renamed formulae, etc.). brew bundle exits
+# non-zero if anything failed; we report it but keep going so the rest of
+# the setup (services, mise, macOS defaults) still runs.
+set +e
 brew bundle --file=/dev/stdin <<EOF
 {{ range .packages.darwin.taps -}}
 tap {{ . | quote }}
@@ -33,6 +38,13 @@ cask {{ . | quote }}
 {{ end -}}
 {{ end -}}
 EOF
+bundle_status=$?
+if [ $bundle_status -ne 0 ]; then
+  echo ""
+  echo "WARN: brew bundle reported failures (exit $bundle_status)."
+  echo "      The rest of setup will continue. Re-run 'chezmoi apply' or"
+  echo "      'brew bundle' later to retry any packages that failed."
+fi
 {{ else -}}
 echo "Skipping: not on Darwin (macOS)"
 {{ end -}}

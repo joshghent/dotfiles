@@ -3,7 +3,6 @@ packages:
     taps:
       - aquasecurity/trivy
       - felixkratz/formulae
-      - homebrew/services
       - nikitabobko/tap
       - oven-sh/bun
     brews:
