@@ -2,16 +2,33 @@ packages:
   darwin:
     taps:
       - aquasecurity/trivy
+      - cmacrae/formulae
       - FelixKratz/formulae
+      - gcenx/apple
+      - gcenx/wine
+      - hashicorp/tap
+      - koekeishiya/formulae
       - laurentftech/ntfy-macos
+      - mike-engel/jwt-cli
+      - mongodb/brew
       - nikitabobko/tap
       - oven-sh/bun
+      - sachaos/todoist
+      - spicetify/tap
+      - steipete/tap
+      - stripe/stripe-cli
+      - styrainc/packages
+      - supabase/tap
+      - warrensbox/tap
+      - yt-dlp/taps
     brews:
       - act
       - ansible
       - antigen
       - aom
+      - apr-util
       - aquasecurity/trivy/trivy
+      - argon2
       - aribb24
       - asimov
       - assimp@5
@@ -31,9 +48,11 @@ packages:
       - cjson
       - clamav
       - cmake
+      - colima
       - composer
       - coreutils
       - cryptography
+      - curl
       - cyrus-sasl
       - dav1d
       - dbus
@@ -45,6 +64,7 @@ packages:
       - docker-compose
       - docker-credential-helper
       - doctl
+      - docutils
       - dotnet
       - double-conversion
       - expat
@@ -57,10 +77,12 @@ packages:
       - fish
       - flac
       - flyctl
+      - freetds
       - frei0r
       - gdbm
       - gdk-pixbuf
       - gh
+      - ghostscript
       - git
       - git-delta
       - git-filter-repo
@@ -69,13 +91,16 @@ packages:
       - go
       - gobject-introspection
       - golang-migrate
+      - goreleaser
       - gpgme
       - gpgmepp
       - graphviz
+      - grep
       - gts
       - harlequin
       - hdf5
       - hey
+      - himalaya
       - htop
       - hunspell
       - hwloc
@@ -103,8 +128,10 @@ packages:
       - libdicom
       - libev
       - libexif
+      - libiconv
       - libimagequant
       - liblinear
+      - liblqr
       - libmagic
       - libmatio
       - libmicrohttpd
@@ -125,6 +152,7 @@ packages:
       - libvorbis
       - libvpx
       - libxml2
+      - libzip
       - localstack
       - lua
       - make
@@ -137,19 +165,25 @@ packages:
       - mpg123
       - mysql
       - neovim
+      - net-snmp
       - nethack
       - netpbm
       - nghttp2
-      - ntfy-macos
       - nmap
+      - nowplaying-cli
       - nspr
       - nss
+      - ntfy-macos
+      - nvm
       - oha
       - ollama
       - onnx
       - open-mpi
       - opencore-amr
       - openjdk
+      - openjdk@11
+      - openjdk@21
+      - openldap
       - openslide
       - openvino
       - opus
@@ -166,6 +200,7 @@ packages:
       - policy_sentry
       - poppler
       - postgresql@14
+      - postgresql@18
       - posting
       - pre-commit
       - protobuf-c
@@ -176,8 +211,10 @@ packages:
       - pure
       - pyenv
       - python-packaging
+      - python@3.10
       - python@3.11
       - python@3.14
+      - python@3.9
       - qemu
       - qrencode
       - qt
@@ -188,6 +225,7 @@ packages:
       - redis
       - regal
       - ripgrep
+      - rtmpdump
       - rubberband
       - ruby-build
       - rust
@@ -195,6 +233,7 @@ packages:
       - screenresolution
       - sdl2
       - sfml
+      - shared-mime-info
       - shellcheck
       - slides
       - smartmontools
@@ -206,6 +245,7 @@ packages:
       - srt
       - stripe-cli
       - svt-av1
+      - switchaudio-osx
       - tbb
       - tcl-tk
       - telnet
@@ -220,8 +260,12 @@ packages:
       - tmux
       - todoist-cli
       - tree
+      - tree-sitter@0.25
       - trufflehog
+      - typst
+      - unbound
       - uthash
+      - uv
       - vale
       - vips
       - weasyprint
@@ -243,13 +287,23 @@ packages:
       - 1password
       - 1password-cli
       - aerospace
+      - alfred
+      - autodesk-fusion
       - backblaze
+      - bartender
       - battery
       - battle-net
+      - bitwarden
+      - blackhole-2ch
       - brave-browser
       - bruno
       - calibre
       - chromium
+      - claude
+      - claude-code
+      - codex
+      - codex-app
+      - conductor
       - copilot-cli
       - crossover
       - cryptomator
@@ -257,7 +311,10 @@ packages:
       - darktable
       - deluge
       - discord
+      - docker
+      - docker-desktop
       - dropbox
+      - fig
       - firefox
       - font-fira-code
       - font-fontawesome
@@ -265,9 +322,12 @@ packages:
       - font-inter
       - font-iosevka
       - font-jetbrains-mono-nerd-font
+      - font-sf-mono
       - font-sf-pro
       - font-sketchybar-app-font
+      - font-symbols-only-nerd-font
       - gimp
+      - godot
       - google-backup-and-sync
       - google-chrome
       - google-drive
@@ -279,13 +339,21 @@ packages:
       - jdownloader
       - jellyfin
       - jordanbaird-ice
+      - karabiner-elements
       - keybase
+      - kitty
       - leapp
       - libreoffice
+      - lm-studio
+      - lmms
+      - macfuse
+      - microsoft-teams
       - minecraft
       - mono-mdk-for-visual-studio
+      - mp3tag
       - mullvad-browser
       - obs
+      - obsidian
       - proton-drive
       - proton-mail-bridge
       - protonmail-bridge
@@ -295,21 +363,35 @@ packages:
       - raspberry-pi-imager
       - raycast
       - rectangle
+      - rustdesk
+      - sf-symbols
       - signal
       - slack
+      - smcfancontrol
+      - soulseek
       - spectacle
       - spotify
       - standard-notes
       - steam
+      - stremio
+      - syncthing-app
       - tableplus
       - tailscale
+      - tailscale-app
+      - telegram
       - thunderbird
       - todoist
+      - todoist-app
       - tor-browser
+      - tunnelblick
+      - unity-hub
+      - veracrypt
       - virtualbox
       - vlc
       - vscodium
+      - webtorrent
       - whatsapp
+      - wispr-flow
       - zed
       - zoom
 
