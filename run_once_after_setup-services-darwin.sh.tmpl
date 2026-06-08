@@ -37,7 +37,11 @@ if command -v podman &>/dev/null; then
 fi
 
 # --- Background services ---
-brew services start sketchybar || true
+# NOTE: sketchybar is NOT started here. AeroSpace launches it via its
+# after-startup-command (see ~/.config/aerospace/aerospace.toml), so running it
+# as a brew service too spawns a second instance that loses the race and fails
+# with exit code 78. SbarLua (the Lua bindings the config needs) is installed by
+# run_once_after_install-sbarlua-darwin.sh.tmpl.
 brew services start ollama || true
 
 echo "Services configured."

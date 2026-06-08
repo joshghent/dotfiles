@@ -1,0 +1,32 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "darwin" -}}
+set -e
+
+# Make sure brew (and brew-installed lua) is on PATH in this non-interactive shell.
+if ! command -v brew &>/dev/null; then
+  if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ -x /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+fi
+
+# SbarLua is the Lua binding our sketchybar config depends on
+# (init.lua does `require("sketchybar")`). It isn't packaged in Homebrew, so
+# build it from source. `make install` drops the compiled module at
+# ~/.local/share/sketchybar_lua/sketchybar.so. Without it sketchybar's config
+# fails to load and the bar never renders (brew service errors with code 78).
+MODULE="$HOME/.local/share/sketchybar_lua/sketchybar.so"
+if [ -f "$MODULE" ]; then
+  echo "SbarLua already installed."
+else
+  echo "Building SbarLua from source..."
+  tmp=$(mktemp -d)
+  git clone --depth 1 https://github.com/FelixKratz/SbarLua.git "$tmp/SbarLua"
+  make -C "$tmp/SbarLua" install
+  rm -rf "$tmp"
+  echo "Installed SbarLua to $MODULE"
+fi
+{{ else -}}
+echo "Skipping: not on Darwin (macOS)"
+{{ end -}}
