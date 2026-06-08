@@ -1,7 +1,12 @@
 after-login-command = []
 
+# PATH is prepended so sketchybar's plugins can find the `aerospace` CLI: on
+# casks-disabled machines it lives in ~/.local/bin (see
+# run_once_after_install-aerospace-cli-darwin.sh.tmpl), which isn't on the
+# minimal PATH a login-launched GUI app inherits. Harmless on cask machines
+# where the CLI is already in /opt/homebrew/bin.
 after-startup-command = [
-  'exec-and-forget sketchybar',
+  'exec-and-forget PATH="$HOME/.local/bin:$PATH" sketchybar',
   'exec-and-forget borders',
 ]
 

@@ -1,0 +1,39 @@
+#!/bin/bash
+{{ if and (eq .chezmoi.os "darwin") (not (index . "casks_enabled")) -}}
+set -e
+
+# On casks-disabled machines the AeroSpace cask is skipped, so its companion
+# `aerospace` CLI is never linked onto PATH — only the .app gets installed by
+# hand. sketchybar's workspace items shell out to `aerospace list-workspaces`
+# etc., so without the CLI the bar renders empty. Pull the CLI binary out of
+# the GitHub release that matches the installed app and drop it in ~/.local/bin.
+APP="/Applications/AeroSpace.app"
+DEST="$HOME/.local/bin/aerospace"
+
+if [ ! -d "$APP" ]; then
+  echo "AeroSpace.app not installed — skipping CLI install."
+  exit 0
+fi
+
+if command -v aerospace &>/dev/null; then
+  echo "aerospace CLI already on PATH ($(command -v aerospace)) — skipping."
+  exit 0
+fi
+
+ver=$(defaults read "$APP/Contents/Info.plist" CFBundleShortVersionString)
+url="https://github.com/nikitabobko/AeroSpace/releases/download/v${ver}/AeroSpace-v${ver}.zip"
+echo "Fetching aerospace CLI v${ver} from upstream release..."
+
+mkdir -p "$HOME/.local/bin"
+tmp=$(mktemp -d)
+curl -fsSL "$url" -o "$tmp/AeroSpace.zip"
+# The release zip contains AeroSpace.app and a bin/aerospace CLI.
+unzip -o -j "$tmp/AeroSpace.zip" 'AeroSpace-v'"${ver}"'/bin/aerospace' 'bin/aerospace' -d "$HOME/.local/bin" >/dev/null 2>&1 || \
+  unzip -o -j "$tmp/AeroSpace.zip" '*/bin/aerospace' -d "$HOME/.local/bin" >/dev/null
+chmod +x "$DEST"
+rm -rf "$tmp"
+echo "Installed aerospace CLI to $DEST"
+"$DEST" --version || true
+{{ else -}}
+echo "Skipping: not Darwin without casks (aerospace cask provides the CLI)"
+{{ end -}}
