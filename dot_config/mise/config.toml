@@ -1,12 +1,12 @@
 [tools]
 # Node.js
-node = "23"
+node = "26"
 
 # Python
-python = "3.12"
+python = "latest"
 
 # Go
-go = "1.23"
+go = "latest"
 
 # Rust
 rust = "latest"
