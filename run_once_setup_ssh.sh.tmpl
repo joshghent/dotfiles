@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+key_file="$HOME/.ssh/id_ed25519"
+
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
+if [[ -f "$key_file" ]]; then
+    echo "SSH key already exists at $key_file — skipping generation."
+else
+    echo "No existing SSH key found. Generating new ed25519 key..."
+
+    # Generate key non-interactively with no passphrase. The private key is
+    # added to the agent / keychain on first use via ~/.ssh/config.
+    ssh-keygen -t ed25519 -C "{{ .email }}" -f "$key_file" -N ""
+
+    echo "SSH key generated successfully!"
+fi
+
+if [[ -f "$key_file.pub" ]]; then
+    echo ""
+    echo "Add this public key to GitHub/GitLab:"
+    echo "========================================"
+    cat "$key_file.pub"
+    echo "========================================"
+fi

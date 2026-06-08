@@ -1,0 +1,37 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "darwin" -}}
+set -e
+
+# Point iTerm2 at a chezmoi-managed prefs folder so settings sync across
+# machines. iTerm2 loads com.googlecode.iterm2.plist from this folder on
+# launch and (with "Save changes automatically") writes edits back to it,
+# which you then commit.
+#
+# Guarded: we only enable load-from-folder once the plist actually exists
+# in the folder. Enabling it against an empty folder makes iTerm2 fall back
+# to defaults and overwrite the folder on quit — losing your settings.
+
+prefs_dir="$HOME/.config/iterm2"
+plist="$prefs_dir/com.googlecode.iterm2.plist"
+
+if [[ ! -f "$plist" ]]; then
+  echo "No iTerm2 prefs found at $plist yet — skipping."
+  echo "Export them from your other machine into the repo first:"
+  echo "  (other machine) iTerm2 > Settings > General > Settings tab >"
+  echo "                  'Load preferences from a custom folder' = ~/.config/iterm2"
+  echo "  (other machine) chezmoi add ~/.config/iterm2/com.googlecode.iterm2.plist && git push"
+  echo "  (this machine)  chezmoi update, then re-run."
+  exit 0
+fi
+
+# Quit iTerm2 if running so it doesn't clobber these prefs on its next quit.
+osascript -e 'tell application "iTerm" to quit' 2>/dev/null || true
+
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$prefs_dir"
+defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+
+echo "iTerm2 now loads preferences from $prefs_dir"
+echo "On next launch, choose 'Save automatically' if iTerm2 asks how to handle changes."
+{{ else -}}
+echo "Skipping: not on Darwin (macOS)"
+{{ end -}}
