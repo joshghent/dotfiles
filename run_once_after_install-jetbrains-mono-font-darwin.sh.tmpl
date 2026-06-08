@@ -1,0 +1,27 @@
+#!/bin/bash
+{{ if and (eq .chezmoi.os "darwin") (not (index . "casks_enabled")) -}}
+set -e
+
+# On locked-down machines (e.g. CyberEssentials Plus work setup) Homebrew
+# casks can't be installed, so font-jetbrains-mono-nerd-font is skipped —
+# leaving iTerm2 (which requests "JetBrainsMonoNFM-Regular") to fall back to a
+# default font that renders small/wrong. Fetch the Nerd Font Mono .ttfs from
+# the upstream nerd-fonts release into the user font dir; no admin, no cask.
+FONT_DIR="$HOME/Library/Fonts"
+FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+
+if ls "$FONT_DIR"/JetBrainsMonoNerdFontMono-*.ttf &>/dev/null; then
+  echo "JetBrains Mono Nerd Font already installed."
+else
+  echo "Installing JetBrains Mono Nerd Font from upstream release..."
+  mkdir -p "$FONT_DIR"
+  tmp=$(mktemp -d)
+  curl -fsSL "$FONT_URL" -o "$tmp/JetBrainsMono.zip"
+  # Extract only the Mono variants (PostScript family "JetBrainsMono NFM").
+  unzip -o -j "$tmp/JetBrainsMono.zip" 'JetBrainsMonoNerdFontMono-*.ttf' -d "$FONT_DIR" >/dev/null
+  rm -rf "$tmp"
+  echo "Installed JetBrains Mono Nerd Font Mono into $FONT_DIR"
+fi
+{{ else -}}
+echo "Skipping: not Darwin without casks (font-jetbrains-mono-nerd-font cask handles it)"
+{{ end -}}
