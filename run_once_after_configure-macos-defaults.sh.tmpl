@@ -9,6 +9,9 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock tilesize -int 61
 defaults write com.apple.dock show-recents -bool false
 
+# Auto-hide the native macOS menu bar (SketchyBar replaces it)
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+
 # Keyboard: fast key repeat
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15

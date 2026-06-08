@@ -1,0 +1,26 @@
+#!/bin/bash
+{{ if and (eq .chezmoi.os "darwin") (not (index . "casks_enabled")) -}}
+set -e
+
+# On locked-down machines (e.g. CyberEssentials Plus work setup) Homebrew
+# casks can't be installed, so `font-sketchybar-app-font` is skipped. That
+# font is what renders the SketchyBar icons — without it the bar shows tofu
+# boxes. Fetch the .ttf straight from the upstream release into the user font
+# dir, which needs no admin rights and no cask.
+FONT_DIR="$HOME/Library/Fonts"
+FONT_PATH="$FONT_DIR/sketchybar-app-font.ttf"
+FONT_URL="https://github.com/kvndrsslr/sketchybar-app-font/releases/latest/download/sketchybar-app-font.ttf"
+
+if [ -f "$FONT_PATH" ] || [ -f "/Library/Fonts/sketchybar-app-font.ttf" ]; then
+  echo "sketchybar-app-font already installed."
+else
+  echo "Installing sketchybar-app-font from upstream release..."
+  mkdir -p "$FONT_DIR"
+  curl -fsSL "$FONT_URL" -o "$FONT_PATH"
+  echo "Installed $FONT_PATH"
+  # Reload SketchyBar so it picks up the new glyphs, if it's running.
+  command -v sketchybar &>/dev/null && sketchybar --reload || true
+fi
+{{ else -}}
+echo "Skipping: not Darwin without casks (font-sketchybar-app-font cask handles it)"
+{{ end -}}

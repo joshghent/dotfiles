@@ -2,7 +2,8 @@ packages:
   darwin:
     taps:
       - aquasecurity/trivy
-      - felixkratz/formulae
+      - FelixKratz/formulae
+      - laurentftech/ntfy-macos
       - nikitabobko/tap
       - oven-sh/bun
     brews:
@@ -12,6 +13,7 @@ packages:
       - aom
       - aquasecurity/trivy/trivy
       - aribb24
+      - asimov
       - assimp@5
       - autojump
       - automake
@@ -138,6 +140,7 @@ packages:
       - nethack
       - netpbm
       - nghttp2
+      - ntfy-macos
       - nmap
       - nspr
       - nss
