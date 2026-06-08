@@ -57,16 +57,18 @@ automatically-unhide-macos-hidden-apps = false
 preset = 'qwerty'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
-# Different gap settings for different monitors
-# Built-in monitor has smaller top gap, external monitors have larger gap for sketchybar
 [gaps]
 inner.horizontal = 5
 inner.vertical = 5
 outer.left = 5
 outer.bottom = 0
 outer.right = 5
-# Per monitor top gaps - U32H85x is external monitor, needs more space for sketchybar
-outer.top = [{ monitor."U32H85x" = 40 }, 10]
+# Top gap must clear the 40px-tall SketchyBar on every display. The native menu
+# bar is auto-hidden (see macos-defaults), so macOS reserves no top strip and
+# windows would otherwise overlap the bar. A built-in-only machine made this
+# obvious; machines on the external U32H85x never noticed because it was already
+# mapped to 40. So 40 across the board.
+outer.top = 40
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
