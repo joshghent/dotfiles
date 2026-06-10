@@ -11,8 +11,9 @@ return {
     transparent = 0x00000000,
 
     bar = {
-        bg = 0x00000000,
-        -- bg = 0xf02c2e34,
+        -- Opaque (well, ~94%) bar so it reads as a solid bar rather than a
+        -- transparent strip showing desktop wallpaper above the tiled windows.
+        bg = 0xf02c2e34,
         border = 0xff2c2e34,
     },
     popup = {

@@ -63,12 +63,13 @@ inner.vertical = 5
 outer.left = 5
 outer.bottom = 0
 outer.right = 5
-# Top gap must clear the 40px-tall SketchyBar on every display. The native menu
-# bar is auto-hidden (see macos-defaults), so macOS reserves no top strip and
-# windows would otherwise overlap the bar. A built-in-only machine made this
-# obvious; machines on the external U32H85x never noticed because it was already
-# mapped to 40. So 40 across the board.
-outer.top = 40
+# Top gap must clear the 40px-tall SketchyBar. AeroSpace tiles inside the
+# display's visible frame, which on notched MacBooks already excludes the ~32px
+# notch strip the bar draws over — so the bar only intrudes ~8px into the usable
+# area there (barHeight - notchHeight). A no-notch external display reserves
+# nothing, so the bar intrudes its full 40px. Hence: 8 for the notched built-in,
+# 40 for the external U32H85x.
+outer.top = [{ monitor."U32H85x" = 40 }, 8]
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
