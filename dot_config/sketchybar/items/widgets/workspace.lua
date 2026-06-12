@@ -1,5 +1,6 @@
 local colors = require("colors")
 local settings = require("settings")
+local aerospace = require("helpers.aerospace")
 
 local workspace = sbar.add("item", "widgets.workspace", {
     position = "right",
@@ -21,7 +22,7 @@ local workspace = sbar.add("item", "widgets.workspace", {
 })
 
 local function update_workspace()
-    sbar.exec("aerospace list-workspaces --focused", function(result)
+    sbar.exec(aerospace.bin .. " list-workspaces --focused", function(result)
         local current_workspace = result:gsub("%s+", "")
         workspace:set({
             label = { string = current_workspace }

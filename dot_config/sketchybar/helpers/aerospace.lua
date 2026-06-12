@@ -2,10 +2,26 @@ local app_icons = require("helpers.app_icons")
 
 local aerospace = {}
 
+-- Resolve the aerospace CLI to an absolute path. On casks-disabled machines the
+-- CLI lives in ~/.local/bin, which is NOT on the minimal PATH that AeroSpace (a
+-- login GUI app) hands to the sketchybar process it launches — so bare
+-- "aerospace" calls fail and the bar renders empty. Prefer the absolute path
+-- when present; fall back to PATH lookup on cask machines (CLI in /opt/homebrew/bin).
+local function resolve_aerospace_bin()
+    local home = os.getenv("HOME")
+    if home then
+        local p = home .. "/.local/bin/aerospace"
+        local f = io.open(p, "r")
+        if f then f:close(); return p end
+    end
+    return "aerospace"
+end
+aerospace.bin = resolve_aerospace_bin()
+
 -- Get all workspace IDs (synchronous version using io.popen for initialization)
 function aerospace.list_workspaces()
     local workspaces = {}
-    local handle = io.popen("aerospace list-workspaces --all")
+    local handle = io.popen(aerospace.bin .. " list-workspaces --all")
     if handle then
         for line in handle:lines() do
             local workspace = line:gsub("%s+", "")
@@ -20,7 +36,7 @@ end
 
 -- Get the currently focused workspace (synchronous)
 function aerospace.get_focused_workspace()
-    local handle = io.popen("aerospace list-workspaces --focused")
+    local handle = io.popen(aerospace.bin .. " list-workspaces --focused")
     if handle then
         local workspace = handle:read("*l")
         handle:close()
@@ -34,7 +50,7 @@ end
 -- Get all windows in a specific workspace (synchronous)
 function aerospace.list_windows(workspace)
     local windows = {}
-    local handle = io.popen("aerospace list-windows --workspace " .. workspace .. " --format '%{app-name}'")
+    local handle = io.popen(aerospace.bin .. " list-windows --workspace " .. workspace .. " --format '%{app-name}'")
     if handle then
         for line in handle:lines() do
             local app = line:gsub("%s+", "")

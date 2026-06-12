@@ -1,12 +1,13 @@
 after-login-command = []
 
-# PATH is prepended so sketchybar's plugins can find the `aerospace` CLI: on
-# casks-disabled machines it lives in ~/.local/bin (see
-# run_once_after_install-aerospace-cli-darwin.sh.tmpl), which isn't on the
-# minimal PATH a login-launched GUI app inherits. Harmless on cask machines
-# where the CLI is already in /opt/homebrew/bin.
+# NOTE: keep this a bare command. AeroSpace's exec-and-forget does not run it
+# through a shell, so an inline "VAR=val cmd" prefix is treated as the binary
+# name and silently fails to launch. The reason we needed PATH here — letting
+# sketchybar's plugins find the ~/.local/bin aerospace CLI — is now handled
+# inside the sketchybar config (helpers/aerospace.lua resolves the absolute
+# path), so the launch can stay simple.
 after-startup-command = [
-  'exec-and-forget PATH="$HOME/.local/bin:$PATH" sketchybar',
+  'exec-and-forget sketchybar',
   'exec-and-forget borders',
 ]
 

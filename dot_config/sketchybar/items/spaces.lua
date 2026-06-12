@@ -60,7 +60,7 @@ for _, workspace_id in ipairs(workspaces) do
 
     -- Click handler to switch workspaces
     space:subscribe("mouse.clicked", function(env)
-        sbar.exec("aerospace workspace " .. workspace_id)
+        sbar.exec(aerospace.bin .. " workspace " .. workspace_id)
     end)
 end
 
