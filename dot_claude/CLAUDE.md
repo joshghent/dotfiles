@@ -19,6 +19,26 @@ whatever project you're in; match it rather than imposing a house style.
   assumption and proceed — don't block on small decisions.
 - Never mention Claude/AI in commit messages or PR descriptions.
 
+## Fixing bugs — 5 whys, then red-green
+
+For every bug fix, before changing code:
+
+1. **5 whys.** Trace the symptom to its root cause by asking "why" until you
+   reach the real defect, not a surface symptom. State the chain briefly (a few
+   lines) and name the actual root cause. Fix that cause — not the symptom. If
+   the chain reveals the bug isn't where it first appeared, say so.
+2. **Red.** Write a failing test that reproduces the bug and asserts the
+   correct behaviour. Run it and confirm it fails for the right reason (the bug,
+   not a typo or setup error). Show the failure.
+3. **Green.** Make the minimal change that makes the test pass. Run the test and
+   confirm it's green, then run the surrounding suite to confirm nothing else
+   broke.
+
+Keep the test — it's the regression guard. Match the project's existing test
+framework and conventions; don't introduce a new one. If the bug genuinely
+can't be covered by a test (e.g. a pure config/infra change), say why and
+proceed without one rather than forcing a contrived test.
+
 ## Toolchain — always respect
 
 - **Package manager: detect, never guess.** `pnpm-lock.yaml` → pnpm ·
@@ -27,6 +47,12 @@ whatever project you're in; match it rather than imposing a house style.
 - **Versions via mise.** If `.mise.toml` / `mise.toml` / `.tool-versions`
   exists, use the pinned toolchain (`mise install`, `mise exec -- …`). Don't
   hand-install global language runtimes.
+- **Schema via the ORM, never raw SQL.** If the project uses a database
+  toolkit (Drizzle, Prisma, etc.), make schema changes through it — edit the
+  schema definition and generate the migration (`drizzle-kit generate`,
+  `prisma migrate dev`). Don't hand-edit generated migration/SQL files or apply
+  ad-hoc DDL that drifts from the schema source. Only touch SQL directly when
+  there's no ORM in the project.
 
 ## New work → worktree first
 
