@@ -38,5 +38,9 @@ if command -v mise &> /dev/null
     mise activate fish | source
 end
 
+# Stop corepack-managed Yarn Berry from auto-writing a `{"packageManager": ...}`
+# package.json into any dir an agent runs yarn in (mise's node ships corepack).
+set -gx COREPACK_ENABLE_AUTO_PIN 0
+
 # Load common functions and aliases
 source ~/.config/fish/conf.d/aliases.fish
