@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+# Create a git worktree for any repo, symlink its local (git-ignored) .env
+# files from the source checkout, and install JS deps for every lockfile found.
+#
+#   new-worktree <repo-dir> <branch> [base-ref]
+#
+#   <repo-dir>   Path to the repo (or any of its existing worktrees).
+#   <branch>     Branch to work on. Checked out if it exists locally or on
+#                origin, otherwise created from <base-ref>.
+#   [base-ref]   Base for a brand-new branch. Defaults to origin/main.
+#
+# The worktree is created as a sibling of the source checkout, named
+# <repo>-<id>, where <id> is a ticket id found in the branch (e.g. JN-3554)
+# when present, otherwise the slugified branch name.
+#
+# Env files: every git-ignored .env / .env.* in the source checkout is
+# symlinked into the worktree at the same path, so the worktree shares the
+# source's secrets. Symlinks are shared — edits affect every worktree. If a
+# tool needs per-worktree values, replace a symlink with a copy (see the note
+# printed at the end).
+#
+# Installs: pnpm-lock.yaml -> pnpm, yarn.lock -> yarn, package-lock.json -> npm,
+# run in each lockfile's own directory (JS ecosystem only).
+set -euo pipefail
+
+repo_arg="${1:?usage: new-worktree <repo-dir> <branch> [base-ref]}"
+branch="${2:?usage: new-worktree <repo-dir> <branch> [base-ref]}"
+base="${3:-origin/main}"
+
+if ! git -C "$repo_arg" rev-parse --is-inside-work-tree &>/dev/null; then
+	echo "error: '$repo_arg' is not a git repository" >&2
+	exit 1
+fi
+
+# Source checkout = env source-of-truth. Resolves from any worktree.
+main="$(dirname "$(git -C "$repo_arg" rev-parse --path-format=absolute --git-common-dir)")"
+parent="$(dirname "$main")"
+repo="$(basename "$main")"
+
+# Short, stable dir name: prefer a ticket id (e.g. JN-3554) when the branch has
+# one, else slugify the branch.
+if [[ "$branch" =~ ([A-Z]+-[0-9]+) ]]; then
+	suffix="${BASH_REMATCH[1]}"
+else
+	suffix="${branch//\//-}"
+fi
+wt="$parent/${repo}-${suffix}"
+
+# Refresh refs so origin/main and origin/<branch> are current.
+if git -C "$main" remote get-url origin &>/dev/null; then
+	git -C "$main" fetch origin --quiet
+fi
+
+if git -C "$main" show-ref --verify --quiet "refs/heads/$branch"; then
+	git -C "$main" worktree add "$wt" "$branch"
+elif git -C "$main" show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+	git -C "$main" worktree add --track -b "$branch" "$wt" "origin/$branch"
+else
+	git -C "$main" worktree add -b "$branch" "$wt" "$base"
+fi
+
+# Symlink git-ignored env files from the source checkout into the worktree.
+# --directory collapses fully-ignored dirs (e.g. node_modules) so we don't
+# descend into them; individual ignored .env files are still listed.
+env_count=0
+while IFS= read -r f; do
+	[[ -z "$f" ]] && continue
+	mkdir -p "$wt/$(dirname "$f")"
+	ln -sfn "$main/$f" "$wt/$f"
+	env_count=$((env_count + 1))
+done < <(git -C "$main" ls-files --others --ignored --exclude-standard --directory |
+	grep -E '(^|/)\.env([.][^/]*)?$' || true)
+
+# Install JS deps for every lockfile in the worktree.
+install_for() {
+	local pm="$1" lock="$2" dir
+	dir="$wt/$(dirname "$lock")"
+	if ! command -v "$pm" &>/dev/null; then
+		echo "⚠  $pm not found — skipping install in $dir"
+		return
+	fi
+	echo "==> $pm install ($dir)"
+	(cd "$dir" && "$pm" install)
+}
+
+while IFS= read -r lock; do
+	[[ -z "$lock" ]] && continue
+	case "$(basename "$lock")" in
+	pnpm-lock.yaml) install_for pnpm "$lock" ;;
+	yarn.lock) install_for yarn "$lock" ;;
+	package-lock.json) install_for npm "$lock" ;;
+	esac
+done < <(git -C "$wt" ls-files '*pnpm-lock.yaml' '*yarn.lock' '*package-lock.json' || true)
+
+echo "✅ $wt"
+echo "   branch: $branch   base: $base   env files: $env_count"
+echo "ℹ  Env files are symlinked from '$repo' and shared across worktrees."
+echo "   For per-worktree values, replace a symlink with a copy, e.g.:"
+echo "     f=path/to/.env; t=\$(readlink \"$wt/\$f\") && rm \"$wt/\$f\" && cp \"\$t\" \"$wt/\$f\""

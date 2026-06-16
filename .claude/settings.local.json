@@ -9,7 +9,11 @@
       "Bash(gsettings set:*)",
       "Bash(echo:*)",
       "Read(//Users/joshghent/.local/share/sketchybar_lua/**)",
-      "Read(//Users/joshghent/.local/share/chezmoi/**)"
+      "Read(//Users/joshghent/.local/share/chezmoi/**)",
+      "Bash(brew leaves *)",
+      "Bash(brew list *)",
+      "Read(//Users/joshghent/Projects/repojanitor/**)",
+      "Read(//Users/joshghent/Projects/skills/**)"
     ],
     "deny": [],
     "ask": []
