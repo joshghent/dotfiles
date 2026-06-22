@@ -20,3 +20,9 @@ bun = "latest"
 
 [settings]
 experimental = true
+
+[settings.python]
+# Use the standard (non-freethreaded) precompiled CPython build. mise's
+# default freethreaded `*-stripped` tarballs ship without a `lib/` dir and
+# fail to install ("Python installation is missing a `lib` directory").
+precompiled_flavor = "install_only"

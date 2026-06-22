@@ -76,8 +76,61 @@ echo "Package installation complete!"
 echo ""
 echo "Important: You may need to log out and back in for group changes to take effect."
 
+{{ else if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "debian") -}}
+
+# Headless Ubuntu/Debian servers. Minimal CLI set only — language toolchains
+# (Node, Python, Go, Rust, …) are installed via mise further down.
+export DEBIAN_FRONTEND=noninteractive
+
+echo "Installing apt prerequisites..."
+sudo apt-get update -y
+sudo apt-get install -y ca-certificates curl wget gnupg apt-transport-https software-properties-common
+
+# GitHub CLI (gh) is not in the default Ubuntu/Debian repos — add its apt source.
+if ! command -v gh &> /dev/null; then
+    echo "Adding GitHub CLI apt repository..."
+    sudo mkdir -p -m 755 /etc/apt/keyrings
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
+    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt-get update -y
+fi
+
+# Install apt packages (each is best-effort so a package missing on a given
+# release does not abort the whole run).
+echo "Installing apt packages..."
+{{ range .packages.linux.apt -}}
+sudo apt-get install -y {{ . | quote }} || echo "Failed to install {{ . }}, continuing..."
+{{ end -}}
+
+# Install mise (replacement for asdf) if not already present
+if ! command -v mise &> /dev/null && [ ! -x "$HOME/.local/bin/mise" ]; then
+    echo "Installing mise..."
+    curl https://mise.run | sh
+fi
+export PATH="$HOME/.local/bin:$PATH"
+
+# Install mise toolchains (Node, Python, Go, Rust, Terraform, etc.)
+if command -v mise &> /dev/null; then
+    echo "Installing development toolchains via mise..."
+    echo "This may take a while as it downloads/compiles toolchains..."
+    mise install
+else
+    echo "Warning: mise not found in PATH. You may need to restart your shell and run 'mise install' manually."
+fi
+
+# Enable the Podman socket (Docker-compatible API) if Podman was installed
+if command -v podman &> /dev/null; then
+    echo "Enabling Podman socket..."
+    systemctl --user enable --now podman.socket 2>/dev/null || true
+fi
+
+echo "Package installation complete!"
+
 {{ else -}}
-echo "Skipping: Linux distribution is not Fedora"
+echo "Skipping: unsupported Linux distribution ({{ .chezmoi.osRelease.id }})"
 {{ end -}}
 {{ else -}}
 echo "Skipping: not on Linux"

@@ -17,3 +17,7 @@ run_once_before_install-packages-linux.sh.tmpl
 # ~/mise.toml holds machine-local tool pins (e.g. work terraform/dotnet versions)
 # and must never be managed — global defaults live in .config/mise/config.toml
 mise.toml
+
+# authorized_keys is host-specific (each server grants its own access keys).
+# Never manage it from the repo — overwriting it can lock you out of a box.
+.ssh/authorized_keys

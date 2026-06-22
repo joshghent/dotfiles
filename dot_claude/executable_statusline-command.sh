@@ -15,6 +15,9 @@ git_untracked=$(git -C "$cwd" --no-optional-locks ls-files --others --exclude-st
 
 dir=$(basename "$cwd")
 
+# Icons are written as literal UTF-8 so they render under any POSIX printf.
+# Do NOT switch back to \xNN escapes here: dash's printf (Ubuntu /bin/sh)
+# does not interpret hex escapes and would emit them verbatim.
 parts=""
 
 append() {
@@ -27,7 +30,7 @@ append() {
 
 # Directory
 if [ -n "$dir" ]; then
-	append "$(printf '\033[36m\xf0\x9f\x93\x81 %s\033[0m' "$dir")"
+	append "$(printf '\033[36m📁 %s\033[0m' "$dir")"
 fi
 
 # Git branch + diff counts
@@ -45,15 +48,15 @@ if [ -n "$git_branch" ]; then
 		diff_info="${diff_info}$(printf '\033[33m?%s\033[0m' "$git_untracked")"
 	fi
 	if [ -n "$diff_info" ]; then
-		append "$(printf '\033[35m\xf0\x9f\x8c\xbf %s\033[0m  %s' "$git_branch" "$diff_info")"
+		append "$(printf '\033[35m🌿 %s\033[0m  %s' "$git_branch" "$diff_info")"
 	else
-		append "$(printf '\033[35m\xf0\x9f\x8c\xbf %s\033[0m' "$git_branch")"
+		append "$(printf '\033[35m🌿 %s\033[0m' "$git_branch")"
 	fi
 fi
 
 # Model
 if [ -n "$model" ]; then
-	append "$(printf '\033[34m\xf0\x9f\xa4\x96 %s\033[0m' "$model")"
+	append "$(printf '\033[34m🤖 %s\033[0m' "$model")"
 fi
 
 # Effort
@@ -66,7 +69,7 @@ if [ -n "$effort" ]; then
 	max) effort_label="max" ;;
 	*) effort_label="$effort" ;;
 	esac
-	append "$(printf '\033[33m\xe2\x9a\xa1 %s\033[0m' "$effort_label")"
+	append "$(printf '\033[33m⚡ %s\033[0m' "$effort_label")"
 fi
 
 # Context usage as a progress bar
@@ -77,12 +80,12 @@ if [ -n "$used" ]; then
 	bar=""
 	i=0
 	while [ $i -lt $filled ]; do
-		bar="${bar}\xe2\x96\x88"
+		bar="${bar}█"
 		i=$((i + 1))
 	done
 	i=0
 	while [ $i -lt $empty ]; do
-		bar="${bar}\xe2\x96\x91"
+		bar="${bar}░"
 		i=$((i + 1))
 	done
 	if [ "$used_int" -ge 80 ]; then
@@ -92,8 +95,7 @@ if [ -n "$used" ]; then
 	else
 		color='\033[32m'
 	fi
-	bar_str=$(printf '%b' "$bar")
-	append "$(printf '%b\xf0\x9f\xa7\xa0 %s %s%%\033[0m' "$color" "$bar_str" "$used_int")"
+	append "$(printf '%b🧠 %s %s%%\033[0m' "$color" "$bar" "$used_int")"
 fi
 
 printf '%s' "$parts"

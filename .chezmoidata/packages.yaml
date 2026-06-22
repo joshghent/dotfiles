@@ -513,3 +513,52 @@ packages:
       - ch.protonmail.protonmail-bridge
       - dev.zed.Zed
       - io.jan.Jan
+
+    # Ubuntu/Debian servers (headless). Minimal CLI set only — no GUI/desktop
+    # packages. Language toolchains (Node, Python, Go, Rust, …) come from mise.
+    # Each package installs with `|| continue`, so any unavailable on a given
+    # release is skipped without aborting the run.
+    apt:
+      # Core CLI
+      - fish
+      - neovim
+      - tmux
+      - git
+      - git-delta
+      - ripgrep
+      - bat
+      - fzf
+      - fd-find
+      - tree
+      - wget
+      - curl
+      - htop
+      - btop
+      - jq
+      - nmap
+      - autojump
+      - gh
+
+      # Build toolchain (native builds; runtimes themselves come from mise)
+      - build-essential
+      - cmake
+      - pkg-config
+
+      # GnuPG / secrets (headless pinentry, not the GUI one)
+      - gnupg
+      - pinentry-curses
+      - pass
+
+      # Containers
+      - podman
+      - buildah
+      - skopeo
+
+      # Networking / sync
+      - wireguard-tools
+      - rclone
+
+      # Misc
+      - unzip
+      - pandoc
+      - fastfetch
