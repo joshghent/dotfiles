@@ -18,6 +18,29 @@ terraform = "latest"
 deno = "latest"
 bun = "latest"
 
+# CLI tools — installed per-user into ~/.local, so they work even on machines
+# where you have no sudo / aren't an admin. Anything that genuinely needs root
+# (system libs, podman, fish) stays in the apt/dnf package list instead.
+ripgrep = "latest"
+fd = "latest"
+bat = "latest"
+fzf = "latest"
+jq = "latest"
+yq = "latest"
+gh = "latest"
+# Pin neovim to the aqua backend: mise's default (vfox) plugin registry isn't
+# always reachable and leaves nvim off PATH.
+"aqua:neovim/neovim" = "latest"
+lazygit = "latest"
+delta = "latest"
+fastfetch = "latest"
+btop = "latest"
+shellcheck = "latest"
+rclone = "latest"
+pandoc = "latest"
+direnv = "latest"
+usage = "latest"
+
 [settings]
 experimental = true
 

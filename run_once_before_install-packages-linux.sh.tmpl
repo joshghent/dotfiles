@@ -78,44 +78,50 @@ echo "Important: You may need to log out and back in for group changes to take e
 
 {{ else if or (eq .chezmoi.osRelease.id "ubuntu") (eq .chezmoi.osRelease.id "debian") -}}
 
-# Headless Ubuntu/Debian servers. Minimal CLI set only — language toolchains
-# (Node, Python, Go, Rust, …) are installed via mise further down.
+# Headless Ubuntu/Debian. SYSTEM packages need root; the full CLI toolset
+# comes from mise (no privilege). We auto-detect how — if at all — we can run
+# privileged commands and SKIP system packages cleanly when we can't, so the
+# run still completes and mise still gives you a working environment.
 export DEBIAN_FRONTEND=noninteractive
 
-echo "Installing apt prerequisites..."
-sudo apt-get update -y
-sudo apt-get install -y ca-certificates curl wget gnupg apt-transport-https software-properties-common
-
-# GitHub CLI (gh) is not in the default Ubuntu/Debian repos — add its apt source.
-if ! command -v gh &> /dev/null; then
-    echo "Adding GitHub CLI apt repository..."
-    sudo mkdir -p -m 755 /etc/apt/keyrings
-    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
-        | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
-    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
-        | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-    sudo apt-get update -y
+SUDO=""
+if [ "$(id -u)" -eq 0 ]; then
+    SUDO=""                                   # already root
+elif sudo -n true 2>/dev/null; then
+    SUDO="sudo"                               # passwordless sudo
+elif [ -t 0 ] && sudo -v 2>/dev/null; then
+    SUDO="sudo"                               # interactive: prompt + cache
 fi
 
-# Install apt packages (each is best-effort so a package missing on a given
-# release does not abort the whole run).
-echo "Installing apt packages..."
-{{ range .packages.linux.apt -}}
-sudo apt-get install -y {{ . | quote }} || echo "Failed to install {{ . }}, continuing..."
-{{ end -}}
+if [ "$(id -u)" -eq 0 ] || [ -n "$SUDO" ]; then
+    echo "Installing apt prerequisites..."
+    $SUDO apt-get update -y
+    $SUDO apt-get install -y ca-certificates curl wget gnupg
 
-# Install mise (replacement for asdf) if not already present
+    # System packages (best-effort; a package missing on a given release is
+    # skipped without aborting the run).
+    echo "Installing apt packages..."
+{{ range .packages.linux.apt -}}
+    $SUDO apt-get install -y {{ . | quote }} || echo "Failed to install {{ . }}, continuing..."
+{{ end -}}
+else
+    echo "No sudo available (non-admin user) — skipping system packages."
+    echo "The CLI tools below still install via mise. If you gain admin later,"
+    echo "re-run 'chezmoi apply' to add the system packages."
+fi
+
+# Install mise if not already present (installs into ~/.local — no privilege)
 if ! command -v mise &> /dev/null && [ ! -x "$HOME/.local/bin/mise" ]; then
     echo "Installing mise..."
     curl https://mise.run | sh
 fi
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install mise toolchains (Node, Python, Go, Rust, Terraform, etc.)
+# Install toolchains AND CLI tools via mise (Node, Python, Go, Rust, ripgrep,
+# fd, bat, fzf, jq, gh, neovim, lazygit, delta, …) — all per-user, no sudo.
 if command -v mise &> /dev/null; then
-    echo "Installing development toolchains via mise..."
-    echo "This may take a while as it downloads/compiles toolchains..."
+    echo "Installing toolchains and CLI tools via mise..."
+    echo "This may take a while on first run as it downloads everything..."
     mise install
 else
     echo "Warning: mise not found in PATH. You may need to restart your shell and run 'mise install' manually."

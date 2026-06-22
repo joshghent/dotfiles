@@ -514,32 +514,22 @@ packages:
       - dev.zed.Zed
       - io.jan.Jan
 
-    # Ubuntu/Debian servers (headless). Minimal CLI set only — no GUI/desktop
-    # packages. Language toolchains (Node, Python, Go, Rust, …) come from mise.
-    # Each package installs with `|| continue`, so any unavailable on a given
-    # release is skipped without aborting the run.
+    # Ubuntu/Debian servers (headless). SYSTEM packages only — things that
+    # genuinely need root. The rest of the CLI toolset (ripgrep, fd, bat, fzf,
+    # jq, gh, neovim, lazygit, delta, …) is installed per-user via mise (see
+    # dot_config/mise/config.toml), so a box where you have no sudo still gets
+    # a full toolset. Each install is best-effort (`|| continue`).
     apt:
-      # Core CLI
-      - fish
-      - neovim
-      - tmux
+      # Shells / multiplexers / small system utilities not in mise
       - git
-      - git-delta
-      - ripgrep
-      - bat
-      - fzf
-      - fd-find
+      - fish
+      - tmux
       - tree
-      - wget
-      - curl
       - htop
-      - btop
-      - jq
       - nmap
       - autojump
-      - gh
 
-      # Build toolchain (native builds; runtimes themselves come from mise)
+      # Build toolchain (for native builds; language runtimes come from mise)
       - build-essential
       - cmake
       - pkg-config
@@ -554,11 +544,8 @@ packages:
       - buildah
       - skopeo
 
-      # Networking / sync
+      # Networking
       - wireguard-tools
-      - rclone
 
       # Misc
       - unzip
-      - pandoc
-      - fastfetch
