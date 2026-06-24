@@ -119,15 +119,15 @@ if [ -n "$five_used" ]; then
 			h=$((secs / 3600))
 			m=$(((secs % 3600) / 60))
 			if [ "$h" -gt 0 ]; then
-				reset_str=$(printf ' \xc2\xb7 resets %dh%02dm' "$h" "$m")
+				reset_str=$(printf ' · resets %dh%02dm' "$h" "$m")
 			else
-				reset_str=$(printf ' \xc2\xb7 resets %dm' "$m")
+				reset_str=$(printf ' · resets %dm' "$m")
 			fi
 		fi
 	fi
 
 	if [ "$five_int" -ge 100 ]; then
-		append "$(printf '\033[31m\xf0\x9f\x92\xb3 extra usage%s\033[0m' "$reset_str")"
+		append "$(printf '\033[31m💳 extra usage%s\033[0m' "$reset_str")"
 	else
 		if [ "$remaining" -lt 20 ]; then
 			scolor='\033[31m'
@@ -136,7 +136,7 @@ if [ -n "$five_used" ]; then
 		else
 			scolor='\033[32m'
 		fi
-		append "$(printf '%b\xf0\x9f\x94\x8b %s%% session%s\033[0m' "$scolor" "$remaining" "$reset_str")"
+		append "$(printf '%b🔋 %s%% session%s\033[0m' "$scolor" "$remaining" "$reset_str")"
 	fi
 fi
 
