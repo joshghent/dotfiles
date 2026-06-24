@@ -5,6 +5,8 @@ cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
 model=$(echo "$input" | jq -r '.model.display_name // ""')
 effort=$(echo "$input" | jq -r '.effort.level // empty')
 used=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+five_used=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+five_reset=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
 git_branch=$(git -C "$cwd" --no-optional-locks branch --show-current 2>/dev/null)
 if [ ${#git_branch} -gt 15 ]; then
 	git_branch="$(printf '%s' "$git_branch" | cut -c1-14)…"
@@ -96,6 +98,46 @@ if [ -n "$used" ]; then
 		color='\033[32m'
 	fi
 	append "$(printf '%b🧠 %s %s%%\033[0m' "$color" "$bar" "$used_int")"
+fi
+
+# Session usage (5-hour rate limit). Present only for Pro/Max accounts after the
+# first API response. used_percentage is 0-100; we show what's left in the
+# session. At 100% the plan limit is reached and further work bills as extra
+# usage — there is no dedicated overage field in the payload, so this is the
+# best available signal.
+if [ -n "$five_used" ]; then
+	five_int=$(printf '%.0f' "$five_used")
+	remaining=$((100 - five_int))
+	[ "$remaining" -lt 0 ] && remaining=0
+
+	# Reset countdown, e.g. " · resets 2h13m"
+	reset_str=""
+	if [ -n "$five_reset" ]; then
+		now=$(date +%s)
+		secs=$((five_reset - now))
+		if [ "$secs" -gt 0 ]; then
+			h=$((secs / 3600))
+			m=$(((secs % 3600) / 60))
+			if [ "$h" -gt 0 ]; then
+				reset_str=$(printf ' \xc2\xb7 resets %dh%02dm' "$h" "$m")
+			else
+				reset_str=$(printf ' \xc2\xb7 resets %dm' "$m")
+			fi
+		fi
+	fi
+
+	if [ "$five_int" -ge 100 ]; then
+		append "$(printf '\033[31m\xf0\x9f\x92\xb3 extra usage%s\033[0m' "$reset_str")"
+	else
+		if [ "$remaining" -lt 20 ]; then
+			scolor='\033[31m'
+		elif [ "$remaining" -lt 50 ]; then
+			scolor='\033[33m'
+		else
+			scolor='\033[32m'
+		fi
+		append "$(printf '%b\xf0\x9f\x94\x8b %s%% session%s\033[0m' "$scolor" "$remaining" "$reset_str")"
+	fi
 fi
 
 printf '%s' "$parts"
