@@ -14,6 +14,16 @@
       "Bash(brew list *)",
       "Read(//Users/joshghent/Projects/repojanitor/**)",
       "Read(//Users/joshghent/Projects/skills/**)"
+      "Bash(chezmoi execute-template *)",
+      "Read(//Users/jghent/.ssh/**)",
+      "Bash(chezmoi state *)",
+      "Bash(chezmoi apply *)",
+      "Bash(grep -iA2 ssh)",
+      "Bash(bash)",
+      "Read(//Users/jghent/Library/Preferences/**)",
+      "Bash(defaults read *)",
+      "Bash(chezmoi managed *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k, v\\) for k,v in d.get\\('entryState',{}\\).items\\(\\) if 'ssh' in k.lower\\(\\)]\")"
     ],
     "deny": [],
     "ask": []
