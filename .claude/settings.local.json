@@ -13,7 +13,7 @@
       "Bash(brew leaves *)",
       "Bash(brew list *)",
       "Read(//Users/joshghent/Projects/repojanitor/**)",
-      "Read(//Users/joshghent/Projects/skills/**)"
+      "Read(//Users/joshghent/Projects/skills/**)",
       "Bash(chezmoi execute-template *)",
       "Read(//Users/jghent/.ssh/**)",
       "Bash(chezmoi state *)",
