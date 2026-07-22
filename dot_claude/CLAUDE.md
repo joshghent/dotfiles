@@ -17,7 +17,6 @@ whatever project you're in; match it rather than imposing a house style.
   wait until the pattern is real.
 - **Be direct and concise.** Lead with a recommendation and why. State your
   assumption and proceed — don't block on small decisions.
-- Never mention Claude/AI in commit messages or PR descriptions.
 
 ## Fixing bugs — 5 whys, then red-green
 
