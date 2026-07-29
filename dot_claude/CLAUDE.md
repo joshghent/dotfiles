@@ -17,6 +17,7 @@ whatever project you're in; match it rather than imposing a house style.
   wait until the pattern is real.
 - **Be direct and concise.** Lead with a recommendation and why. State your
   assumption and proceed — don't block on small decisions.
+- Never mention Claude/AI in commit messages or PR descriptions.
 
 ## Fixing bugs — 5 whys, then red-green
 
@@ -46,6 +47,11 @@ proceed without one rather than forcing a contrived test.
 - **Versions via mise.** If `.mise.toml` / `mise.toml` / `.tool-versions`
   exists, use the pinned toolchain (`mise install`, `mise exec -- …`). Don't
   hand-install global language runtimes.
+- **Containers are podman, not Docker.** Docker Desktop and colima are not
+  installed. Run `podman` directly (`podman run`, `podman build`,
+  `podman machine start`); `docker` is only an alias to it. `docker-compose`
+  works because `DOCKER_HOST` points at podman's socket — but write podman in
+  anything new. Never install Docker Desktop or suggest `brew install docker`.
 - **Schema via the ORM, never raw SQL.** If the project uses a database
   toolkit (Drizzle, Prisma, etc.), make schema changes through it — edit the
   schema definition and generate the migration (`drizzle-kit generate`,

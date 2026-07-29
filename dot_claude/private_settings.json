@@ -72,7 +72,9 @@
     "rust-analyzer-lsp@claude-plugins-official": true,
     "impeccable@impeccable": true,
     "last30days@last30days-skill": true,
-    "ecc@ecc": true
+    "ecc@ecc": false,
+    "swift-lsp@claude-plugins-official": true,
+    "ponytail@ponytail": true
   },
   "extraKnownMarketplaces": {
     "impeccable": {
@@ -92,9 +94,16 @@
         "source": "github",
         "repo": "affaan-m/ECC"
       }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
     }
   },
   "effortLevel": "high",
+  "tui": "fullscreen",
   "voice": {
     "enabled": true,
     "mode": "hold"

@@ -12,6 +12,9 @@ set -g fish_user_paths "$HOME/.local/bin" $fish_user_paths
 set -x DOCKER_HOST "unix://"$TMPDIR"podman/podman-machine-default-api.sock"
 set -x TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE /var/run/docker.sock
 set -x TESTCONTAINERS_RYUK_DISABLED true
+
+# Podman replaces Docker Desktop entirely — there is no docker binary
+alias docker="podman"
 {{ end }}
 
 {{ if eq .chezmoi.os "linux" }}
