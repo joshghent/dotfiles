@@ -117,3 +117,13 @@
 [tag]
     gpgSign = true
 {{- end }}
+
+# Written by `gh auth setup-git`. Tracked here so `chezmoi apply` doesn't strip
+# it and break HTTPS pushes until gh is re-run. Unqualified `gh` so it resolves
+# on Linux too.
+[credential "https://github.com"]
+    helper =
+    helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+    helper =
+    helper = !gh auth git-credential
