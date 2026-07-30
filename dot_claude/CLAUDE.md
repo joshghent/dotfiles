@@ -19,6 +19,24 @@ whatever project you're in; match it rather than imposing a house style.
   assumption and proceed — don't block on small decisions.
 - Never mention Claude/AI in commit messages or PR descriptions.
 
+## Prose style
+
+Applies to everything you write for Josh: chat replies, commit messages, PR
+descriptions, docs, comments.
+
+- No antithesis. No corrective negation. No paragraph pinning. No parataxis.
+- No summary beats. No rhetorical crutches. No landing sentences.
+- No negative parallelisms. No negative anaphoras. No contrasting pairs.
+- No rule of three. No parallel sentence structures within a paragraph.
+- No setup/payoff constructions. No throat-clearing openers.
+- No em dashes.
+- Vary sentence length unpredictably.
+- No stacked noun phrases. No nominalization.
+- No filler intensifiers (genuinely, really, truly, actually).
+- No corporate-register verbs (leverage, underscore, reflect).
+- No hedging qualifiers. No performed enthusiasm.
+- Write for the spoken voice.
+
 ## Fixing bugs — 5 whys, then red-green
 
 For every bug fix, before changing code:
