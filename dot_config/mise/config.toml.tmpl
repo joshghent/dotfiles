@@ -34,7 +34,12 @@ gh = "latest"
 lazygit = "latest"
 delta = "latest"
 fastfetch = "latest"
+{{ if ne .chezmoi.os "darwin" -}}
+# btop has no macOS binary in mise's aqua backend (aristocratos/btop ships
+# Linux releases only). On macOS it's installed via Homebrew instead; here it
+# stays for the no-sudo Linux servers that rely on the per-user mise toolset.
 btop = "latest"
+{{ end -}}
 shellcheck = "latest"
 rclone = "latest"
 pandoc = "latest"

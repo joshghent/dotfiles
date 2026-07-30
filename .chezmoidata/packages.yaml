@@ -26,6 +26,11 @@ packages:
       - azure-cli
       - bash-completion@2
       - bat
+      - btop
+      - cariddi
+      - cfitsio
+      - cgif
+      - checkov
       - chezmoi
       - clamav
       - cmake
