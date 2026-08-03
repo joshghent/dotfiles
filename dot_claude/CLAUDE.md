@@ -101,6 +101,16 @@ Skip the worktree when: continuing in-progress work on the current branch,
 amending an open PR, already inside a worktree, making a trivial edit, or just
 answering questions. Tear down with `git worktree remove <dir>`.
 
+## Design system — Josh's own products
+
+For any product under `github.com/joshghent` (not client or employer work), use
+the design system in `joshghent/turbotechnologies-brand` as the source of
+truth for colors, typography, spacing, and components. Before styling a new
+page or component, check that repo for existing tokens or patterns and match
+them rather than inventing new ones. If the repo isn't attached to the
+session yet, ask Josh to add it before doing design work — don't guess at the
+brand.
+
 ## Safety
 
 - Never commit `.env`, secrets, or credentials; never print their contents.
