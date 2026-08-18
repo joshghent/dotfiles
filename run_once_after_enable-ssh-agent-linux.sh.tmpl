@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "linux" -}}
+# Enable the persistent ssh-agent user service. macOS keeps passphrases in the
+# login keychain (UseKeychain in ~/.ssh/config); Linux has no equivalent, so a
+# long-lived agent is what stops ssh asking for the passphrase every time.
+set -euo pipefail
+
+if ! command -v systemctl >/dev/null 2>&1; then
+	echo "systemctl not found — skipping ssh-agent service setup."
+	exit 0
+fi
+
+# No user systemd instance (container, chroot, plain docker exec): nothing to
+# enable, and failing here would abort the whole apply.
+if ! systemctl --user show-environment >/dev/null 2>&1; then
+	echo "No systemd user session — skipping ssh-agent service setup."
+	echo "Start an agent manually with: eval (ssh-agent -c)"
+	exit 0
+fi
+
+# Ubuntu ships its own unit under this name; make sure the one that runs is
+# ours (~/.config takes precedence, but drop any stale enable first).
+systemctl --user daemon-reload
+systemctl --user disable --now ssh-agent.service 2>/dev/null || true
+systemctl --user enable --now ssh-agent.service
+
+echo "ssh-agent user service enabled (socket: \${XDG_RUNTIME_DIR}/ssh-agent.socket)."
+echo "Run 'ssh-add ~/.ssh/id_ed25519' once to cache your passphrase for this boot."
+{{ else -}}
+echo "Skipping: ssh-agent service is Linux-only (macOS uses the login keychain)."
+{{ end -}}

@@ -1,0 +1,28 @@
+# Managed by chezmoi. Machine-local host definitions do NOT belong here —
+# put them in ~/.ssh/config.d/*.conf instead (see the Includes below).
+
+# ssh takes the FIRST value it obtains for each keyword, so these Includes must
+# stay above the `Host *` defaults or per-host settings could never override
+# them. Missing files, and globs that match nothing, are silently ignored.
+Include ~/.ssh/config.d/*.conf
+{{- if eq .chezmoi.os "darwin" }}
+# colima generates its own Host entries for the VM.
+Include ~/.colima/ssh_config
+{{- end }}
+
+Host *
+{{- if eq .chezmoi.os "darwin" }}
+	# Keys live in 1Password and its agent does the authentication, so there is
+	# no key file on disk and no passphrase to cache — which is why macOS never
+	# prompts. IdentityAgent overrides SSH_AUTH_SOCK, so nothing else needs to
+	# know about this. Deliberately no IdentityFile: 1Password serves the keys.
+	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{- else }}
+	# No 1Password agent here — its Linux app needs a desktop session, and this
+	# box is headless. So keys live on disk instead, and AddKeysToAgent hands
+	# the decrypted key to the persistent ssh-agent user service (see
+	# dot_config/systemd/user/ssh-agent.service). That makes the passphrase a
+	# once-per-boot prompt rather than a once-per-connection one.
+	AddKeysToAgent yes
+	IdentityFile ~/.ssh/id_ed25519
+{{- end }}

@@ -22,6 +22,13 @@ alias docker="podman"
 set -g fish_user_paths "$HOME/.local/bin" $fish_user_paths
 set -g fish_user_paths "$HOME/go/bin" $fish_user_paths
 
+# Point at the persistent ssh-agent user service so the decrypted key survives
+# between shells. macOS gets this from the 1Password agent instead; Linux has
+# no equivalent, so without this you re-enter the passphrase on every shell.
+if test -S $XDG_RUNTIME_DIR/ssh-agent.socket
+    set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
+end
+
 # Use Podman as Docker replacement
 set -x DOCKER_HOST unix://$XDG_RUNTIME_DIR/podman/podman.sock
 

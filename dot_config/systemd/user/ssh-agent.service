@@ -1,0 +1,18 @@
+[Unit]
+Description=SSH key agent (persistent, session-wide)
+Documentation=man:ssh-agent(1)
+
+# Ubuntu ships /usr/lib/systemd/user/ssh-agent.service, but it is gated on
+# ConditionPathExists=/etc/X11/Xsession.options and ordered before
+# graphical-session-pre.target — neither holds on a headless box, so it never
+# starts. This unit replaces it with one that works with or without a desktop
+# session, on a socket path that stays put across reboots.
+
+[Service]
+Type=simple
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

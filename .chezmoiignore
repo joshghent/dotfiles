@@ -12,6 +12,8 @@ run_once_before_install-packages-darwin.sh.tmpl
 {{ if ne .chezmoi.os "linux" }}
 run_once_before_install-packages-linux.sh.tmpl
 .config/autostart/ulauncher.desktop
+# systemd does not exist on macOS — do not litter ~/.config/systemd there
+.config/systemd/
 {{ end }}
 
 # ~/mise.toml holds machine-local tool pins (e.g. work terraform/dotnet versions)
