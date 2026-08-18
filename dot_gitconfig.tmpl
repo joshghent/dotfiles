@@ -95,35 +95,41 @@
     diff = diff-so-fancy | less --tabs=1,5 -RFX
     show = diff-so-fancy | less --tabs=1,5 -RFX
 
+# NOTE: the sections below are indented with TABS, not spaces. `git config`
+# rewrites any section it touches using tabs, so matching that keeps the file
+# from drifting against chezmoi on indentation alone.
+
 [user]
-    name = {{ .name | quote }}
-    email = {{ .email | quote }}
+	name = {{ .name | quote }}
+	email = {{ .email | quote }}
 {{- if stat (joinPath .chezmoi.sourceDir "private_gpg_key_id") }}
-    signingkey = {{ (include "private_gpg_key_id" | trim) }}
+	signingkey = {{ (include "private_gpg_key_id" | trim) }}
 {{- end }}
 
 {{- if stat (joinPath .chezmoi.sourceDir "private_gpg_key_id") }}
 [commit]
-    gpgsign = true
+	gpgsign = true
 
 [gpg]
-{{ if eq .chezmoi.os "darwin" -}}
-    program = /opt/homebrew/bin/gpg
-{{ else -}}
-    program = /usr/bin/gpg
-{{ end -}}
-    format = openpgp
+	program = {{ if eq .chezmoi.os "darwin" }}/opt/homebrew/bin/gpg{{ else }}/usr/bin/gpg{{ end }}
+	format = openpgp
 
 [tag]
-    gpgSign = true
+	gpgSign = true
 {{- end }}
 
 # Written by `gh auth setup-git`. Tracked here so `chezmoi apply` doesn't strip
 # it and break HTTPS pushes until gh is re-run. Unqualified `gh` so it resolves
 # on Linux too.
 [credential "https://github.com"]
-    helper =
-    helper = !gh auth git-credential
+	helper =
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
-    helper =
-    helper = !gh auth git-credential
+	helper =
+	helper = !gh auth git-credential
+
+# Machine-local overrides (work identity, host-specific paths). Not managed by
+# chezmoi — create it by hand where you need it. Includes are applied in place,
+# so anything set here overrides the settings above.
+[include]
+	path = ~/.gitconfig.local
