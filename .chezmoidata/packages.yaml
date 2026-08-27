@@ -85,6 +85,7 @@ packages:
       - libvidstab
       - libzip
       - mbedtls
+      - mdcat
       - mike-engel/jwt-cli/jwt-cli
       - minikube
       - mise
