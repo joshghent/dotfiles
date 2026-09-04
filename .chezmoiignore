@@ -23,3 +23,6 @@ mise.toml
 # authorized_keys is host-specific (each server grants its own access keys).
 # Never manage it from the repo — overwriting it can lock you out of a box.
 .ssh/authorized_keys
+
+# Test script for the fish env functions. Runs from the repo, not from ~
+test_fish_env.fish
