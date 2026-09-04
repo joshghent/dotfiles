@@ -19,7 +19,9 @@ else
   curl -fsSL "$FONT_URL" -o "$FONT_PATH"
   echo "Installed $FONT_PATH"
   # Reload SketchyBar so it picks up the new glyphs, if it's running.
-  command -v sketchybar &>/dev/null && sketchybar --reload || true
+  if command -v sketchybar &>/dev/null; then
+    sketchybar --reload || true
+  fi
 fi
 {{ else -}}
 echo "Skipping: not Darwin without casks (font-sketchybar-app-font cask handles it)"

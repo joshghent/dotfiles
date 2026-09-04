@@ -68,8 +68,11 @@ if command -v chezmoi >/dev/null; then
 			[ -e "$f" ] || continue
 			base=$(basename "$f" .tmpl)
 			out="$RENDER_DIR/$label--$base"
-			if ! chezmoi execute-template --config "$cfg" --config-format toml \
-				--file "$f" >"$out" 2>"$RENDER_DIR/err"; then
+			# --source is required: .chezmoidata/packages.yaml is loaded relative
+			# to the source dir, which is only this checkout by luck on a machine
+			# where chezmoi is already set up. On CI it is not.
+			if ! chezmoi execute-template --source . --config "$cfg" \
+				--config-format toml --file "$f" >"$out" 2>"$RENDER_DIR/err"; then
 				echo "[RENDER FAILED] $f ($label): $(head -1 "$RENDER_DIR/err")"
 				ERRORS+=("$f ($label, render)")
 				continue

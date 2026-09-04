@@ -2,6 +2,12 @@ name: CI
 
 on: push
 
+env:
+  # Pinned so CI and a local `make test` agree. Ubuntu's apt build lags far
+  # enough behind to disagree about which checks fire.
+  SHELLCHECK_VERSION: v0.11.0
+  CHEZMOI_VERSION: v2.70.4
+
 jobs:
   test:
     name: make test and run pre-commit
@@ -12,12 +18,18 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.x"
-      - name: Install shellcheck and fish
-        run: sudo apt-get update && sudo apt-get install -y shellcheck fish
+      - name: Install shellcheck
+        run: |
+          curl -fsSL "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION}/shellcheck-${SHELLCHECK_VERSION}.linux.x86_64.tar.xz" \
+            | tar -xJf - -C /tmp
+          sudo install "/tmp/shellcheck-${SHELLCHECK_VERSION}/shellcheck" /usr/local/bin/
+          shellcheck --version
+      - name: Install fish
+        run: sudo apt-get update && sudo apt-get install -y fish
       # Templates have to be rendered before shellcheck can read them, so the
-      # lint needs chezmoi itself. Pinned to match the version in use locally.
+      # lint needs chezmoi itself.
       - name: Install chezmoi
-        run: sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin -t v2.70.4
+        run: sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin -t "${CHEZMOI_VERSION}"
       - name: Install pre-commit
         run: pip install pre-commit
       - name: Run pre-commit
