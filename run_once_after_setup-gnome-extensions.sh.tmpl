@@ -60,9 +60,7 @@ add_custom_keybinding() {
 if [ ! -d "$HOME/.local/share/gnome-shell/extensions/pop-shell@system76.com" ]; then
     echo "Installing Pop Shell..."
     git clone https://github.com/pop-os/shell.git /tmp/pop-shell
-    cd /tmp/pop-shell
-    make local-install
-    cd -
+    (cd /tmp/pop-shell && make local-install)
     rm -rf /tmp/pop-shell
 fi
 

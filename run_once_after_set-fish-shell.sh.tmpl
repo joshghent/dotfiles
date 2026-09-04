@@ -52,6 +52,9 @@ fi
 if [ "$changed_login_shell" -eq 0 ]; then
     # No privilege (or chsh failed): launch fish from the login shell's rc.
     echo "Couldn't change the login shell — adding an 'exec fish' launcher to your shell rc instead."
+    # The single quotes are the point: this is shell source written verbatim
+    # into an rc file, so $FISH_LAUNCHED and $- must survive unexpanded.
+    # shellcheck disable=SC2016
     guard='# launch fish for interactive sessions (set by chezmoi)
 if [ -z "$FISH_LAUNCHED" ] && command -v fish >/dev/null 2>&1; then
     export FISH_LAUNCHED=1

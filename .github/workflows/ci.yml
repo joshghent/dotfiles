@@ -12,8 +12,12 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.x"
-      - name: Install shellcheck
-        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Install shellcheck and fish
+        run: sudo apt-get update && sudo apt-get install -y shellcheck fish
+      # Templates have to be rendered before shellcheck can read them, so the
+      # lint needs chezmoi itself. Pinned to match the version in use locally.
+      - name: Install chezmoi
+        run: sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin -t v2.70.4
       - name: Install pre-commit
         run: pip install pre-commit
       - name: Run pre-commit
