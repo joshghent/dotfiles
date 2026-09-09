@@ -1,3 +1,17 @@
+# Config schema version. v2 stopped inferring persistent-workspaces from the
+# workspace bindings, so the list below is now spelled out explicitly.
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+config-version = 2
+
+# Workspaces that stay alive with no windows in them. Under v1 these were
+# derived from the alt-<key> bindings; this list mirrors that set so SketchyBar
+# keeps showing the same workspaces.
+persistent-workspaces = [
+  '1', '2', '3', '4', '5', '6', '7', '8', '9',
+  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'I', 'M', 'N', 'O', 'P',
+  'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+]
+
 after-login-command = []
 
 # NOTE: keep this a bare command. AeroSpace's exec-and-forget does not run it
