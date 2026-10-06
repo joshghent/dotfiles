@@ -5,6 +5,8 @@ cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
 model=$(echo "$input" | jq -r '.model.display_name // ""')
 effort=$(echo "$input" | jq -r '.effort.level // empty')
 used=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+tokens=$(echo "$input" | jq -r '(.context_window.current_usage // empty) | (.input_tokens + .cache_creation_input_tokens + .cache_read_input_tokens)')
+window=$(echo "$input" | jq -r '.context_window.context_window_size // empty')
 five_used=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 five_reset=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
 git_branch=$(git -C "$cwd" --no-optional-locks branch --show-current 2>/dev/null)
@@ -74,6 +76,11 @@ if [ -n "$effort" ]; then
 	append "$(printf '\033[33m⚡ %s\033[0m' "$effort_label")"
 fi
 
+# 68000 -> 68k, 1000000 -> 1M
+fmt_tokens() {
+	awk -v n="$1" 'BEGIN { if (n >= 1000000) printf "%gM", n / 1000000; else if (n >= 1000) printf "%dk", n / 1000; else printf "%d", n }'
+}
+
 # Context usage as a progress bar
 if [ -n "$used" ]; then
 	used_int=$(printf '%.0f' "$used")
@@ -97,7 +104,11 @@ if [ -n "$used" ]; then
 	else
 		color='\033[32m'
 	fi
-	append "$(printf '%b🧠 %s %s%%\033[0m' "$color" "$bar" "$used_int")"
+	count=""
+	if [ -n "$tokens" ] && [ -n "$window" ]; then
+		count=" $(fmt_tokens "$tokens")/$(fmt_tokens "$window")"
+	fi
+	append "$(printf '%b🧠 %s %s%%%s\033[0m' "$color" "$bar" "$used_int" "$count")"
 fi
 
 # Session usage (5-hour rate limit). Present only for Pro/Max accounts after the
