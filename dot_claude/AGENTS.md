@@ -79,6 +79,7 @@ proceed without one rather than forcing a contrived test.
 - Use fnox with 1Password for .env. If there is an existing .env file then utilise this. Migration will be gradual.
 - Use oxfmt and oxlint where possible. Suggest if there are not present.
 - Use hk for git hooks that link with the above toolchain where it makes sense.
+- I use chezmoi to manage my dotfiles. Where changes need to be made to any dotfile. Update Chezmoi, add a commit, apply and then push it once satisfied withe changes.
 
 ## New work → worktree first
 
