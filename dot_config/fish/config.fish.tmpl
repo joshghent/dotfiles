@@ -11,7 +11,9 @@ set -g fish_user_paths "$HOME/.local/bin" $fish_user_paths
 # Podman + testcontainers
 set -x DOCKER_HOST "unix://"$TMPDIR"podman/podman-machine-default-api.sock"
 set -x TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE /var/run/docker.sock
-set -x TESTCONTAINERS_RYUK_DISABLED true
+# Rootless podman only lets Ryuk reach the socket when it runs privileged. Ryuk
+# removes every container a test run started once the run exits, even after a crash.
+set -x TESTCONTAINERS_RYUK_PRIVILEGED true
 
 # Podman replaces Docker Desktop entirely — there is no docker binary
 alias docker="podman"
