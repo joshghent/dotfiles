@@ -140,3 +140,30 @@ words borrowed from chat culture. This applies universally, not only to the
 one example that follows: a script that deploys dashboards is
 `deploy_dashboards.sh`, not `push_dashboards.sh`. That is one illustration of
 the principle, not the extent of it.
+
+# Session Naming (auto-rename)
+
+## Expected behavior
+
+1. **Early rename**: Once the session's main subject is clear (after 2-3 exchanges),
+   run `/rename` with a short, descriptive title (max 50 chars)
+2. **End-of-session update**: If scope shifted significantly from the initial rename,
+   propose a re-rename before closing
+
+## Title format
+
+`[action] [subject]` — examples:
+- "fix whitepaper PDF build"
+- "add auth middleware + tests"
+- "refactor hook system"
+- "research terminal tab rename"
+- "update CC releases v2.2.0"
+
+## Rules
+
+- Max 50 characters
+- No "Session:" prefix, no date
+- Action verb first (fix, add, refactor, update, research, debug...)
+- Multi-topic: use the dominant subject, not an exhaustive list
+- Do NOT ask for confirmation on the early rename (just do it)
+- Only propose confirmation for end-of-session re-rename if title changed
