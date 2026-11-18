@@ -32,7 +32,10 @@ exec-on-workspace-change = [
 	'/opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
 ]
 
-on-focus-changed = [ 'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_focus_change' ]
+on-focus-changed = [
+  'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_focus_change',
+  'exec-and-forget ~/.local/bin/log_focus_changes',
+]
 
 # Start AeroSpace at login
 start-at-login = true
