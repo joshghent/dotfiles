@@ -81,6 +81,38 @@ proceed without one rather than forcing a contrived test.
 - Use hk for git hooks that link with the above toolchain where it makes sense.
 - I use chezmoi to manage my dotfiles. Where changes need to be made to any dotfile. Update Chezmoi, add a commit, apply and then push it once satisfied withe changes.
 
+## Engineering standards — definition of done
+
+Check each against the project. Where one is missing, say so and suggest it.
+Don't add a check unprompted.
+
+- **Lint and format.** oxlint with `--deny-warnings`, every rule turned on, plus
+  the landmines rules (https://github.com/interfere-inc/landmines). oxfmt for
+  formatting.
+- **Fast CI.** Lint, typecheck, build and tests run as parallel jobs. Shard
+  tests by recorded test time. PRs run only the tests the diff can reach.
+- **Verification.** Each PR gets its own environment with E2E tests run against
+  it. Unit and integration tests cover critical paths. Screenshots of key pages
+  show they load.
+- **Observability.** Errors, metrics and alerts ship with the feature.
+- **Clean tree.** No comments that restate the code, no stray markdown,
+  backups or plans, and nothing else that adds nothing to the product.
+- **Mobile.** Key pages pass at 375px with no horizontal scroll.
+- **Accessibility, SEO and AI-answer visibility (GEO).** axe passes on key
+  pages. Every page has a title, description, canonical link, one h1 and valid
+  JSON-LD. The site serves `llms.txt` and `openapi.json`.
+- **Speed.** UI interactions finish in under 500ms on slow devices and hold
+  60fps.
+- **Least privilege.** Grant the narrowest access. Return only the fields the
+  caller needs.
+- **API standards.** Follow the published specs: OpenAPI, `problem+json`
+  errors, standard rate-limit headers.
+- **Dependencies.** Add one only when required. Pin exact versions. No
+  critical or high Dependabot alerts.
+- **Security checks in CI.** betterleaks, ZAP baseline and OWASP tests.
+- **Auto-merge.** An agent may merge a PR that is green on CI and judged low
+  impact. When unsure, ask.
+
 ## New work → worktree first
 
 Before starting any new unit of work that writes code (feature, fix,
