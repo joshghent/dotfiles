@@ -1,0 +1,7 @@
+#!/bin/bash
+# Append the newly focused window to a log. Called from AeroSpace on-focus-changed
+# to find out which app takes focus unprompted.
+log="$HOME/.local/state/aerospace-focus.log"
+mkdir -p "${log%/*}"
+printf '%s | %s\n' "$(date '+%F %T')" \
+  "$(/opt/homebrew/bin/aerospace list-windows --focused --format '%{workspace} | %{app-name} | %{window-title}')" >> "$log"
