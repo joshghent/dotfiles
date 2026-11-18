@@ -1,0 +1,19 @@
+#!/bin/bash
+# skills.yaml hash: {{ .skills | toJson | sha256sum }}
+set -e
+
+if ! command -v npx &>/dev/null; then
+  if command -v mise &>/dev/null; then
+    eval "$(mise activate bash)"
+  fi
+fi
+if ! command -v npx &>/dev/null; then
+  echo "npx not found, skipping agent skills install"
+  exit 0
+fi
+
+# One failed source must not stop the rest.
+{{ range .skills -}}
+npx -y skills add {{ .source | quote }}{{ range .names }} --skill {{ . | quote }}{{ end }} --global --yes \
+  || echo "WARN: failed to install skills from {{ .source }}"
+{{ end -}}
