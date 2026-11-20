@@ -5,6 +5,8 @@
 .config/aerospace/
 .config/borders/
 .config/sketchybar/
+.config/fish/keyboard-lock.swift
+.config/fish/functions/lock_keyboard.fish
 run_once_before_install-packages-darwin.sh.tmpl
 {{ end }}
 
