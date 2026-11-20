@@ -23,6 +23,17 @@ skills:
       - openseo-release-notes
       - seo-coach
       - seo-project-setup
+  - source: joshghent/skills
+    names:
+      - beacon
+      - blogger
+      - conductor
+      - design-review
+      - gantarr
+      - groundwork
+      - growth-review
+      - sentinel
+      - warden
   - source: vercel-labs/agent-browser
     names:
       - agent-browser
