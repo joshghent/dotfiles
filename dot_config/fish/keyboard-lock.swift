@@ -129,4 +129,3 @@ CFRunLoopRun()
 safetyTimer.invalidate()
 CGEvent.tapEnable(tap: tap, enable: false)
 CFMachPortInvalidate(tap)
-
