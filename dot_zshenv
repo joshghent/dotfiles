@@ -1,0 +1,2 @@
+. "$HOME/.cargo/env"
+[[ -n "$CLAUDECODE" ]] && export PATH="$HOME/.local/share/mise/shims:$PATH"
