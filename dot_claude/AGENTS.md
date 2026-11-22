@@ -13,6 +13,9 @@ whatever project you're in; match it rather than imposing a house style.
 - **Small, atomic commits.** Each one leaves the tree in a working state.
 - **Let errors bubble** to one high-level handler. Don't swallow failures in
   silent try/catch fallbacks.
+- **Names and tests carry intent.** Write code without comments.
+- **Search with `rg`.**
+- **Autofix only the files you changed** (`hk fix` where the repo has hk).
 - **Don't abstract early.** Duplication is cheaper than the wrong abstraction;
   wait until the pattern is real.
 - **Be direct and concise.** Lead with a recommendation and why. State your
