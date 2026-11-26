@@ -108,6 +108,8 @@ Skip the worktree when: continuing in-progress work on the current branch,
 amending an open PR, already inside a worktree, making a trivial edit, or just
 answering questions. Tear down with `git worktree remove <dir>`.
 
+Once a PR is merged and the work item complete, offer to remove the work tree. Do this periodically if you see worktrees from old PR/workstreams.
+
 ## Design system — Josh's own products
 
 For any product under `github.com/joshghent` (not client or employer work), use
